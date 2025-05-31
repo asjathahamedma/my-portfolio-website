@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import { FaBackward, FaForward } from "react-icons/fa";
-import { LettersPullUp } from "../components/letters-pull-up";
+import { FaBackward, FaForward, FaGithub } from "react-icons/fa";
+
 
 const BackgroundParticles = dynamic(
   () => import("../components/BackgroundParticles"),
@@ -36,6 +36,7 @@ type Project = {
   image: string;
   status: string;
   techStack: string[];
+  github: string;
 };
 
 const projectsData: Record<Category, Project[]> = {
@@ -43,24 +44,27 @@ const projectsData: Record<Category, Project[]> = {
     {
       title: "ViperScan",
       description:
-        "Custom vulnerability scanner using Python and Nmap for small web apps.",
+        "A Python-based web vulnerability scanner integrating Nmap, Burp Suite, and Nikto to detect OWASP Top 10 issues.",
       image: "/ViperScan.jpg",
       status: "In Progress / Research Project",
       techStack: ["Python", "Nmap", "OWASP", "Burp Suite", "Nikto"],
+      github: "/"
     },
     {
       title: "XSS Hunter",
-      description: "Automates XSS discovery in websites.",
+      description:
+        "An automated tool for detecting reflected and stored XSS using JS payloads and Burp Suite macros.",
       image: "/XssHunter.jpg",
       status: "Completed",
       techStack: ["JavaScript", "Burp Suite", "Python"],
+      github: "/"
     },
   ],
   "malware-analysis": [
     {
       title: "MalwareLab-X",
       description:
-        "Controlled malware analysis lab with REMnux and keylogger dropper simulation.",
+        "An isolated lab for reverse-engineering malware using REMnux, Wireshark, and debugging tools.",
       image: "/MalwareLab-X.jpg",
       status: "Research Simulation",
       techStack: [
@@ -70,20 +74,23 @@ const projectsData: Record<Category, Project[]> = {
         "Wireshark",
         "Process Hacker",
       ],
+      github: "/"
     },
     {
       title: "YARA Scanner",
-      description: "Scan files using YARA rules in sandboxed environments.",
+      description:
+        "A YARA-based scanner for identifying malware signatures in sandboxed environments.",
       image: "/YARAscanner.jpg",
       status: "Completed",
       techStack: ["Python", "YARA", "VirtualBox"],
+      github: "/"
     },
   ],
   "network-security": [
     {
       title: "NetSentinel",
       description:
-        "Virtual lab for enterprise network attack-defense simulation.",
+        "A red/blue team simulation lab for testing IDS, firewalls, and network analysis tools.",
       image: "/NetSentinal.jpg",
       status: "Learning Environment",
       techStack: [
@@ -94,13 +101,14 @@ const projectsData: Record<Category, Project[]> = {
         "TCPDump",
         "Ettercap",
       ],
+      github: "/"
     },
   ],
   scripting: [
     {
       title: "AutoReconX",
       description:
-        "Automated recon tool for CTFs using Python and Bash scripting.",
+        "A CTF-focused recon tool combining subdomain, directory, and DNS enumeration workflows.",
       image: "/AutoReconX.jpg",
       status: "Tool Prototype",
       techStack: [
@@ -112,26 +120,32 @@ const projectsData: Record<Category, Project[]> = {
         "Whois",
         "DNS",
       ],
+      github: "/"
     },
   ],
   "frontend-development": [
     {
       title: "GlitchViper.dev",
       description:
-        "Animated hacker-themed portfolio site using Next.js and Framer Motion.",
+        "A hacker-themed portfolio with animations, interactive UI, and dynamic project showcases.",
       image: "/myPortfolio.jpg",
       status: "Live",
       techStack: ["Next.js", "Tailwind CSS", "Framer Motion", "React", "Vercel"],
+      github: "https://github.com/AsjathAhamedMohamedAazath/my-portfolio-website"
     },
     {
       title: "Admin Dashboard",
-      description: "Responsive admin panel with charts and controls.",
+      description:
+        "A responsive dashboard with charts, filters, and clean UI built using Tailwind and Chart.js.",
       image: "/AdminDashboard.jpg",
       status: "Completed",
       techStack: ["React", "Tailwind CSS", "Chart.js"],
+      github: "/"
     },
   ],
 };
+
+
 
 const categories: { label: string; value: Category }[] = [
   { label: "Penetration Testing", value: "penetration-testing" },
@@ -177,7 +191,7 @@ export default function ProjectsPage() {
   return (
     <div className="h-screen text-[#00D9FF] overflow-x-hidden relative bg-gradient-to-b dark:from-[#01242da4] dark:to-[#020006c5]">
       {!showProjects ? (
-        <div className="text-lg drop-shadow-[0_0_8px_rgba(0,217,255,0.4)]">
+        <div className="text-lg p-5 drop-shadow-[0_0_8px_rgba(0,217,255,0.4)]">
           {visibleLines.map((line, idx) => (
             <motion.p
               key={idx}
@@ -196,9 +210,9 @@ export default function ProjectsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1 }}
         >
-          <div className="h-screen text-white flex flex-row items-center px-4 gap-10 overflow-hidden ">
+          <div className="h-screen text-white flex flex-col items-start px-3 gap-8 overflow-hidden ">
             {/* Category Tabs */}
-            <div className="flex flex-col gap-6 text-md font-semibold">
+            <div className="flex mt-11 gap-3">
               {categories.map((cat) => (
                 <button
                   key={cat.value}
@@ -206,9 +220,11 @@ export default function ProjectsPage() {
                     setActiveCategory(cat.value);
                     setActiveIndex(0);
                   }}
-                  className={`transition duration-200 ${activeCategory === cat.value
-                    ? " text-cyan-400 hover:scale-110"
-                    : "text-white hover:scale-110 hover:text-gray-400 transition-all duration-600"
+                  className={`px-4 py-1 text-sm md:text-sm rounded-full font-semibold transition-all duration-300 
+        border border-cyan-500 shadow-md 
+        ${activeCategory === cat.value
+                      ? "bg-cyan-400 text-black shadow-[0_0_12px_#00D9FF] scale-105"
+                      : "bg-transparent text-white hover:bg-white hover:text-black hover:shadow-[0_0_10px_#00D9FF] hover:scale-105"
                     }`}
                 >
                   {cat.label}
@@ -218,11 +234,21 @@ export default function ProjectsPage() {
 
             {/* Project Viewer */}
             <div className="flex items-center justify-center gap-6 w-full ">
-              <div className="p-[2px] rounded-full bg-gradient-to-r from-indigo-500 via-sky-500 to-purple-500 transition-transform duration-300 hover:scale-105">
+              <div>
+                <Image
+                  src="/hacker-3.png"
+                  alt=""
+                  width={800}
+                  height={800}
+                  className="hover:scale-105 transition-transform duration-300 animate-img"
+
+                />
+              </div>
+              <div className="p-[2px] rounded-full bg-gradient-to-r items-center from-[#0252f1] via-[#02e0f4] to-[#fff] transition-transform duration-300 hover:scale-105">
                 <button
                   onClick={handleNext}
-                  className="rounded-full p-4 bg-zinc-900 text-white transition-all duration-300
-               hover:bg-gradient-to-r from-indigo-500 via-sky-500 to-purple-500
+                  className="rounded-full p-2 bg-zinc-900 text-white transition-all duration-300
+               hover:bg-gradient-to-r from-[#0252f1] via-[#02e0f4] to-[#fff]
                hover:shadow-[0_0_15px_#0ff] hover:scale-110"
                 >
                   <FaBackward />
@@ -236,7 +262,7 @@ export default function ProjectsPage() {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -60 }}
                   transition={{ duration: 0.5 }}
-                  className="relative w-[50%] h-[400px] overflow-hidden glass-glow flex flex-col md:flex-row items-center justify-between p-6 gap-6 hover:scale-102 transition-all duration-300"
+                  className="relative w-[90%] h-[60%] overflow-hidden glass-glow flex flex-col md:flex-row items-center justify-between p-6 gap-6 hover:scale-102 transition-all duration-300"
                 >
                   <div className="w-full md:w-1/2">
                     <h3 className="text-2xl text-[#00D9FF] font-bold mb-2">{currentProject.title}</h3>
@@ -247,6 +273,16 @@ export default function ProjectsPage() {
                     <p className="text-sm text-sky-300">
                       <strong>Tech Stack:</strong> {currentProject.techStack.join(", ")}
                     </p>
+                    <a
+                      href={currentProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-white mt-2 hover:text-cyan-300 transition-colors"
+                    >
+                      <FaGithub className="text-xl" />
+                      View on GitHub
+                    </a>
+
                   </div>
                   <div className="w-full md:w-1/2">
                     <Image
@@ -261,11 +297,11 @@ export default function ProjectsPage() {
               </AnimatePresence>
 
 
-              <div className="p-[2px] rounded-full bg-gradient-to-r from-indigo-500 via-sky-500 to-purple-500 transition-transform duration-300 hover:scale-105">
+              <div className="p-[2px] rounded-full bg-gradient-to-r from-[#0252f1] via-[#02e0f4] to-[#fff] transition-transform duration-300 hover:scale-105">
                 <button
                   onClick={handleNext}
-                  className="rounded-full p-4 bg-zinc-900 text-white transition-all duration-300
-               hover:bg-gradient-to-r from-indigo-500 via-sky-500 to-purple-500
+                  className="rounded-full p-2 bg-zinc-900 text-white transition-all duration-300
+               hover:bg-gradient-to-r from-[#0252f1] via-[#02e0f4] to-[#fff]
                hover:shadow-[0_0_15px_#0ff] hover:scale-110"
                 >
                   <FaForward />
@@ -275,14 +311,14 @@ export default function ProjectsPage() {
 
 
             </div>
-            <div className="fixed inset-0 -z-50 opacity-5">
+            <div className="fixed inset-1 -z-10 opacity-20">
               <img src="/effect.png" alt="background" className="w-full h-full object-cover" />
             </div>
           </div>
 
         </motion.div>
       )}
-    <BackgroundParticles/>
+      <BackgroundParticles />
     </div>
   );
 }

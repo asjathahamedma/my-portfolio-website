@@ -48,9 +48,9 @@ const links = [
   { title: "Skills", icon: <IconBrain className="h-full w-full text-neutral-500 dark:text-black" />, href: "/skills" },
   { title: "Projects", icon: <IconRocket className="h-full w-full text-neutral-500 dark:text-black" />, href: "/projects" },
   { title: "WriteUps", icon: <IconBook className="h-full w-full text-neutral-500 dark:text-black" />, href: "/writeups" },
-  { title: "HackTheBox", icon: <IconCube className="h-full w-full text-neutral-500 dark:text-black" />, href: "/htb" },
-  { title: "LinkedIn", icon: <IconBrandLinkedin className="h-full w-full text-neutral-500 dark:text-black" />, href: "#" },
-  { title: "GitHub", icon: <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-black" />, href: "#" },
+  { title: "HackTheBox", icon: <IconCube className="h-full w-full text-neutral-500 dark:text-black" />, href: "#" },
+  { title: "LinkedIn", icon: <IconBrandLinkedin className="h-full w-full text-neutral-500 dark:text-black" />, href: "https://www.linkedin.com/in/asjathahamedmohamedaazath" },
+  { title: "GitHub", icon: <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-black" />, href: "https://github.com/AsjathAhamedMohamedAazath?tab=repositories" },
 ];
 
 export default function RootLayout({
