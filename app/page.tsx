@@ -1,103 +1,156 @@
-import Image from "next/image";
+"use client";
+import React from 'react'
+import { LettersPullUp } from './components/letters-pull-up'
+import { StaggeredFade } from './components/staggered-fade'
+import { GradualSpacing } from './components/gradual-spacing'
+import { BackgroundBeamsWithCollision } from "./components/background-beams-with-collision";
+import { motion } from 'framer-motion'
+import dynamic from 'next/dynamic';
 
-export default function Home() {
+const BackgroundParticles = dynamic(
+  () => import("./components/BackgroundParticles"),
+  { ssr: false }
+);
+
+
+const paragraphText = "I don’t just breach defenses— I rewrite the rules. Firewalls melt. Secrets spill. I code in chaos.";
+const words = paragraphText.split(' ');
+
+
+
+const Home = () => {
+  const [isHovered, setIsHovered] = React.useState(false);
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <BackgroundBeamsWithCollision>
+      <div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* hero section */}
+        <div className="relative flex justify-center items-center mt-22 min-h-[300px]">
+          {/* Centered Image */}
+          {/* Background PNG Image */}
+          <img
+            src="/effect.png" // Replace with your background image
+            alt="Background"
+            className="absolute z-0 w-500  opacity-10"
+          />
+
+          {/* Animated Foreground Image */}
+          <motion.div
+            initial={{ y: '100vh', opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ type: "spring", bounce: 0.3, duration: 3 }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <div className="relative group">
+              <img
+                src="/skill-img2.png"
+                alt="Hacker"
+                className="w-32 sm:w-40 md:w-56 lg:w-72 xl:w-120 h-auto animate-img 
+                           transition-all duration-300 hover:scale-150 
+                           hover:drop-shadow-[0_0_20px_rgba(0,217,255,0.6)]"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              />
+              {/* Hover-triggered Text Elements */}
+              {isHovered && (
+                <>
+                  {/* Left Top Text */}
+                  <motion.div
+                    initial={{ opacity: 0, x: -200 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute -top-12 -left-90 ease-in-out"
+                  >
+                    <div className='flex items-center'>
+                      <img src="/lock.png" height={200} width={200} />
+                      <span className="text-2xl text-[#ffffff] font-mono drop-shadow-[0_0_15px_rgba(0,217,255,0.6)]">
+                        SYSTEM BREACHED
+                      </span>
+                    </div>
+                  </motion.div>
+
+                  {/* Right Bottom Text */}
+                  <motion.div
+                    initial={{ opacity: 0, x: 200 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.5 }}
+                    className="absolute -bottom-5 -right-90 ease-in-out"
+                  >
+                    <div className='flex items-center'>
+                      <span className="text-2xl text-[#ffffff] font-mono drop-shadow-[0_0_15px_rgba(0,217,255,0.6)] ">
+                        ACCESS GRANTED
+                      </span>
+                      <img src="brain.png" height={200} width={200} />
+                    </div>
+                  </motion.div>
+                </>
+              )}
+              {/* Optional: Add an animated gradient background */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,#00D9FF_0%,transparent_70%)] 
+                            opacity-0 group-hover:opacity-40 transition-opacity duration-300 
+                            mix-blend-screen -z-10 rounded-full" />
+            </div>
+          </motion.div>
+          {/* Left Content (Intro) */}
+          <div className="absolute left-0 top-3/5 -translate-y-1/2 text-left pl-10 w-1/3 hidden sm:block " >
+            <h1 className="flex flex-wrap gap-x-2 text-5xl font-normal  ">
+              <LettersPullUp
+                text="Welcome"
+                className="text-[#00D9FF] drop-shadow-[0_0_15px_rgba(0,217,255,0.7)] transition-transform hover:scale-130 duration-200 ease-linear"
+              />
+              <LettersPullUp text="to" className="transition-transform hover:scale-130 duration-200 ease-linear" />
+              <LettersPullUp text="the" className="transition-transform hover:scale-130 duration-200 ease-linear" />
+              <LettersPullUp
+                text="Code"
+                className="transition-transform hover:scale-130 duration-200 ease-linear"
+              />
+              <LettersPullUp
+                text="Anomaly"
+                className="text-[#00D9FF] drop-shadow-[0_0_15px_rgba(0,217,255,0.7)] transition-transform hover:scale-130 duration-200 ease-linear"
+              />
+            </h1>
+            <div className="max-w-xl flex flex-wrap gap-x-2 ">
+              {words.map((word, i) => (
+                <GradualSpacing key={i} text={word + (i !== words.length - 1 ? ' ' : '')}
+                  className="hover:text-[#00D9FF] hover:drop-shadow-[0_0_20px_rgba(0,217,255,0.7)] transition-all duration-300 hover:scale-120 "
+                />
+              ))}
+            </div>
+          </div>
+
+
+
+          {/* Right Content - Add hover effects here */}
+          <div className="absolute right-0 top-2/5 -translate-y-1/2 text-right pr-10 text-white w-1/3 hidden sm:block ">
+            <div className="mb-2 flex flex-wrap gap-x-2 justify-end">
+              <GradualSpacing text="They " className="hover:text-[#00D9FF] hover:drop-shadow-[0_0_20px_rgba(0,217,255,0.7)] transition-all duration-300 hover:scale-120 " />
+              <GradualSpacing text="fortified " className="hover:text-[#00D9FF] hover:drop-shadow-[0_0_20px_rgba(0,217,255,0.7)] transition-all duration-300 hover:scale-120 " />
+              <GradualSpacing text="the " className="hover:text-[#00D9FF] hover:drop-shadow-[0_0_20px_rgba(0,217,255,0.7)] transition-all duration-300 hover:scale-120 " />
+              <GradualSpacing text="walls. " className="hover:text-[#00D9FF] hover:drop-shadow-[0_0_20px_rgba(0,217,255,0.7)] transition-all duration-300 hover:scale-120 " />
+              <GradualSpacing text="They " className="hover:text-[#00D9FF] hover:drop-shadow-[0_0_20px_rgba(0,217,255,0.7)] transition-all duration-300 hover:scale-120 " />
+              <GradualSpacing text="encrypted " className="hover:text-[#00D9FF] hover:drop-shadow-[0_0_20px_rgba(0,217,255,0.7)] transition-all duration-300 hover:scale-120 " />
+              <GradualSpacing text="everything." className="hover:text-[#00D9FF] hover:drop-shadow-[0_0_20px_rgba(0,217,255,0.7)] transition-all duration-300 hover:scale-120 " />
+
+            </div>
+            <div className="flex flex-wrap gap-x-2 text-5xl justify-end">
+              <LettersPullUp text="But" className="transition-transform hover:scale-130 duration-200 ease-linear" />
+              <LettersPullUp
+                text="GlitchViper"
+                className="text-[#00D9FF] drop-shadow-[0_0_15px_rgba(0,217,255,0.7)] transition-transform hover:scale-130 duration-200 ease-linear"
+              />
+              <LettersPullUp text="rewrote" className="transition-transform hover:scale-130 duration-200 ease-linear" />
+              <LettersPullUp
+                text="reality."
+                className="text-[#00D9FF] drop-shadow-[0_0_15px_rgba(0,217,255,0.7)] transition-transform hover:scale-130 duration-200 ease-linear "
+              />
+            </div>
+          </div>
+
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </div>
+      <BackgroundParticles />
+    </BackgroundBeamsWithCollision>
+  )
 }
+
+export default Home

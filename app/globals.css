@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #1d2b06;
+  --foreground: white;
+  cursor: pointer;
 }
 
 @theme inline {
@@ -14,8 +15,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #040D12;
+    --foreground: white;
   }
 }
 
@@ -24,3 +25,206 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+@theme {
+  --animate-img: slideXY 3s ease-in-out infinite;
+  @keyframes slideXY {
+    0%{
+      transform: translate(-5px, -5px); 
+    }
+    100% {
+      transform: translate(-5px, -5px); /* Top-left */
+    }
+    50% {
+      transform: translate(5px, 5px); /* Bottom-right */
+    }
+  }
+}
+
+.border-mask {
+  background: conic-gradient(from 0deg, #00D9FF, white, #00D9FF);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), black calc(100% - 2px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), black calc(100% - 2px));
+}
+
+@theme inline {
+  --animate-scroll: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+ 
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
+}
+
+
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(64, 235, 12, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(99, 102, 241, 0.8);
+  }
+}
+
+
+
+.no-visible-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.no-visible-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* Running gradient border animation */
+@keyframes border-run-glow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+/* Glass container with animated glowing border + shadow */
+.glass-glow {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1rem;
+  overflow: hidden;
+  z-index: 0;
+  box-shadow: 0 0 20px rgba(0, 217, 255, 0.4); /* glowing shadow */
+}
+
+/* Animated glowing border layer */
+.glass-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px; /* border thickness */
+  background: linear-gradient(
+    270deg,
+    rgba(150, 1, 249, 0.4),
+    rgba(0, 100, 255, 0.9),
+    rgba(255, 0, 140, 0.4)
+  );
+  background-size: 400% 400%;
+  animation: border-run-glow 6s linear infinite;
+
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: destination-out;
+
+  border-radius: 1rem;
+  z-index: -1;
+  pointer-events: none;
+}
+
+
+/* CSS Variables for advanced control
+:root {
+  --glitch-duration: 2s;
+  --glitch-strength: 1px;
+  --glitch-hue-rotate: 10deg;
+  --glitch-opacity: 0.9;
+  --glitch-blur: 2px;
+  --glitch-clip: 5%;
+  --glitch-red: #ff0055;
+  --glitch-blue: #00ffff;
+} */
+
+/* Improved keyframes with multi-axis distortion */
+/* @keyframes glitch {
+  0% {
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+  15% {
+    transform: translate(calc(var(--glitch-strength) * -1), calc(var(--glitch-strength) * 1.5));
+    clip-path: inset(var(--glitch-clip) 0 calc(var(--glitch-clip) * 2) 0);
+  }
+  30% {
+    transform: translate(calc(var(--glitch-strength) * 1.2), calc(var(--glitch-strength) * -1));
+    clip-path: inset(0 calc(var(--glitch-clip) * 3) var(--glitch-clip) 0);
+  }
+  45% {
+    transform: translate(calc(var(--glitch-strength) * 0.8)) skewX(10deg);
+    clip-path: inset(var(--glitch-clip) calc(var(--glitch-clip) * 2) 0 0);
+  }
+  60% {
+    transform: translate(calc(var(--glitch-strength) * -0.5), calc(var(--glitch-strength) * 0.5)) skewY(-8deg);
+  }
+  85% {
+    transform: translate(0, calc(var(--glitch-strength) * -2));
+    filter: hue-rotate(calc(var(--glitch-hue-rotate) * 2));
+  }
+  100% {
+    transform: translate(0);
+    clip-path: inset(0 0 0 0);
+  }
+} */
+
+/* Base glitch styles with layered effects */
+
+/* 
+.glitch::before {
+  color: var(--glitch-red);
+  animation: glitch var(--glitch-duration) infinite cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse;
+  clip-path: polygon(0 20%, 100% 30%, 100% 60%, 0 50%);
+  transform: translate(calc(var(--glitch-strength) * 1.5), 0);
+} */
+
+/* .glitch::after {
+  color: var(--glitch-blue);
+  animation: glitch var(--glitch-duration) infinite cubic-bezier(0.25, 0.46, 0.45, 0.94) alternate-reverse;
+  clip-path: polygon(0 60%, 100% 50%, 100% 80%, 0 70%);
+  transform: translate(calc(var(--glitch-strength) * -1.2), 0);
+} */
+
+/* Add occasional big glitch */
+/* @keyframes big-glitch {
+  0%, 100% { transform: scaleY(1); }
+  5% { transform: scaleY(1.8) skewX(25deg); }
+  6% { transform: scaleY(0.2) skewX(-25deg); }
+  7% { transform: scaleY(1); }
+}
+
+.glitch:hover {
+  animation-duration: 0.4s;
+  filter: blur(var(--glitch-blur));
+} */
+
+/* Add noise texture */
+/* .glitch::after {
+  background: 
+    linear-gradient(transparent 65%, rgba(0,0,0,0.2) 80%),
+    repeating-linear-gradient(
+      45deg,
+      rgba(0,0,0,0.2) 0 1px,
+      transparent 1px 5px
+    );
+  background-clip: text;
+  -webkit-background-clip: text;
+} */
