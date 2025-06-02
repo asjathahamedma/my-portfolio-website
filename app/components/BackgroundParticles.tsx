@@ -15,11 +15,11 @@ const BackgroundParticles = () => {
   );
 
   return (
-    <div className="absolute inset-0 -z-40 overflow-hidden">
+    <div className="fixed inset-0 opacity-50 pointer-events-none overflow-hidden">
       {particles.map((particle, i) => (
         <motion.div
           key={i}
-          className="absolute text-[#00D9FF] opacity-10"
+          className="absolute text-[#00D9FF] text-sm md:text-base"
           style={{
             left: particle.left,
             top: particle.top,
@@ -37,4 +37,5 @@ const BackgroundParticles = () => {
     </div>
   );
 };
+
 export default BackgroundParticles;

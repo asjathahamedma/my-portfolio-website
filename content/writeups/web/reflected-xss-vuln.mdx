@@ -1,0 +1,62 @@
+---
+title: "Reflected XSS in Login Page"
+image: "/AutoReconX.jpg"
+date: "2024-03-05"
+category: "web"
+tags: ["xss", "reflected", "bug bounty"]
+description: "Discovered a reflected XSS vulnerability in a login page parameter."
+---
+
+# ⚠️ Reflected XSS in Login Page
+
+While testing a login endpoint, I found a reflected XSS vulnerability in the `redirect_url` parameter.
+
+---
+
+## 🔍 PoC – Proof of Concept
+
+The vulnerable URL was:
+
+```
+https://example.com/login?redirect_url=javascript:alert(1)
+```
+
+When the login page rendered, the `redirect_url` parameter was reflected into the DOM without proper sanitization or encoding.
+
+<Note>Any unsanitized input directly inserted into `window.location` or HTML can become a vector for XSS.</Note>
+
+## 🔬 Root Cause
+
+The server was dynamically inserting the `redirect_url` parameter into a `<script>` block:
+
+```
+<script>
+  window.location = "${redirect_url}";
+</script>
+```
+
+If a user inputs JavaScript in the query string, the browser interprets and executes it.
+
+## ✅ Fix Recommendation
+
+- Whitelist only trusted redirect domains or paths.
+- Escape and validate all input values rendered in HTML or JavaScript context.
+- Use a framework-level sanitizer to prevent XSS injection.
+
+## 🛡️ Impact
+
+- Could allow attackers to steal cookies or session tokens.
+- Possibility of phishing attacks by disguising malicious URLs.
+- Users could be redirected to external malicious sites.
+
+## 📌 Disclosure Timeline
+
+1. March 3: Vulnerability discovered
+2. March 4: Reported via bug bounty platform
+3. March 5: Acknowledged and fixed by the security team
+
+## 🔚 Conclusion
+
+Reflected XSS is often overlooked, but it's a real threat. Always validate user input, especially on pages involving redirects or dynamic content.
+
+<Note>Use tools like Burp Suite, Param Miner, and manual fuzzing to detect reflected XSS vectors.</Note>

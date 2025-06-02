@@ -5,9 +5,6 @@ export default function TopRightProfile() {
   return (
     <div className="fixed top-6 right-10 z-50">
       <div className="flex items-center space-x-2 p-2 rounded-full ">
-        <span className="font-medium animate-pulse">
-          <span className="text-[#00D9FF]">Asjath Ahamed</span> Mohamed Aazath
-        </span>
 
         {/* Spinning border wrapper */}
         <div className="relative w-14 h-14 flex items-center justify-center hover:scale-200 transform transition-transform duration-900">

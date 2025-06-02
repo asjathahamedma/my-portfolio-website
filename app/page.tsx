@@ -1,16 +1,10 @@
 "use client";
 import React from 'react'
 import { LettersPullUp } from './components/letters-pull-up'
-import { StaggeredFade } from './components/staggered-fade'
 import { GradualSpacing } from './components/gradual-spacing'
 import { BackgroundBeamsWithCollision } from "./components/background-beams-with-collision";
 import { motion } from 'framer-motion'
-import dynamic from 'next/dynamic';
 
-const BackgroundParticles = dynamic(
-  () => import("./components/BackgroundParticles"),
-  { ssr: false }
-);
 
 
 const paragraphText = "I don’t just breach defenses— I rewrite the rules. Firewalls melt. Secrets spill. I code in chaos.";
@@ -28,13 +22,6 @@ const Home = () => {
         {/* hero section */}
         <div className="relative flex justify-center items-center mt-22 min-h-[300px]">
           {/* Centered Image */}
-          {/* Background PNG Image */}
-          <img
-            src="/effect.png" // Replace with your background image
-            alt="Background"
-            className="absolute z-0 w-500  opacity-10"
-          />
-
           {/* Animated Foreground Image */}
           <motion.div
             initial={{ y: '100vh', opacity: 0 }}
@@ -148,7 +135,6 @@ const Home = () => {
 
         </div>
       </div>
-      <BackgroundParticles />
     </BackgroundBeamsWithCollision>
   )
 }

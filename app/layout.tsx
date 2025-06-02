@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, VT323, Fira_Code, Electrolize } from "next/font/goog
 import "./globals.css";
 import TopRightProfile from "./components/TopRightProfile";
 import { FloatingDock } from "./components/floating-dock";
+
 import {
   IconBrandGithub,
   IconHome,
@@ -12,6 +13,8 @@ import {
   IconCube,
   IconBrandLinkedin,
 } from "@tabler/icons-react";
+import BackgroundParticlesWrapper from "./components/BackgroundParticlesWrapper";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -61,14 +64,30 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${electrolize.className} antialiased`}>
-        <div className="relative">
-          <TopRightProfile />
-        </div>
-        <main>{children}</main>
-        <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-100">
-          <FloatingDock mobileClassName="translate-y-20" items={links} />
+        {/* Gradient wrapper over background */}
+        <div className="relative min-h-screen bg-gradient-to-b from-white to-white dark:from-[#01242d] dark:to-[#020006]">
+          <div className="fixed inset-0 pointer-events-none">
+            <img
+              src="/effect.png"
+              alt="Background"
+              className="w-full h-full object-cover opacity-5"
+            />
+          </div>
+
+          <BackgroundParticlesWrapper />
+          <div className="absolute top-0 right-0 z-20">
+            <TopRightProfile />
+          </div>
+
+          <main>{children}</main>
+
+          <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-20">
+            <FloatingDock mobileClassName="translate-y-20" items={links} />
+          </div>
         </div>
       </body>
     </html>
   );
 }
+
+

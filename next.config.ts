@@ -1,7 +1,15 @@
-import type { NextConfig } from "next";
+const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+    providerImportSource: "@mdx-js/react",
+  },
+})
 
-const nextConfig: NextConfig = {
-  /* config options here */
-};
+module.exports = withMDX({
+  // Put pageExtensions here — NOT inside the withMDX options
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 
-export default nextConfig;
+  // your other Next.js config here
+})

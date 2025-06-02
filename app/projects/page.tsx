@@ -2,14 +2,8 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import { FaBackward, FaForward, FaGithub } from "react-icons/fa";
 
-
-const BackgroundParticles = dynamic(
-  () => import("../components/BackgroundParticles"),
-  { ssr: false }
-);
 
 
 const bootLines = [
@@ -189,7 +183,7 @@ export default function ProjectsPage() {
     );
 
   return (
-    <div className="h-screen text-[#00D9FF] overflow-x-hidden relative bg-gradient-to-b dark:from-[#01242da4] dark:to-[#020006c5]">
+    <div className="h-screen text-[#00D9FF] overflow-x-hidden relative ">
       {!showProjects ? (
         <div className="text-lg p-5 drop-shadow-[0_0_8px_rgba(0,217,255,0.4)]">
           {visibleLines.map((line, idx) => (
@@ -311,14 +305,11 @@ export default function ProjectsPage() {
 
 
             </div>
-            <div className="fixed inset-1 -z-10 opacity-20">
-              <img src="/effect.png" alt="background" className="w-full h-full object-cover" />
-            </div>
+
           </div>
 
         </motion.div>
       )}
-      <BackgroundParticles />
     </div>
   );
 }
