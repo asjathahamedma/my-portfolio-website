@@ -27,7 +27,7 @@ export const AnimatedImage = () => {
       <motion.img
         src="/hacker2.png"
         alt="Cyber Surgeon"
-        className="w-auto max-w-md rounded-xl h-70 relative z-10 ml-20"
+        className="w-auto max-w-md rounded-xl h-90 relative z-10 ml-20"
         whileHover={{ scale: 1.2 }}
         transition={{ type: "spring", stiffness: 200 }}
       />
@@ -37,7 +37,7 @@ export const AnimatedImage = () => {
           key={cert.name}
           src={cert.img}
           alt={cert.name}
-          className={`absolute w-16 h-16 ${cert.position} cursor-pointer z-20 cert-pulse`}
+          className={`absolute w-16 h-16 ${cert.position} cursor-pointer z-20 cert-pulse border-2 p-2 border-[#00D9FF] rounded-full  `}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={controls}
           transition={{
@@ -50,6 +50,9 @@ export const AnimatedImage = () => {
             scale: 1.2,
             rotate: [0, 5, -5, 0],
             transition: { duration: 0.5 },
+            background:"#00D9FF",
+            boxShadow: "0px 0px 20px 0 #00D9FF",
+
           }}
         />
       ))}

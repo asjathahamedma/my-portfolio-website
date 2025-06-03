@@ -1,4 +1,4 @@
-export const testimonials = [
+export const skills = [
   {
     title: "Penetration Testing",
     quote: "Experienced in simulating attacks to find vulnerabilities in networks, applications, and systems using industry-standard tools.",
