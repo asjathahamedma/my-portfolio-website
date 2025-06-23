@@ -20,7 +20,7 @@ const Note = ({ children }: { children: ReactNode }) => (
 
 const components = {
   Note,
-  // Add other custom components here
+  // Add other custom MDX components here
 }
 
 type Params = {
@@ -28,6 +28,7 @@ type Params = {
   slug: string
 }
 
+// Static route generator
 export async function generateStaticParams() {
   const basePath = path.join(process.cwd(), 'content/writeups')
   const categories = await fs.readdir(basePath)
@@ -39,10 +40,10 @@ export async function generateStaticParams() {
     const files = await fs.readdir(categoryPath)
 
     for (const file of files) {
-      if (path.extname(file) === '.mdx') {
+      if (file.endsWith('.mdx')) {
         params.push({
-          category: category,
-          slug: file.replace(/\.mdx$/, '')
+          category,
+          slug: file.replace(/\.mdx$/, ''),
         })
       }
     }
@@ -51,54 +52,53 @@ export async function generateStaticParams() {
   return params
 }
 
-// FIXED: Properly handle async params
-export default async function WriteupPage(props: { params: Promise<Params> }) {
-  // Await the params promise
-  const params = await props.params
+// Page component
+export default async function WriteupPage({ params }: { params: Params }) {
   const decodedCategory = decodeURIComponent(params.category)
   const decodedSlug = decodeURIComponent(params.slug)
 
-  try {
-    // Construct file path
-    const basePath = path.join(process.cwd(), 'content/writeups')
-    const filePath = path.join(basePath, decodedCategory, `${decodedSlug}.mdx`)
+  const basePath = path.join(process.cwd(), 'content/writeups')
+  const filePath = path.join(basePath, decodedCategory, `${decodedSlug}.mdx`)
 
-    // Read and parse file content
+  try {
     const source = await fs.readFile(filePath, 'utf8')
     const { content, data } = matter(source)
 
     return (
       <div className="prose dark:prose-invert mx-auto max-w-4xl p-6">
-        <article >
+        <article>
           <header className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <span className="bg-blue-100 text-blue-800 text-sm font-medium px-3 py-1 rounded">
-                {data.category}
+                {data.category || decodedCategory}
               </span>
               <time className="text-gray-400 text-sm">
-                {new Date(data.date).toLocaleDateString()}
+                {data.date
+                  ? new Date(data.date).toLocaleDateString()
+                  : 'Unknown date'}
               </time>
             </div>
 
-            <div className="relative w-full h-64 mb-6 rounded-xl overflow-hidden">
-              <Image
-                src={data.image}
-                alt={data.title}
-                fill
-                className="object-cover rounded-xl"
-                sizes="(max-width: 768px) 100vw, 50vw"
-                priority
-              />
-            </div>
+            {data.image && (
+              <div className="relative w-full h-64 mb-6 rounded-xl overflow-hidden">
+                <Image
+                  src={data.image}
+                  alt={data.title || 'Post image'}
+                  fill
+                  className="object-cover rounded-xl"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  priority
+                />
+              </div>
+            )}
 
-
-            <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
+            <h1 className="text-3xl font-bold mb-4">{data.title || decodedSlug}</h1>
 
             {data.description && (
               <p className="text-gray-400 text-lg">{data.description}</p>
             )}
 
-            {data.tags && data.tags.length > 0 && (
+            {Array.isArray(data.tags) && data.tags.length > 0 && (
               <div className="flex flex-wrap gap-2 mt-4">
                 {data.tags.map((tag: string) => (
                   <span
@@ -112,15 +112,14 @@ export default async function WriteupPage(props: { params: Promise<Params> }) {
             )}
           </header>
 
-
-          <div className="border-t pt-6 ">
-            {/* Pass custom components to MDXRemote */}
+          <div className="border-t pt-6">
             <MDXRemote source={content} components={components} />
           </div>
         </article>
       </div>
     )
   } catch (error) {
+    console.error(`Error loading MDX:`, error)
     return notFound()
   }
 }

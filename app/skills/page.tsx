@@ -14,6 +14,7 @@ import {
 import { motion } from "framer-motion";
 import { Eye } from "lucide-react";
 import { TextGenerateEffect } from "../components/text-generate-effect";
+import Image from "next/image";
 
 const words = `Explore my technical expertise through interactive skill cards. Each represents a domain I've mastered - click to discover the specific tools and technologies I wield within each discipline.`
 
@@ -75,11 +76,14 @@ const SkillCard = ({ skill }: { skill: Skill }) => {
                          bg-[rgba(0,217,255,0.1)] 
                          border border-[rgba(0,217,255,0.3)]"
             >
-              <img
+              <Image
                 src={skill.iconUrl}
                 alt={skill.title}
-                className="w-5 h-5 object-contain"
+                width={20}
+                height={20}
+                className="object-contain w-5 h-5"
               />
+
             </div>
             <h3 className="text-sm font-bold text-[#00D9FF] truncate">
               {skill.title}
@@ -106,11 +110,14 @@ const SkillCard = ({ skill }: { skill: Skill }) => {
                          bg-[rgba(0,217,255,0.1)] 
                          border border-[rgba(0,217,255,0.3)]"
             >
-              <img
+              <Image
                 src={skill.iconUrl}
                 alt={skill.title}
-                className="w-14 h-14 object-contain"
+                width={56}
+                height={56}
+                className="object-contain w-14 h-14"
               />
+
             </div>
 
             <h3 className="text-xl sm:text-2xl font-bold text-center mb-3 text-[#00D9FF]">
@@ -126,7 +133,7 @@ const SkillCard = ({ skill }: { skill: Skill }) => {
                 Tools & Technologies
               </h4>
               <div className="flex flex-wrap justify-center gap-3">
-                {skill.logos.map((logo: any, idx: number) => (
+                {skill.logos.map((logo: { name: string; url: string }, idx: number) => (
                   <motion.div
                     key={logo.name + idx}
                     whileHover={{ scale: 1.1 }}
@@ -137,11 +144,14 @@ const SkillCard = ({ skill }: { skill: Skill }) => {
                                  bg-[rgba(0,217,255,0.1)] 
                                  border border-[rgba(0,217,255,0.3)]"
                     >
-                      <img
+                      <Image
                         src={logo.url}
                         alt={logo.name}
-                        className="w-10 h-10 object-contain"
+                        width={40}
+                        height={40}
+                        className="object-contain w-10 h-10"
                       />
+
                     </div>
                     <span className="mt-2 text-xs sm:text-sm font-medium text-[#a0d7e0]">
                       {logo.name}

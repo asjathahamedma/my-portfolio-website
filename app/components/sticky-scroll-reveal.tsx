@@ -38,11 +38,12 @@ export const StickyScroll = ({
     setActiveCard(closestBreakpointIndex);
   });
 
-  const linearGradients = [
+  const linearGradients = React.useMemo(() => [
     "linear-gradient(to bottom right, rgba(6, 182, 212, 0.9), rgba(16, 185, 129, 0.9))",
     "linear-gradient(to bottom right, rgba(236, 72, 153, 0.9), rgba(99, 102, 241, 0.9))",
     "linear-gradient(to bottom right, rgba(249, 115, 22, 0.9), rgba(234, 179, 8, 0.9))",
-  ];
+  ], []);
+
 
   const [backgroundGradient, setBackgroundGradient] = useState(
     linearGradients[0]

@@ -183,32 +183,33 @@ const ShaderMaterial = ({
     timeLocation.value = timestamp;
   });
 
-  const getUniforms = () => {
-    const preparedUniforms: { [key: string]: { value: unknown } } = {};
+  // Memoize prepared uniforms based on size and uniforms to avoid unnecessary recalculations
+  const preparedUniforms = useMemo(() => {
+    const prepared: { [key: string]: { value: unknown } } = {};
 
     for (const name in uniforms) {
       const uniform = uniforms[name];
       switch (uniform.type) {
         case "uniform1f":
-          preparedUniforms[name] = { value: uniform.value };
+          prepared[name] = { value: uniform.value };
           break;
         case "uniform3f":
-          preparedUniforms[name] = {
+          prepared[name] = {
             value: new THREE.Vector3().fromArray(uniform.value as number[]),
           };
           break;
         case "uniform1fv":
-          preparedUniforms[name] = { value: uniform.value };
+          prepared[name] = { value: uniform.value };
           break;
         case "uniform3fv":
-          preparedUniforms[name] = {
+          prepared[name] = {
             value: (uniform.value as number[][]).map((v) =>
               new THREE.Vector3().fromArray(v)
             ),
           };
           break;
         case "uniform2f":
-          preparedUniforms[name] = {
+          prepared[name] = {
             value: new THREE.Vector2().fromArray(uniform.value as number[]),
           };
           break;
@@ -218,28 +219,25 @@ const ShaderMaterial = ({
       }
     }
 
-    preparedUniforms["u_time"] = { value: 0 };
-    preparedUniforms["u_resolution"] = {
+    prepared["u_time"] = { value: 0 };
+    prepared["u_resolution"] = {
       value: new THREE.Vector2(size.width * 2, size.height * 2),
     };
 
-    return preparedUniforms;
-  };
+    return prepared;
+  }, [size.width, size.height, uniforms]);
 
   const material = useMemo(() => {
-    const resolvedUniforms = getUniforms(); // call here directly
-
     return new THREE.ShaderMaterial({
       vertexShader: `...`,
       fragmentShader: source,
-      uniforms: resolvedUniforms,
+      uniforms: preparedUniforms,
       glslVersion: THREE.GLSL3,
       blending: THREE.CustomBlending,
       blendSrc: THREE.SrcAlphaFactor,
       blendDst: THREE.OneFactor,
     });
-  }, [size.width, size.height, source, getUniforms]); // Removed getUniforms from dependencies
-
+  }, [source, preparedUniforms]);
 
   return (
     <mesh ref={ref}>
