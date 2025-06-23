@@ -31,7 +31,7 @@ const Skills = () => {
               className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl font-normal"
               cursorClassName="bg-[#00D9FF]"
             />
-            <div className="mt-4 text-start text-sm sm:text-base text-[#dcebed] max-w-2xl">
+            <div className="mt-4 text-start text-sm sm:text-base text-white max-w-2xl">
               <TextGenerateEffect words={words} />
             </div>
 
@@ -79,8 +79,8 @@ const SkillCard = ({ skill }: { skill: any }) => {
           </div>
 
           {/* Eye Icon */}
-          <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 -translate-x-full group-hover:translate-x-0 bg-[rgba(183,138,228,0.63)]">
-            <Eye className="w-5 h-5 text-[#00D9FF]" />
+          <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 -translate-x-full group-hover:translate-x-0 bg-[rgb(226,221,231)]">
+            <Eye className="w-5 h-5 text-[#03363f]" />
           </div>
         </div>
       </ModalTrigger>

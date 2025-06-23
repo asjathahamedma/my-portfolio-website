@@ -1,315 +1,272 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { FaBackward, FaForward, FaGithub } from "react-icons/fa";
-
-
-
-const bootLines = [
-  "[*] 🚦 Boot sequence initiated...",
-  "[+] 🧠 Neural matrix online: GlitchViper.exe",
-  "[!] 🔍 Scanning darknets for exploitable surfaces...",
-  "[✓] 🔓 Firewall bypassed — UID=0(root) acquired",
-  "[*] 🧬 Injecting code anomalies into live memory...",
-  "[+] 🐍 ViperStrike protocol engaged — entropy rising...",
-  "[✓] 🧠 System breach complete. Intelligence secured.",
-  "[!] ⚡ GlitchViper active — rewriting digital reality...",
-];
-
-type Category =
-  | "penetration-testing"
-  | "malware-analysis"
-  | "network-security"
-  | "scripting"
-  | "frontend-development";
+import { FaGithub, FaFileAlt } from "react-icons/fa";
+import { sentences } from "../components/data/projectSentences";
+import { TypewriterEffectSmooth } from "../components/typewriter-effect";
+import { TextGenerateEffect } from "../components/text-generate-effect";
 
 type Project = {
+  writeup: string | undefined;
   title: string;
   description: string;
+  shortDescription: string;
   image: string;
   status: string;
   techStack: string[];
   github: string;
+  category: string;
 };
 
-const projectsData: Record<Category, Project[]> = {
-  "penetration-testing": [
-    {
-      title: "ViperScan",
-      description:
-        "A Python-based web vulnerability scanner integrating Nmap, Burp Suite, and Nikto to detect OWASP Top 10 issues.",
-      image: "/ViperScan.jpg",
-      status: "In Progress / Research Project",
-      techStack: ["Python", "Nmap", "OWASP", "Burp Suite", "Nikto"],
-      github: "/"
-    },
-    {
-      title: "XSS Hunter",
-      description:
-        "An automated tool for detecting reflected and stored XSS using JS payloads and Burp Suite macros.",
-      image: "/XssHunter.jpg",
-      status: "Completed",
-      techStack: ["JavaScript", "Burp Suite", "Python"],
-      github: "/"
-    },
-  ],
-  "malware-analysis": [
-    {
-      title: "MalwareLab-X",
-      description:
-        "An isolated lab for reverse-engineering malware using REMnux, Wireshark, and debugging tools.",
-      image: "/MalwareLab-X.jpg",
-      status: "Research Simulation",
-      techStack: [
-        "REMnux",
-        "Python",
-        "x64dbg",
-        "Wireshark",
-        "Process Hacker",
-      ],
-      github: "/"
-    },
-    {
-      title: "YARA Scanner",
-      description:
-        "A YARA-based scanner for identifying malware signatures in sandboxed environments.",
-      image: "/YARAscanner.jpg",
-      status: "Completed",
-      techStack: ["Python", "YARA", "VirtualBox"],
-      github: "/"
-    },
-  ],
-  "network-security": [
-    {
-      title: "NetSentinel",
-      description:
-        "A red/blue team simulation lab for testing IDS, firewalls, and network analysis tools.",
-      image: "/NetSentinal.jpg",
-      status: "Learning Environment",
-      techStack: [
-        "Kali Linux",
-        "Wireshark",
-        "iptables",
-        "pfSense",
-        "TCPDump",
-        "Ettercap",
-      ],
-      github: "/"
-    },
-  ],
-  scripting: [
-    {
-      title: "AutoReconX",
-      description:
-        "A CTF-focused recon tool combining subdomain, directory, and DNS enumeration workflows.",
-      image: "/AutoReconX.jpg",
-      status: "Tool Prototype",
-      techStack: [
-        "Python",
-        "Bash",
-        "Sublist3r",
-        "Dirsearch",
-        "Nmap",
-        "Whois",
-        "DNS",
-      ],
-      github: "/"
-    },
-  ],
-  "frontend-development": [
-    {
-      title: "GlitchViper.dev",
-      description:
-        "A hacker-themed portfolio with animations, interactive UI, and dynamic project showcases.",
-      image: "/myPortfolio.jpg",
-      status: "Live",
-      techStack: ["Next.js", "Tailwind CSS", "Framer Motion", "React", "Vercel"],
-      github: "https://github.com/AsjathAhamedMohamedAazath/my-portfolio-website"
-    },
-    {
-      title: "Admin Dashboard",
-      description:
-        "A responsive dashboard with charts, filters, and clean UI built using Tailwind and Chart.js.",
-      image: "/AdminDashboard.jpg",
-      status: "Completed",
-      techStack: ["React", "Tailwind CSS", "Chart.js"],
-      github: "/"
-    },
-  ],
-};
-
-
-
-const categories: { label: string; value: Category }[] = [
-  { label: "Penetration Testing", value: "penetration-testing" },
-  { label: "Malware Analysis", value: "malware-analysis" },
-  { label: "Network Security", value: "network-security" },
-  { label: "Scripting & Automation", value: "scripting" },
-  { label: "Frontend Development", value: "frontend-development" },
+const allProjects: Project[] = [
+  {
+    title: "ViperScan",
+    description: "A Python-based web vulnerability scanner integrating Nmap, Burp Suite, and Nikto. It supports automated scanning, intelligent target parsing, and customizable modules for detecting OWASP Top 10 vulnerabilities.",
+    shortDescription: "Web scanner with Nmap, Burp Suite, and Nikto integration.",
+    image: "/ViperScan.jpg",
+    status: "In Progress",
+    techStack: ["Python", "Nmap", "Burp Suite"],
+    github: "/",
+    category: "Penetration Testing",
+    writeup: "/"
+  },
+  {
+    title: "XSS Hunter",
+    description: "Automated tool for detecting reflected and stored XSS vulnerabilities using payload injection and browser-based scripts. Ideal for testing input sanitization.",
+    shortDescription: "Detects XSS vulnerabilities using JS payloads.",
+    image: "/XssHunter.jpg",
+    status: "Completed",
+    techStack: ["JavaScript", "Burp Suite", "Python"],
+    github: "/",
+    category: "Penetration Testing",
+    writeup:"/"
+  },
+  {
+    title: "MalwareLab-X",
+    description: "Reverse engineering malware using REMnux, x64dbg, and Wireshark. Includes behavioral analysis and static inspection in a safe lab setup.",
+    shortDescription: "Reverse engineering malware using REMnux and x64dbg.",
+    image: "/MalwareLab-X.jpg",
+    status: "Research",
+    techStack: ["REMnux", "x64dbg", "Wireshark"],
+    github: "/",
+    category: "Malware Analysis",
+    writeup:"/"
+  },
+  {
+    title: "YARA Scanner",
+    description: "Detects malware in virtual sandbox environments using custom YARA rules. Supports real-time alerts and detailed match reports.",
+    shortDescription: "Malware detection using YARA rules.",
+    image: "/YARAscanner.jpg",
+    status: "Completed",
+    techStack: ["Python", "YARA", "VirtualBox"],
+    github: "/",
+    category: "Malware Analysis",
+    writeup: "/"
+  },
+  {
+    title: "AutoReconX",
+    description: "Automates reconnaissance tasks for CTFs including subdomain enumeration, directory brute-forcing, and port scanning.",
+    shortDescription: "Automates CTF recon tasks like subdomain and dir scan.",
+    image: "/AutoReconX.jpg",
+    status: "Prototype",
+    techStack: ["Python", "Sublist3r", "Dirsearch", "Nmap"],
+    github: "/",
+    category: "Scripting",
+    writeup: "/"
+  },
+  {
+    title: "NetSentinel",
+    description: "Simulated lab environment for network defense including firewall setup, intrusion detection, and packet inspection using open-source tools.",
+    shortDescription: "Network defense lab with IDS, firewall, and sniffing.",
+    image: "/NetSentinal.jpg",
+    status: "Simulated",
+    techStack: ["Wireshark", "pfSense", "Ettercap"],
+    github: "/",
+    category: "Network Security",
+    writeup: "/"
+  },
+  {
+    title: "GlitchViper.dev",
+    description: "A modern, animated cybersecurity-themed portfolio using Next.js, Tailwind CSS, and Framer Motion. Features glitch effects, 3D assets, and smooth page transitions.",
+    shortDescription: "Cyber-themed animated portfolio with glitch effects.",
+    image: "/myPortfolio.jpg",
+    status: "Live",
+    techStack: ["Next.js", "Tailwind", "Framer Motion"],
+    github: "https://github.com/AsjathAhamedMohamedAazath/my-portfolio-website",
+    category: "Frontend Development",
+    writeup: "/"
+  },
+  {
+    title: "Admin Dashboard",
+    description: "A minimal admin dashboard interface built with Tailwind CSS and Chart.js. Displays analytics, real-time charts, and theme customization.",
+    shortDescription: "Admin UI with Tailwind and Chart.js.",
+    image: "/AdminDashboard.jpg",
+    status: "Completed",
+    techStack: ["React", "Tailwind", "Chart.js"],
+    github: "/",
+    category: "Frontend Development",
+    writeup: "/"
+  },
 ];
 
 export default function ProjectsPage() {
-  const [visibleLines, setVisibleLines] = useState<string[]>([]);
-  const [showProjects, setShowProjects] = useState(false);
-
-  useEffect(() => {
-    bootLines.forEach((line, i) => {
-      setTimeout(() => {
-        setVisibleLines((prev) => [...prev, line]);
-        if (i === bootLines.length - 1) {
-          setTimeout(() => setShowProjects(true), 1000);
-        }
-      }, i * 1500);
-    });
-  }, []);
-
-  const [activeCategory, setActiveCategory] = useState<Category>(
-    "penetration-testing"
-  );
-  const [activeIndex, setActiveIndex] = useState<number>(0);
-
-  const activeProjects = projectsData[activeCategory];
-  const currentProject = activeProjects[activeIndex];
-
-  const handlePrev = () =>
-    setActiveIndex((prev) =>
-      prev === 0 ? activeProjects.length - 1 : prev - 1
-    );
-
-  const handleNext = () =>
-    setActiveIndex((prev) =>
-      prev === activeProjects.length - 1 ? 0 : prev + 1
-    );
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   return (
-    <div className="h-screen text-[#00D9FF] overflow-x-hidden relative ">
-      {!showProjects ? (
-        <div className="text-lg p-5 drop-shadow-[0_0_8px_rgba(0,217,255,0.4)]">
-          {visibleLines.map((line, idx) => (
-            <motion.p
-              key={idx}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.4 }}
-              className="mb-2"
-            >
-              {line}
-            </motion.p>
-          ))}
-        </div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <div className="h-screen text-white flex flex-col items-start px-3 gap-8 overflow-hidden ">
-            {/* Category Tabs */}
-            <div className="flex mt-11 gap-3">
-              {categories.map((cat) => (
-                <button
-                  key={cat.value}
-                  onClick={() => {
-                    setActiveCategory(cat.value);
-                    setActiveIndex(0);
-                  }}
-                  className={`px-4 py-1 text-sm md:text-sm rounded-full font-semibold transition-all duration-300 
-        border border-cyan-500 shadow-md 
-        ${activeCategory === cat.value
-                      ? "bg-cyan-400 text-black shadow-[0_0_12px_#00D9FF] scale-105"
-                      : "bg-transparent text-white hover:bg-white hover:text-black hover:shadow-[0_0_10px_#00D9FF] hover:scale-105"
-                    }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
+    <div className="relative w-full h-screen overflow-hidden">
+      <TypewriterEffectSmooth
+        sentences={sentences}
+        className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl p-3 font-normal"
+        cursorClassName="bg-[#00D9FF]"
+      />
+
+      <motion.div
+        className="absolute top-1/2 -translate-y-1/2 left-0 flex gap-10 px-10"
+        animate={{ x: ["7%", "-100%"] }}
+        transition={{ duration: 180, repeat: Infinity, ease: "linear" }}
+      >
+        {[...allProjects, ...allProjects].map((project, i) => (
+          <motion.div
+            key={`${project.title}-${i}`}
+            onClick={() => setSelectedProject(project)}
+            className="min-w-[50vw] h-[60vh] p-4 bg-[#393c3d80] rounded-xl flex flex-col justify-between items-center hover:shadow-[0_0_70px_#ffffffff] hover:scale-105 transition-all duration-500 cursor-pointer"
+          >
+            <Image
+              src={project.image}
+              alt={project.title}
+              width={1000}
+              height={500}
+              className="w-full h-[45%] object-cover rounded-md shadow-lg hover:scale-110 transition-all duration-300"
+            />
+            <div className="flex flex-col justify-center items-center flex-grow">
+              <motion.h2 className="text-3xl font-bold text-cyan-400 text-center mt-4">
+                {project.title}
+              </motion.h2>
+              <p className="mt-2 text-gray-300 text-center text-sm max-w-2xl">
+                {project.shortDescription}
+              </p>
+              <p className="mt-2 text-emerald-400 text-sm">
+                <strong>Status:</strong> {project.status}
+              </p>
+              <p className="text-cyan-300 text-sm">
+                <strong>Category:</strong> {project.category}
+              </p>
+              <div className="mt-3 flex flex-wrap justify-center gap-2">
+                {project.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 text-xs border border-cyan-400 bg-cyan-500/10 text-cyan-300 rounded-full hover:bg-white hover:text-cyan-950 hover:border-white hover:scale-120 transition-all duration-500"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
+          </motion.div>
+        ))}
+      </motion.div>
 
-            {/* Project Viewer */}
-            <div className="flex items-center justify-center gap-6 w-full ">
-              <div>
-                <Image
-                  src="/hacker-3.png"
-                  alt=""
-                  width={800}
-                  height={800}
-                  className="hover:scale-105 transition-transform duration-300 animate-img"
+      <AnimatePresence>
+        {selectedProject && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-[#8ce5f468] backdrop-blur-sm z-50 flex items-center justify-center"
+            onClick={() => setSelectedProject(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              className="bg-[#011417] text-white p-8 rounded-lg max-w-3xl w-full shadow-lg relative"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Image
+                src={selectedProject.image}
+                alt={selectedProject.title}
+                width={1000}
+                height={500}
+                className="w-full h-[250px] object-cover rounded-md mb-4"
+              />
 
-                />
-              </div>
-              <div className="p-[2px] rounded-full bg-gradient-to-r items-center from-[#0252f1] via-[#02e0f4] to-[#fff] transition-transform duration-300 hover:scale-105">
-                <button
-                  onClick={handleNext}
-                  className="rounded-full p-2 bg-zinc-900 text-white transition-all duration-300
-               hover:bg-gradient-to-r from-[#0252f1] via-[#02e0f4] to-[#fff]
-               hover:shadow-[0_0_15px_#0ff] hover:scale-110"
-                >
-                  <FaBackward />
-                </button>
-              </div>
+              <TextGenerateEffect
+                words={selectedProject.title}
+                className="text-3xl font-bold text-cyan-400 mb-2 text-left"
+              />
+              <TextGenerateEffect
+                words={selectedProject.description}
+                className="text-gray-300 mb-2 text-sm text-left"
+              />
+              <TextGenerateEffect
+                words={`Status: ${selectedProject.status}`}
+                className="text-emerald-400 mb-2 text-sm text-left"
+              />
+              <TextGenerateEffect
+                words={`Category: ${selectedProject.category}`}
+                className="text-cyan-300 mb-2 text-sm text-left"
+              />
+              <div className="mb-2 flex justify-between items-center flex-wrap gap-2">
+                {/* Tags on the left */}
+                <div className="flex flex-wrap gap-2">
+                  {selectedProject.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-xs border border-cyan-400 bg-cyan-500/10 text-cyan-300 rounded-full hover:bg-white hover:text-cyan-950 hover:border-white hover:scale-120 transition-all duration-500"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentProject.title}
-                  initial={{ opacity: 0, x: 60 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -60 }}
-                  transition={{ duration: 0.5 }}
-                  className="relative w-[90%] h-[60%] overflow-hidden glass-glow flex flex-col md:flex-row items-center justify-between p-6 gap-6 hover:scale-102 transition-all duration-300"
-                >
-                  <div className="w-full md:w-1/2">
-                    <h3 className="text-2xl text-[#00D9FF] font-bold mb-2">{currentProject.title}</h3>
-                    <p className="text-white mb-2">{currentProject.description}</p>
-                    <p className="text-sm text-emerald-300 mb-1">
-                      <strong>Status:</strong> {currentProject.status}
-                    </p>
-                    <p className="text-sm text-sky-300">
-                      <strong>Tech Stack:</strong> {currentProject.techStack.join(", ")}
-                    </p>
+                {/* Icons on the right */}
+                <div className="flex flex-col items-center gap-4 group">
+                  {/* Write-up link (only if exists) */}
+                  {selectedProject.writeup && (
                     <a
-                      href={currentProject.github}
+                      href={selectedProject.writeup}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 text-white mt-2 hover:text-cyan-300 transition-colors"
+                      className="inline-flex items-center justify-end text-green-300 hover:text-green-200 text-md overflow-hidden group/writeup"
                     >
-                      <FaGithub className="text-xl" />
-                      View on GitHub
+                      <span className="opacity-0 transform translate-x-4 transition-all duration-300 group-hover/writeup:opacity-100 group-hover/writeup:translate-x-0 whitespace-nowrap">
+                        Read Write-up
+                      </span>
+                      <FaFileAlt className="text-xl ml-2" />
                     </a>
+                  )}
 
-                  </div>
-                  <div className="w-full md:w-1/2">
-                    <Image
-                      src={currentProject.image}
-                      alt={currentProject.title}
-                      width={500}
-                      height={300}
-                      className="rounded-lg object-cover w-full"
-                    />
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-
-              <div className="p-[2px] rounded-full bg-gradient-to-r from-[#0252f1] via-[#02e0f4] to-[#fff] transition-transform duration-300 hover:scale-105">
-                <button
-                  onClick={handleNext}
-                  className="rounded-full p-2 bg-zinc-900 text-white transition-all duration-300
-               hover:bg-gradient-to-r from-[#0252f1] via-[#02e0f4] to-[#fff]
-               hover:shadow-[0_0_15px_#0ff] hover:scale-110"
-                >
-                  <FaForward />
-                </button>
+                  {/* GitHub Link */}
+                  {selectedProject.github && (
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-end text-cyan-300 hover:text-cyan-200 text-md overflow-hidden group/github"
+                    >
+                      <span className="opacity-0 transform translate-x-4 transition-all duration-300 group-hover/github:opacity-100 group-hover/github:translate-x-0 whitespace-nowrap">
+                        View on GitHub
+                      </span>
+                      <FaGithub className="text-xl ml-2" />
+                    </a>
+                  )}
+                </div>
               </div>
 
 
 
-            </div>
 
-          </div>
-
-        </motion.div>
-      )}
+              <button
+                onClick={() => setSelectedProject(null)}
+                className="absolute top-2 right-2 text-white text-lg hover:text-red-500"
+              >
+                ✕
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

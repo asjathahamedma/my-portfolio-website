@@ -80,7 +80,7 @@ const Home = () => {
           </motion.div>
           {/* Left Content (Intro) */}
           <div className="absolute left-0 top-3/5 -translate-y-1/2 text-left pl-10 w-1/3 hidden sm:block " >
-            <h1 className="flex flex-wrap gap-x-2 text-5xl font-normal  ">
+            <h1 className="flex flex-wrap gap-x-2 text-5xl   ">
               <LettersPullUp
                 text="Welcome"
                 className="text-[#00D9FF] drop-shadow-[0_0_15px_rgba(0,217,255,0.7)] transition-transform hover:scale-130 duration-200 ease-linear"

@@ -12,6 +12,11 @@ import {
   IconBook,
   IconCube,
   IconBrandLinkedin,
+  IconMan,
+  IconFaceId,
+  IconFaceMask,
+  IconUser,
+  IconUserCircle,
 } from "@tabler/icons-react";
 import BackgroundParticlesWrapper from "./components/BackgroundParticlesWrapper";
 
@@ -51,9 +56,9 @@ const links = [
   { title: "Skills", icon: <IconBrain className="h-full w-full text-neutral-500 dark:text-black" />, href: "/skills" },
   { title: "Projects", icon: <IconRocket className="h-full w-full text-neutral-500 dark:text-black" />, href: "/projects" },
   { title: "WriteUps", icon: <IconBook className="h-full w-full text-neutral-500 dark:text-black" />, href: "/writeups" },
-  { title: "HackTheBox", icon: <IconCube className="h-full w-full text-neutral-500 dark:text-black" />, href: "#" },
-  { title: "LinkedIn", icon: <IconBrandLinkedin className="h-full w-full text-neutral-500 dark:text-black" />, href: "https://www.linkedin.com/in/asjathahamedmohamedaazath" },
-  { title: "GitHub", icon: <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-black" />, href: "https://github.com/AsjathAhamedMohamedAazath?tab=repositories" },
+  { title: "About Me", icon: <IconUser className="h-full w-full text-neutral-500 dark:text-black" />, href: "about" },
+  { title: "My LinkedIn", icon: <IconBrandLinkedin className="h-full w-full text-neutral-500 dark:text-black" />, href: "https://www.linkedin.com/in/asjathahamedmohamedaazath" },
+  { title: "My GitHub", icon: <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-black" />, href: "https://github.com/AsjathAhamedMohamedAazath?tab=repositories" },
 ];
 
 export default function RootLayout({

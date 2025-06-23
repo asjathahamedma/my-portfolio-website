@@ -52,7 +52,7 @@ export default function WriteupsList({
       <div className="relative overflow-hidden rounded-2xl mb-16">
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-cyan-900/70 z-10"></div>
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')] bg-cover bg-center animate-pulse-slow"></div>
+          <div className="absolute top-0 left-0 w-full h-full bg-[url('/writeups-banner.jpg')] bg-cover bg-center animate-pulse-slow"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.8)_100%)]"></div>
         </div>
         
@@ -72,7 +72,7 @@ export default function WriteupsList({
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Detailed reports of security assessments, CTF solutions, and vulnerability discoveries
+            Detailed reports of security assessments, CTF solutions, and vulnerability discoveries and my projects
           </motion.p>
           
           <motion.div 
@@ -82,13 +82,13 @@ export default function WriteupsList({
             transition={{ delay: 0.6, duration: 0.8 }}
           >
             <div className="bg-cyan-500/10 border border-cyan-400 rounded-full px-6 py-2 text-cyan-300">
-              <span className="text-cyan-400 font-bold">200+</span> Vulnerabilities Discovered
+              <span className="text-cyan-400 font-bold">20+</span> Vulnerabilities Discovered
             </div>
-            <div className="bg-emerald-500/10 border border-emerald-400 rounded-full px-6 py-2 text-emerald-300">
-              <span className="text-emerald-400 font-bold">50+</span> CTF Challenges Solved
+            <div className="bg-emerald-500/10 border border-cyan-400 rounded-full px-6 py-2 text-cyan-300">
+              <span className="text-cyan-300 font-bold">50+</span> CTF Challenges Solved
             </div>
-            <div className="bg-amber-500/10 border border-amber-400 rounded-full px-6 py-2 text-amber-300">
-              <span className="text-amber-400 font-bold">30+</span> Penetration Tests
+            <div className="bg-amber-500/10 border border-cyan-400 rounded-full px-6 py-2 text-cyan-300">
+              <span className="text-cyan-300 font-bold">30+</span> Penetration Tests
             </div>
           </motion.div>
         </div>
@@ -101,7 +101,7 @@ export default function WriteupsList({
         <div className="flex flex-wrap gap-2 md:gap-4">
           <button 
             onClick={() => setSelectedCategory(null)}
-            className={`px-4 py-2 rounded-full transition-all ${!selectedCategory ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/20' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+            className={`px-4 py-2 rounded-full transition-all ${!selectedCategory ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20' : 'bg-gray-800  hover:bg-white hover:text-[#1a4343]'}`}
           >
             All Categories
           </button>
@@ -110,7 +110,7 @@ export default function WriteupsList({
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full transition-all ${selectedCategory === category ? 'bg-cyan-600 text-white shadow-lg shadow-cyan-500/20' : 'bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
+              className={`px-4 py-2 rounded-full transition-all ${selectedCategory === category ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20' : 'bg-gray-800 hover:text-[#1a4343] hover:bg-white'}`}
             >
               {category}
             </button>
@@ -128,7 +128,7 @@ export default function WriteupsList({
         {filteredPosts.map((post) => (
           <motion.div key={`${post.category}-${post.slug}`} variants={itemVariants}>
             <CardContainer className="inter-var">
-              <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-cyan-500/10 dark:bg-gray-900 dark:border-gray-800 border-gray-200 w-full h-[28rem] rounded-xl p-4 border">
+              <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-cyan-500/100 dark:bg-gray-900 dark:border-gray-800 border-gray-200 w-full h-[28rem] rounded-xl p-4 border transition-all duration-500">
                 {/* Image */}
                 <CardItem
                   translateZ="100"
@@ -203,7 +203,7 @@ export default function WriteupsList({
                 >
                   <Link 
                     href={`/writeups/${encodeURIComponent(post.category)}/${encodeURIComponent(post.slug)}`}
-                    className="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-cyan-600 to-cyan-700 text-white text-sm font-bold transition-all hover:from-cyan-700 hover:to-cyan-800 hover:shadow-lg hover:shadow-cyan-500/30"
+                    className="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-[#fff] to-[#02cef3] text-[#011e23] text-sm font-bold transition-all hover:from-[#02cef3] hover:to-white hover:shadow-lg hover:shadow-cyan-500/80 duration-300"
                   >
                     Read Writeup
                   </Link>
