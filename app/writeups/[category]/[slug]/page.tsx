@@ -6,12 +6,20 @@ import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
 import Image from 'next/image'
 
-// Define your custom components
+// Custom MDX component
 const Note = ({ children }: { children: ReactNode }) => (
   <div className="bg-gray-700 border-l-4 border-blue-500 p-4 my-4">
     <div className="flex items-start">
-      <svg className="h-5 w-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
-        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+      <svg
+        className="h-5 w-5 text-blue-500 mr-2"
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          fillRule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+          clipRule="evenodd"
+        />
       </svg>
       <div>{children}</div>
     </div>
@@ -20,42 +28,16 @@ const Note = ({ children }: { children: ReactNode }) => (
 
 const components = {
   Note,
-  // Add other custom MDX components here
 }
 
-type Params = {
-  category: string
-  slug: string
-}
+// Page component: await params because it's a Promise in Next.js 15+
+export default async function WriteupPage(props: {
+  params: Promise<{ category: string; slug: string }>
+}) {
+  const { category, slug } = await props.params
 
-// Static route generator
-export async function generateStaticParams() {
-  const basePath = path.join(process.cwd(), 'content/writeups')
-  const categories = await fs.readdir(basePath)
-
-  const params: Params[] = []
-
-  for (const category of categories) {
-    const categoryPath = path.join(basePath, category)
-    const files = await fs.readdir(categoryPath)
-
-    for (const file of files) {
-      if (file.endsWith('.mdx')) {
-        params.push({
-          category,
-          slug: file.replace(/\.mdx$/, ''),
-        })
-      }
-    }
-  }
-
-  return params
-}
-
-// Page component
-export default async function WriteupPage({ params }: { params: Params }) {
-  const decodedCategory = decodeURIComponent(params.category)
-  const decodedSlug = decodeURIComponent(params.slug)
+  const decodedCategory = decodeURIComponent(category)
+  const decodedSlug = decodeURIComponent(slug)
 
   const basePath = path.join(process.cwd(), 'content/writeups')
   const filePath = path.join(basePath, decodedCategory, `${decodedSlug}.mdx`)
@@ -119,7 +101,31 @@ export default async function WriteupPage({ params }: { params: Params }) {
       </div>
     )
   } catch (error) {
-    console.error(`Error loading MDX:`, error)
+    console.error('Error loading MDX:', error)
     return notFound()
   }
+}
+
+// Static params generator remains normal
+export async function generateStaticParams() {
+  const basePath = path.join(process.cwd(), 'content/writeups')
+  const categories = await fs.readdir(basePath)
+
+  const params: { category: string; slug: string }[] = []
+
+  for (const category of categories) {
+    const categoryPath = path.join(basePath, category)
+    const files = await fs.readdir(categoryPath)
+
+    for (const file of files) {
+      if (file.endsWith('.mdx')) {
+        params.push({
+          category,
+          slug: file.replace(/\.mdx$/, ''),
+        })
+      }
+    }
+  }
+
+  return params
 }

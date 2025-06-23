@@ -47,7 +47,7 @@ const Home = () => {
                     className="absolute -top-12 -left-90 ease-in-out"
                   >
                     <div className='flex items-center'>
-                      <Image src="/lock.png" alt="Lock Icon" width={32} height={32} />
+                      <Image src="/lock.png" alt="Lock Icon" width={200} height={200} />
                       <span className="text-2xl text-[#ffffff] font-mono drop-shadow-[0_0_15px_rgba(0,217,255,0.6)]">
                         SYSTEM BREACHED
                       </span>
@@ -65,7 +65,7 @@ const Home = () => {
                       <span className="text-2xl text-[#ffffff] font-mono drop-shadow-[0_0_15px_rgba(0,217,255,0.6)] ">
                         ACCESS GRANTED
                       </span>
-                      <Image src="/brain.png" alt="Brain Icon" width={32} height={32} />
+                      <Image src="/brain.png" alt="Brain Icon" width={200} height={200} />
                     </div>
                   </motion.div>
                 </>
