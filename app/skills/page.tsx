@@ -9,7 +9,6 @@ import {
   Modal,
   ModalBody,
   ModalContent,
-  ModalFooter,
   ModalTrigger,
 } from "@/app/components/animated-modal";
 import { motion } from "framer-motion";
