@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { StickyScroll } from "../components/sticky-scroll-reveal";
-import { FaEnvelope, FaGithub, FaLinkedin, FaMailBulk } from "react-icons/fa";
+import { FaEnvelope, FaGithub, FaLinkedin } from "react-icons/fa";
 import { TextGenerateEffect } from "../components/text-generate-effect";
 import { motion } from "framer-motion";
 

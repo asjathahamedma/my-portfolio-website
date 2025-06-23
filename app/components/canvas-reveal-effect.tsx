@@ -123,11 +123,11 @@ const DotMatrix: React.FC<DotMatrixProps> = ({
         void main() {
           vec2 st = fragCoord.xy;
           ${center.includes("x")
-            ? "st.x -= abs(floor((mod(u_resolution.x, u_total_size) - u_dot_size) * 0.5));"
-            : ""}
+          ? "st.x -= abs(floor((mod(u_resolution.x, u_total_size) - u_dot_size) * 0.5));"
+          : ""}
           ${center.includes("y")
-            ? "st.y -= abs(floor((mod(u_resolution.y, u_total_size) - u_dot_size) * 0.5));"
-            : ""}
+          ? "st.y -= abs(floor((mod(u_resolution.y, u_total_size) - u_dot_size) * 0.5));"
+          : ""}
           float opacity = step(0.0, st.x);
           opacity *= step(0.0, st.y);
 
@@ -184,7 +184,7 @@ const ShaderMaterial = ({
   });
 
   const getUniforms = () => {
-    const preparedUniforms: { [key: string]: any } = {};
+    const preparedUniforms: { [key: string]: { value: unknown } } = {};
 
     for (const name in uniforms) {
       const uniform = uniforms[name];
@@ -227,28 +227,19 @@ const ShaderMaterial = ({
   };
 
   const material = useMemo(() => {
+    const resolvedUniforms = getUniforms(); // call here directly
+
     return new THREE.ShaderMaterial({
-      vertexShader: `
-        precision mediump float;
-        in vec2 coordinates;
-        uniform vec2 u_resolution;
-        out vec2 fragCoord;
-        void main(){
-          float x = position.x;
-          float y = position.y;
-          gl_Position = vec4(x, y, 0.0, 1.0);
-          fragCoord = (position.xy + vec2(1.0)) * 0.5 * u_resolution;
-          fragCoord.y = u_resolution.y - fragCoord.y;
-        }
-      `,
+      vertexShader: `...`,
       fragmentShader: source,
-      uniforms: getUniforms(),
+      uniforms: resolvedUniforms,
       glslVersion: THREE.GLSL3,
       blending: THREE.CustomBlending,
       blendSrc: THREE.SrcAlphaFactor,
       blendDst: THREE.OneFactor,
     });
-  }, [size.width, size.height, source, getUniforms]);
+  }, [size.width, size.height, source]); // Removed getUniforms from dependencies
+
 
   return (
     <mesh ref={ref}>

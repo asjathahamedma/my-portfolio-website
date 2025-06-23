@@ -3,16 +3,14 @@
 import { AnimatePresence, motion, useInView } from 'framer-motion';
 import * as React from 'react';
 
-interface GradualSpacingProps {
+interface GradualSpacingProps extends React.HTMLAttributes<HTMLDivElement> {
   text: string;
-  className?: string;
-  [key: string]: any; // Allow additional props
 }
 
 export function GradualSpacing({ text = 'Gradual Spacing', className = '', ...props }: GradualSpacingProps) {
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true });
-  
+
   return (
     <div className={`flex space-x-1 ${className}`} {...props}>
       <AnimatePresence>
@@ -24,7 +22,7 @@ export function GradualSpacing({ text = 'Gradual Spacing', className = '', ...pr
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             exit="hidden"
             transition={{ duration: 2, delay: i * 0.3 }}
-            className={className} // Or create a separate prop for character classes
+            className={className}
           >
             {char === ' ' ? <span>&nbsp;</span> : char}
           </motion.p>
