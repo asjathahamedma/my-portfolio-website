@@ -5,12 +5,13 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { CardBody, CardContainer, CardItem } from "@/app/components/3d-Card";
 import { Post } from './writeupsData';
+import Image from 'next/image';
 
-export default function WriteupsList({ 
-  allPosts, 
-  categories 
-}: { 
-  allPosts: Post[]; 
+export default function WriteupsList({
+  allPosts,
+  categories
+}: {
+  allPosts: Post[];
   categories: string[];
 }) {
   const defaultImage = "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
@@ -55,9 +56,9 @@ export default function WriteupsList({
           <div className="absolute top-0 left-0 w-full h-full bg-[url('/writeups-banner.jpg')] bg-cover bg-center animate-pulse-slow"></div>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.8)_100%)]"></div>
         </div>
-        
+
         <div className="relative z-20 py-24 px-8 text-center">
-          <motion.h1 
+          <motion.h1
             className="text-4xl md:text-6xl font-bold mb-6 text-white"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,8 +66,8 @@ export default function WriteupsList({
           >
             Cybersecurity <span className="text-cyan-400">Writeups</span>
           </motion.h1>
-          
-          <motion.p 
+
+          <motion.p
             className="text-xl md:text-2xl text-white max-w-3xl mx-auto mb-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -74,8 +75,8 @@ export default function WriteupsList({
           >
             Detailed reports of security assessments, CTF solutions, and vulnerability discoveries and my projects
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             className="flex flex-wrap justify-center gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -97,15 +98,15 @@ export default function WriteupsList({
       {/* Category Filter */}
       <div className="mb-12">
         <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Filter by Category</h2>
-        
+
         <div className="flex flex-wrap gap-2 md:gap-4">
-          <button 
+          <button
             onClick={() => setSelectedCategory(null)}
             className={`px-4 py-2 rounded-full transition-all ${!selectedCategory ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20' : 'bg-gray-800  hover:bg-white hover:text-[#1a4343]'}`}
           >
             All Categories
           </button>
-          
+
           {categories.map((category) => (
             <button
               key={category}
@@ -119,7 +120,7 @@ export default function WriteupsList({
       </div>
 
       {/* Writeups Grid */}
-      <motion.div 
+      <motion.div
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         variants={containerVariants}
         initial="hidden"
@@ -137,11 +138,14 @@ export default function WriteupsList({
                   className="w-full mb-4"
                 >
                   <div className="relative overflow-hidden rounded-xl h-48">
-                    <img
+                    <Image
                       src={post.image || defaultImage}
-                      className="h-full w-full object-cover group-hover/card:scale-110 transition-transform duration-500"
                       alt={post.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover group-hover/card:scale-110 transition-transform duration-500 rounded-xl"
                     />
+
                     <div className="absolute bottom-2 right-2 bg-black/70 text-white text-xs px-2 py-1 rounded">
                       {post.date}
                     </div>
@@ -201,7 +205,7 @@ export default function WriteupsList({
                   translateZ={20}
                   className="mt-6"
                 >
-                  <Link 
+                  <Link
                     href={`/writeups/${encodeURIComponent(post.category)}/${encodeURIComponent(post.slug)}`}
                     className="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-[#fff] to-[#02cef3] text-[#011e23] text-sm font-bold transition-all hover:from-[#02cef3] hover:to-white hover:shadow-lg hover:shadow-cyan-500/80 duration-300"
                   >
@@ -222,11 +226,11 @@ export default function WriteupsList({
             No writeups found
           </h3>
           <p className="text-gray-600 dark:text-gray-400 max-w-md mx-auto">
-            {selectedCategory 
-              ? `We couldn't find any writeups in the "${selectedCategory}" category.` 
+            {selectedCategory
+              ? `We couldn't find any writeups in the "${selectedCategory}" category.`
               : "No writeups available at the moment. Please check back later."}
           </p>
-          <button 
+          <button
             onClick={() => setSelectedCategory(null)}
             className="mt-6 px-6 py-3 bg-cyan-600 text-white rounded-full hover:bg-cyan-700 transition-colors"
           >

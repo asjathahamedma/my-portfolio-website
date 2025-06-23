@@ -18,6 +18,15 @@ import { TextGenerateEffect } from "../components/text-generate-effect";
 
 const words = `Explore my technical expertise through interactive skill cards. Each represents a domain I've mastered - click to discover the specific tools and technologies I wield within each discipline.`
 
+interface Skill {
+  title: string;
+  iconUrl: string;
+  quote: string;
+  logos: { name: string; url: string }[];
+  content?: React.ReactNode;
+}
+
+
 const Skills = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-start py-12 overflow-hidden">
@@ -50,7 +59,7 @@ const Skills = () => {
   );
 };
 
-const SkillCard = ({ skill }: { skill: any }) => {
+const SkillCard = ({ skill }: { skill: Skill }) => {
   return (
     <Modal>
       <ModalTrigger className="block w-full">

@@ -238,7 +238,7 @@ const ShaderMaterial = ({
       blendSrc: THREE.SrcAlphaFactor,
       blendDst: THREE.OneFactor,
     });
-  }, [size.width, size.height, source]); // Removed getUniforms from dependencies
+  }, [size.width, size.height, source, getUniforms]); // Removed getUniforms from dependencies
 
 
   return (

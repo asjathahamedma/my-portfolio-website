@@ -23,7 +23,6 @@ export const TypewriterEffectSmooth = ({
   delayBetweenSentences?: number;
 }) => {
   const [currentSentenceIndex, setCurrentSentenceIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
 
   const renderCurrentSentence = () => {
@@ -44,16 +43,14 @@ export const TypewriterEffectSmooth = ({
     if (sentences.length === 0) return;
 
     const animationSequence = setTimeout(() => {
-      setIsDeleting(true);
       setTimeout(() => {
-        setIsDeleting(false);
         setCurrentSentenceIndex((prev) => (prev + 1) % sentences.length);
         setAnimationKey((prev) => prev + 1);
       }, deletingSpeed * 1000);
     }, typingSpeed * 1000 + delayBetweenSentences);
 
     return () => clearTimeout(animationSequence);
-  }, [currentSentenceIndex, sentences.length]);
+  }, [currentSentenceIndex, sentences.length, typingSpeed, deletingSpeed, delayBetweenSentences]);
 
   return (
     <div className={cn("flex items-center my-6", className)}>

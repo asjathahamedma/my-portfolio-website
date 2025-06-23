@@ -4,6 +4,7 @@ import matter from 'gray-matter'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { notFound } from 'next/navigation'
 import { ReactNode } from 'react'
+import Image from 'next/image'
 
 // Define your custom components
 const Note = ({ children }: { children: ReactNode }) => (
@@ -79,14 +80,17 @@ export default async function WriteupPage(props: { params: Promise<Params> }) {
               </time>
             </div>
 
-            {/* 🖼️ Image */}
-            {data.image && (
-              <img
+            <div className="relative w-full h-64 mb-6 rounded-xl overflow-hidden">
+              <Image
                 src={data.image}
                 alt={data.title}
-                className="rounded-xl w-full h-64 object-cover mb-6"
+                fill
+                className="object-cover rounded-xl"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
               />
-            )}
+            </div>
+
 
             <h1 className="text-3xl font-bold mb-4">{data.title}</h1>
 

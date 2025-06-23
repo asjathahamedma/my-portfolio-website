@@ -39,8 +39,8 @@ export const StickyScroll = ({
   });
 
   const linearGradients = [
-    "linear-gradient(to bottom right, rgba(6, 182, 212, 0.9), rgba(16, 185, 129, 0.9))", 
-    "linear-gradient(to bottom right, rgba(236, 72, 153, 0.9), rgba(99, 102, 241, 0.9))", 
+    "linear-gradient(to bottom right, rgba(6, 182, 212, 0.9), rgba(16, 185, 129, 0.9))",
+    "linear-gradient(to bottom right, rgba(236, 72, 153, 0.9), rgba(99, 102, 241, 0.9))",
     "linear-gradient(to bottom right, rgba(249, 115, 22, 0.9), rgba(234, 179, 8, 0.9))",
   ];
 
@@ -50,21 +50,21 @@ export const StickyScroll = ({
 
   useEffect(() => {
     setBackgroundGradient(linearGradients[activeCard % linearGradients.length]);
-  }, [activeCard]);
+  }, [activeCard, linearGradients]);
 
   return (
     <div className="relative w-full" ref={ref}>
       {/* Left Content - Scrollable */}
-      <div className="w-full lg:w-1/2">
+      <div className={cn("w-full lg:w-1/2", contentClassName)}>
         {content.map((item, index) => (
-          <section 
+          <section
             key={item.title + index}
             className="min-h-screen flex items-center justify-center px-4 md:px-8 py-16"
           >
             <div className="max-w-2xl">
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ 
+                animate={{
                   opacity: activeCard === index ? 1 : 0.2,
                   y: activeCard === index ? 0 : 20
                 }}
@@ -75,7 +75,7 @@ export const StickyScroll = ({
               </motion.h2>
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ 
+                animate={{
                   opacity: activeCard === index ? 1 : 0.2,
                   y: activeCard === index ? 0 : 20
                 }}
@@ -93,7 +93,7 @@ export const StickyScroll = ({
       <div className="hidden lg:block w-full lg:w-1/2 fixed top-0 right-0 h-screen pointer-events-none">
         <div className="h-full flex items-center justify-center p-4 md:p-8">
           <motion.div
-            style={{ 
+            style={{
               background: backgroundGradient,
               boxShadow: "0 0 40px rgba(59, 130, 246, 0.5)"
             }}
@@ -104,7 +104,7 @@ export const StickyScroll = ({
             )}
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            whileHover={{ 
+            whileHover={{
               scale: 1.05,
               boxShadow: "0 0 50px rgba(59, 130, 246, 0.8)"
             }}
@@ -112,15 +112,15 @@ export const StickyScroll = ({
           >
             {/* Glowing effect */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2),transparent_70%)]"></div>
-            
+
             {/* Grid pattern */}
             <div className="absolute inset-0 bg-[url('/kali-linux.png')] bg-[size:40px] opacity-20 mix-blend-overlay"></div>
-            
+
             {/* Content container */}
             <div key={activeCard} className="relative h-full w-full flex items-center justify-center p-6">
               {content[activeCard].content ?? null}
             </div>
-          
+
           </motion.div>
         </div>
       </div>
