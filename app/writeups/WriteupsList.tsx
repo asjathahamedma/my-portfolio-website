@@ -171,11 +171,10 @@ export default function WriteupsList({
                 {/* Description */}
                 {post.description && (
                   <CardItem
-                    as="p"
                     translateZ="60"
                     className="text-gray-600 dark:text-gray-300 text-sm max-w-sm mt-2 line-clamp-2"
                   >
-                    {post.description}
+                    <p>{post.description}</p>
                   </CardItem>
                 )}
 
