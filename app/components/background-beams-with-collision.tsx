@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import React, { useRef, useState, useEffect } from "react";
 
 export const BackgroundBeamsWithCollision = ({
@@ -96,13 +96,10 @@ export const BackgroundBeamsWithCollision = ({
   );
 };
 
-const CollisionMechanism = ({
-  containerRef,
-  parentRef,
-  beamOptions = {},
-}: {
-  containerRef: React.RefObject<HTMLDivElement>;
-  parentRef: React.RefObject<HTMLDivElement>;
+// Update the ref types to accept null
+interface CollisionMechanismProps {
+  containerRef: React.RefObject<HTMLDivElement | null>;
+  parentRef: React.RefObject<HTMLDivElement | null>;
   beamOptions?: {
     initialX?: number;
     translateX?: number;
@@ -114,7 +111,13 @@ const CollisionMechanism = ({
     delay?: number;
     repeatDelay?: number;
   };
-}) => {
+}
+
+const CollisionMechanism = ({
+  containerRef,
+  parentRef,
+  beamOptions = {},
+}: CollisionMechanismProps) => {
   const beamRef = useRef<HTMLDivElement>(null);
   const [collision, setCollision] = useState<{
     detected: boolean;
@@ -179,15 +182,16 @@ const CollisionMechanism = ({
         key={beamKey}
         ref={beamRef}
         animate="animate"
+        // FIX: Use correct Framer Motion properties
         initial={{
-          translateY: beamOptions.initialY || "-200px",
-          translateX: beamOptions.initialX || "0px",
+          y: beamOptions.initialY || "-200px",
+          x: beamOptions.initialX || "0px",
           rotate: beamOptions.rotate || 0,
         }}
         variants={{
           animate: {
-            translateY: beamOptions.translateY || "1800px",
-            translateX: beamOptions.translateX || "0px",
+            y: beamOptions.translateY || "1800px",
+            x: beamOptions.translateX || "0px",
             rotate: beamOptions.rotate || 0,
           },
         }}
