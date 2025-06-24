@@ -1,6 +1,6 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion } from "framer-motion";
 import React, {
   ReactNode,
   createContext,
@@ -75,9 +75,13 @@ export const ModalBody = ({
     } else {
       document.body.style.overflow = "auto";
     }
+    
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [open]);
 
-  const modalRef = useRef(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   const { setOpen } = useModal();
   useOutsideClick(modalRef, () => setOpen(false));
 
@@ -144,7 +148,7 @@ export const ModalContent = ({
 }: {
   children: ReactNode;
   className?: string;
-  style?: React.CSSProperties
+  style?: React.CSSProperties;
 }) => {
   return (
     <div className={cn("flex flex-col flex-1 p-8 md:p-10", className)}>
@@ -218,10 +222,9 @@ const CloseIcon = () => {
   );
 };
 
-// Hook to detect clicks outside of a component.
-// Add it in a separate file, I've added here for simplicity
+// Updated hook to accept any Element type
 export const useOutsideClick = (
-  ref: React.RefObject<HTMLDivElement>,
+  ref: React.RefObject<Element | null>,
   callback: (event: MouseEvent | TouchEvent) => void
 ) => {
   useEffect(() => {
@@ -241,4 +244,3 @@ export const useOutsideClick = (
     };
   }, [ref, callback]);
 };
-
