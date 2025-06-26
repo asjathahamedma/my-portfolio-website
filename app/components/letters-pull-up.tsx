@@ -10,7 +10,7 @@ export function LettersPullUp({
   text: string;
   className?: string;
 }) {
-  const splittedText = text.split('');
+const splittedText = React.useMemo(() => text.split(''), [text]);
  
   const pullupVariant = {
     initial: { y: 200, opacity: 0 },
@@ -25,11 +25,10 @@ export function LettersPullUp({
   const ref = React.useRef(null);
   const isInView = useInView(ref, { once: true });
   return (
-    <div className="flex justify-center">
+    <div  ref={ref} className="flex justify-center">
       {splittedText.map((current, i) => (
         <motion.div
           key={i}
-          ref={ref}
           variants={pullupVariant}
           initial="initial"
           animate={isInView ? 'animate' : ''}

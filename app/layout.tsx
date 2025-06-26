@@ -16,6 +16,7 @@ import {
 
 } from "@tabler/icons-react";
 import BackgroundParticlesWrapper from "./components/BackgroundParticlesWrapper";
+import PageTransitionHandler from "./components/PageTransitionHandler";
 
 
 
@@ -64,7 +65,9 @@ export default function RootLayout({
             <TopRightProfile />
           </div>
 
-          <main>{children}</main>
+          <main>
+              {children}
+          </main>
 
           <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-20">
             <FloatingDock mobileClassName="translate-y-20" items={links} />

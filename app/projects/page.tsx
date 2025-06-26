@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FaGithub, FaFileAlt } from "react-icons/fa";
@@ -40,7 +40,7 @@ const allProjects: Project[] = [
     techStack: ["JavaScript", "Burp Suite", "Python"],
     github: "/",
     category: "Penetration Testing",
-    writeup:"/"
+    writeup: "/"
   },
   {
     title: "MalwareLab-X",
@@ -51,7 +51,7 @@ const allProjects: Project[] = [
     techStack: ["REMnux", "x64dbg", "Wireshark"],
     github: "/",
     category: "Malware Analysis",
-    writeup:"/"
+    writeup: "/"
   },
   {
     title: "YARA Scanner",
@@ -112,25 +112,46 @@ const allProjects: Project[] = [
 
 export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    setShowContent(true);
+  }, []);
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      <TypewriterEffectSmooth
-        sentences={sentences}
-        className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl p-3 font-normal"
-        cursorClassName="bg-[#00D9FF]"
-      />
+      {/* Animated Typewriter */}
+      <motion.div
+        initial={{ y: 100, opacity: 0 }}
+        animate={showContent ? { y: 0, opacity: 1 } : {}}
+        transition={{ duration: 1, ease: "easeOut" }}
+      >
+        <TypewriterEffectSmooth
+          sentences={sentences}
+          className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl p-3 font-normal"
+          cursorClassName="bg-[#00D9FF]"
+        />
+      </motion.div>
 
+      {/* Animated Projects Carousel */}
       <motion.div
         className="absolute top-1/2 -translate-y-1/2 left-0 flex gap-10 px-10"
-        animate={{ x: ["7%", "-100%"] }}
-        transition={{ duration: 180, repeat: Infinity, ease: "linear" }}
+        initial={{ y: 400, opacity: 0 }}
+        animate={showContent ? { y: 0, opacity: 1 } : {}}
+        transition={{
+          y: { duration: 1, ease: "easeOut" },
+          opacity: { duration: 0.8 },
+          // Keep the existing horizontal animation
+          x: { duration: 180, repeat: Infinity, ease: "linear" }
+        }}
       >
         {[...allProjects, ...allProjects].map((project, i) => (
           <motion.div
             key={`${project.title}-${i}`}
             onClick={() => setSelectedProject(project)}
             className="min-w-[50vw] h-[60vh] p-4 bg-[#393c3d80] rounded-xl flex flex-col justify-between items-center hover:shadow-[0_0_70px_#ffffffff] hover:scale-105 transition-all duration-500 cursor-pointer"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.98 }}
           >
             <Image
               src={project.image}

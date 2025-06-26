@@ -141,7 +141,7 @@ const CollisionMechanism = ({
         const containerRect = containerRef.current.getBoundingClientRect();
         const parentRect = parentRef.current.getBoundingClientRect();
 
-        if (beamRect.bottom >= containerRect.top) {
+        if (beamRect.bottom >= containerRect.top && !collision.detected) {
           const relativeX =
             beamRect.left - parentRect.left + beamRect.width / 2;
           const relativeY = beamRect.bottom - parentRect.top;
@@ -155,6 +155,7 @@ const CollisionMechanism = ({
           });
           setCycleCollisionDetected(true);
         }
+
       }
     };
 
@@ -168,11 +169,9 @@ const CollisionMechanism = ({
       setTimeout(() => {
         setCollision({ detected: false, coordinates: null });
         setCycleCollisionDetected(false);
-      }, 2000);
-
-      setTimeout(() => {
         setBeamKey((prevKey) => prevKey + 1);
       }, 2000);
+
     }
   }, [collision]);
 
@@ -226,13 +225,16 @@ const CollisionMechanism = ({
 };
 
 const Explosion = ({ ...props }: React.HTMLProps<HTMLDivElement>) => {
-  const spans = Array.from({ length: 20 }, (_, index) => ({
-    id: index,
-    initialX: 0,
-    initialY: 0,
-    directionX: Math.floor(Math.random() * 80 - 40),
-    directionY: Math.floor(Math.random() * -50 - 10),
-  }));
+  const spans = React.useMemo(() => (
+    Array.from({ length: 20 }, (_, index) => ({
+      id: index,
+      initialX: 0,
+      initialY: 0,
+      directionX: Math.floor(Math.random() * 80 - 40),
+      directionY: Math.floor(Math.random() * -50 - 10),
+    }))
+  ), []);
+  ;
 
   return (
     <div {...props} className={cn("absolute z-50 h-2 w-2", props.className)}>

@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import { CardBody, CardContainer, CardItem } from "@/app/components/3d-Card";
 import { Post } from './writeupsData';
 import Image from 'next/image';
+import { TypewriterEffectSmooth } from '../components/typewriter-effect';
+import { writeupSentences } from '../components/data/some';
 
 export default function WriteupsList({
   allPosts,
@@ -51,20 +53,22 @@ export default function WriteupsList({
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Hero Section */}
       <div className="relative overflow-hidden rounded-2xl mb-16">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 to-cyan-900/70 z-10"></div>
         <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full bg-[url('/writeups-banner.jpg')] bg-cover bg-center animate-pulse-slow"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0)_0%,rgba(0,0,0,0.8)_100%)]"></div>
         </div>
 
         <div className="relative z-20 py-24 px-8 text-center">
           <motion.h1
-            className="text-4xl md:text-6xl font-bold mb-6 text-white"
+            className="text-4xl md:text-4xl font-bold mb-6 text-white"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            Cybersecurity <span className="text-cyan-400">Writeups</span>
+           <TypewriterEffectSmooth
+              sentences={writeupSentences}
+              className=''
+              cursorClassName="bg-[#00D9FF]"
+
+            />
           </motion.h1>
 
           <motion.p
@@ -129,7 +133,7 @@ export default function WriteupsList({
         {filteredPosts.map((post) => (
           <motion.div key={`${post.category}-${post.slug}`} variants={itemVariants}>
             <CardContainer className="inter-var">
-              <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-cyan-500/100 dark:bg-gray-900 dark:border-gray-800 border-gray-200 w-full h-[28rem] rounded-xl p-4 border transition-all duration-500">
+              <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-cyan-500/100 dark:bg-[#95c4d442] dark:border-gray-800 border-gray-200 w-full h-[28rem] rounded-xl p-4 border transition-all duration-500">
                 {/* Image */}
                 <CardItem
                   translateZ="100"
@@ -206,7 +210,7 @@ export default function WriteupsList({
                 >
                   <Link
                     href={`/writeups/${encodeURIComponent(post.category)}/${encodeURIComponent(post.slug)}`}
-                    className="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-[#fff] to-[#02cef3] text-[#011e23] text-sm font-bold transition-all hover:from-[#02cef3] hover:to-white hover:shadow-lg hover:shadow-cyan-500/80 duration-300"
+                    className="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-[#fff] to-[#02cef3] text-[#011e23] text-sm font-bold transition-all hover:from-[#02cef3] hover:to-white hover:shadow-md hover:shadow-cyan-500/80 hover:scale-110 duration-300"
                   >
                     Read Writeup
                   </Link>

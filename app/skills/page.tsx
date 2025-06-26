@@ -11,12 +11,12 @@ import {
   ModalContent,
   ModalTrigger,
 } from "@/app/components/animated-modal";
-import { motion } from "framer-motion";
+import { motion, Variants, Transition } from "framer-motion";
 import { Eye } from "lucide-react";
 import { TextGenerateEffect } from "../components/text-generate-effect";
 import Image from "next/image";
 
-const words = `Explore my technical expertise through interactive skill cards. Each represents a domain I've mastered - click to discover the specific tools and technologies I wield within each discipline.`
+const words = `Explore my technical expertise through interactive skill cards. Each represents a domain I've mastered - click to discover the specific tools and technologies I wield within each discipline.`;
 
 interface Skill {
   title: string;
@@ -26,32 +26,83 @@ interface Skill {
   content?: React.ReactNode;
 }
 
+// Animation variants - properly typed
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 5,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 350 },
+  show: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { 
+      delay: 0.3 * index, 
+      duration: 1,
+      ease: [0.34, 1.56, 0.64, 1] // Back-out easing curve
+    } as Transition,
+  }),
+};
 
 const Skills = () => {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-start py-12 overflow-hidden">
       <div className="w-full flex flex-col">
-        <div className="flex flex-col lg:flex-row w-full px-6 gap-5 mt-10 items-center">
-          <AnimatedImage />
-
-          <div className="flex-2/3 relative w-full max-w-3xl">
-            <TypewriterEffectSmooth
-              sentences={sentences}
-              className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl font-normal"
-              cursorClassName="bg-[#00D9FF]"
-            />
-            <div className="mt-4 text-start text-sm sm:text-base text-white max-w-2xl">
-              <TextGenerateEffect words={words} />
-            </div>
-
-            {/* Skills Grid Section */}
-            <div className="w-full mt-8">
+        {/* Main content row */}
+        <div className="flex flex-col lg:flex-row w-full px-6 gap-5 mt-10">
+          {/* Left Column: Animated Image */}
+          <motion.div
+            initial={{ opacity: 0, y: 350 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="lg:w-1/3 flex justify-center lg:justify-start"
+          >
+            <AnimatedImage />
+          </motion.div>
+          
+          {/* Right Column: Text content and skills grid */}
+          <div className="lg:w-2/3">
+            {/* Text content at top of right column */}
+            <motion.div
+              initial={{ opacity: 0, y: 350 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+            >
+              <TypewriterEffectSmooth
+                sentences={sentences}
+                className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl font-normal"
+                cursorClassName="bg-[#00D9FF]"
+              />
+              <div className="mt-4 text-start text-sm sm:text-base text-white max-w-2xl">
+                <TextGenerateEffect words={words} />
+              </div>
+            </motion.div>
+            
+            {/* Skills Grid Section below text in right column */}
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate="show"
+              className="w-full mt-8"
+            >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1">
                 {skills.map((skill, index) => (
-                  <SkillCard key={skill.title + index} skill={skill} />
+                  <motion.div
+                    key={skill.title + index}
+                    variants={cardVariants}
+                    custom={index}
+                  >
+                    <SkillCard skill={skill} />
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -82,8 +133,8 @@ const SkillCard = ({ skill }: { skill: Skill }) => {
                 width={20}
                 height={20}
                 className="object-contain w-5 h-5"
+                loading="lazy"
               />
-
             </div>
             <h3 className="text-sm font-bold text-[#00D9FF] truncate">
               {skill.title}
@@ -117,7 +168,6 @@ const SkillCard = ({ skill }: { skill: Skill }) => {
                 height={56}
                 className="object-contain w-14 h-14"
               />
-
             </div>
 
             <h3 className="text-xl sm:text-2xl font-bold text-center mb-3 text-[#00D9FF]">
@@ -136,6 +186,9 @@ const SkillCard = ({ skill }: { skill: Skill }) => {
                 {skill.logos.map((logo: { name: string; url: string }, idx: number) => (
                   <motion.div
                     key={logo.name + idx}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1 * idx, duration: 0.3 }}
                     whileHover={{ scale: 1.1 }}
                     className="flex flex-col items-center"
                   >
@@ -151,7 +204,6 @@ const SkillCard = ({ skill }: { skill: Skill }) => {
                         height={40}
                         className="object-contain w-10 h-10"
                       />
-
                     </div>
                     <span className="mt-2 text-xs sm:text-sm font-medium text-[#a0d7e0]">
                       {logo.name}

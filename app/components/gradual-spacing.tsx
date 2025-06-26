@@ -12,16 +12,15 @@ export function GradualSpacing({ text = 'Gradual Spacing', className = '', ...pr
   const isInView = useInView(ref, { once: true });
 
   return (
-    <div className={`flex space-x-1 ${className}`} {...props}>
+    <div ref={ref} className={`flex space-x-1 ${className}`} {...props}>
       <AnimatePresence>
         {text.split('').map((char, i) => (
           <motion.p
-            ref={ref}
             key={i}
             initial={{ opacity: 0, x: -18 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             exit="hidden"
-            transition={{ duration: 2, delay: i * 0.3 }}
+            transition={{ duration: 1.5, delay: i * 0.3 }}
             className={className}
           >
             {char === ' ' ? <span>&nbsp;</span> : char}
