@@ -121,71 +121,73 @@ export default function ProjectsPage() {
   return (
     <div className="relative w-full h-screen overflow-hidden">
       {/* Animated Typewriter */}
-      <motion.div
+          <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={showContent ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 1, ease: "easeOut" }}
       >
         <TypewriterEffectSmooth
           sentences={sentences}
-          className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl p-3 font-normal"
+          className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl p-5 font-normal"
           cursorClassName="bg-[#00D9FF]"
         />
       </motion.div>
 
-      {/* Animated Projects Carousel */}
+      {/* Container for the carousel with entry animation */}
       <motion.div
-        className="absolute top-1/2 -translate-y-1/2 left-0 flex gap-10 px-10"
+        className="absolute top-1/2 -translate-y-1/2 left-0 w-full"
         initial={{ y: 400, opacity: 0 }}
         animate={showContent ? { y: 0, opacity: 1 } : {}}
-        transition={{
-          y: { duration: 1, ease: "easeOut" },
-          opacity: { duration: 0.8 },
-          // Keep the existing horizontal animation
-          x: { duration: 180, repeat: Infinity, ease: "linear" }
-        }}
+        transition={{ duration: 1, ease: "easeOut" }}
       >
-        {[...allProjects, ...allProjects].map((project, i) => (
-          <motion.div
-            key={`${project.title}-${i}`}
-            onClick={() => setSelectedProject(project)}
-            className="min-w-[50vw] h-[60vh] p-4 bg-[#393c3d80] rounded-xl flex flex-col justify-between items-center hover:shadow-[0_0_70px_#ffffffff] hover:scale-105 transition-all duration-500 cursor-pointer"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={1000}
-              height={500}
-              className="w-full h-[45%] object-cover rounded-md shadow-lg hover:scale-110 transition-all duration-300"
-            />
-            <div className="flex flex-col justify-center items-center flex-grow">
-              <motion.h2 className="text-3xl font-bold text-cyan-400 text-center mt-4">
-                {project.title}
-              </motion.h2>
-              <p className="mt-2 text-gray-300 text-center text-sm max-w-2xl">
-                {project.shortDescription}
-              </p>
-              <p className="mt-2 text-emerald-400 text-sm">
-                <strong>Status:</strong> {project.status}
-              </p>
-              <p className="text-cyan-300 text-sm">
-                <strong>Category:</strong> {project.category}
-              </p>
-              <div className="mt-3 flex flex-wrap justify-center gap-2">
-                {project.techStack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-1 text-xs border border-cyan-400 bg-cyan-500/10 text-cyan-300 rounded-full hover:bg-white hover:text-cyan-950 hover:border-white hover:scale-120 transition-all duration-500"
-                  >
-                    {tech}
-                  </span>
-                ))}
+        {/* Horizontal scrolling animation */}
+        <motion.div
+          className="flex gap-10 px-10"
+          animate={{ x: ["7%", "-100%"] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+        >
+          {[...allProjects, ...allProjects].map((project, i) => (
+            <motion.div
+              key={`${project.title}-${i}`}
+              onClick={() => setSelectedProject(project)}
+              className="min-w-[50vw] h-[60vh] p-4 bg-[#393c3d80] rounded-xl flex flex-col justify-between items-center hover:shadow-[0_0_70px_#ffffffff] hover:scale-105 transition-all duration-500 cursor-pointer"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={1000}
+                height={500}
+                className="w-full h-[45%] object-cover rounded-md shadow-lg hover:scale-110 transition-all duration-300"
+              />
+              <div className="flex flex-col justify-center items-center flex-grow">
+                <motion.h2 className="text-3xl font-bold text-cyan-400 text-center mt-4">
+                  {project.title}
+                </motion.h2>
+                <p className="mt-2 text-gray-300 text-center text-sm max-w-2xl">
+                  {project.shortDescription}
+                </p>
+                <p className="mt-2 text-emerald-400 text-sm">
+                  <strong>Status:</strong> {project.status}
+                </p>
+                <p className="text-cyan-300 text-sm">
+                  <strong>Category:</strong> {project.category}
+                </p>
+                <div className="mt-3 flex flex-wrap justify-center gap-2">
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-xs border border-cyan-400 bg-cyan-500/10 text-cyan-300 rounded-full hover:bg-white hover:text-cyan-950 hover:border-white hover:scale-120 transition-all duration-500"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          ))}
+        </motion.div>
       </motion.div>
 
       <AnimatePresence>

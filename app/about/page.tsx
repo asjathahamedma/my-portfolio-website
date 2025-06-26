@@ -156,7 +156,7 @@ const aboutSections = [
               icon: <FaLinkedin />,
             },
             {
-              href: "mailto:asjathahamed@example.com", // ✅ change to your real email
+              href: "mailto:asjathahamedmohamedaazath@gmail.com", // ✅ change to your real email
               icon: <FaEnvelope />,
             },
           ].map((item, idx) => (

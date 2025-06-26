@@ -16,7 +16,7 @@ import {
 
 } from "@tabler/icons-react";
 import BackgroundParticlesWrapper from "./components/BackgroundParticlesWrapper";
-import PageTransitionHandler from "./components/PageTransitionHandler";
+
 
 
 

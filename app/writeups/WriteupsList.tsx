@@ -8,6 +8,26 @@ import { Post } from './writeupsData';
 import Image from 'next/image';
 import { TypewriterEffectSmooth } from '../components/typewriter-effect';
 import { writeupSentences } from '../components/data/some';
+import { Bug, ShieldCheck, Target } from 'lucide-react';
+
+const stats = [
+  {
+    icon: <Bug className="text-cyan-400 w-6 h-6" />,
+    label: "Labs & Boxes Completed",
+    color: "from-cyan-500/30 to-cyan-400/10",
+  },
+  {
+    icon: <Target className="text-emerald-400 w-6 h-6" />,
+    label: "CTF Challenges Solved",
+    color: "from-emerald-500/30 to-emerald-400/10",
+  },
+  {
+    icon: <ShieldCheck className="text-amber-400 w-6 h-6" />,
+    label: "Hours Practicing Offensive Security",
+    color: "from-amber-500/30 to-amber-400/10",
+  },
+];
+
 
 export default function WriteupsList({
   allPosts,
@@ -52,52 +72,54 @@ export default function WriteupsList({
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
       {/* Hero Section */}
-      <div className="relative overflow-hidden rounded-2xl mb-16">
-        <div className="absolute inset-0">
-        </div>
-
         <div className="relative z-20 py-24 px-8 text-center">
+          {/* Title */}
           <motion.h1
-            className="text-4xl md:text-4xl font-bold mb-6 text-white"
-            initial={{ opacity: 0, y: 20 }}
+            className="text-4xl md:text-5xl font-extrabold text-white mb-6 drop-shadow-[0_2px_20px_rgba(0,217,255,0.25)]"
+            initial={{ opacity: 0, y: 100 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-           <TypewriterEffectSmooth
+            <TypewriterEffectSmooth
               sentences={writeupSentences}
-              className=''
               cursorClassName="bg-[#00D9FF]"
-
             />
           </motion.h1>
 
+          {/* Description */}
           <motion.p
-            className="text-xl md:text-2xl text-white max-w-3xl mx-auto mb-10"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-10"
+            initial={{ opacity: 0, y: 100 }}
+            animate={{ opacity: 1, y:0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
           >
-            Detailed reports of security assessments, CTF solutions, and vulnerability discoveries and my projects
+            Detailed reports of security assessments, CTF solutions, vulnerability discoveries, and my cybersecurity projects.
           </motion.p>
 
+          {/* Stats */}
           <motion.div
-            className="flex flex-wrap justify-center gap-4"
+            className="flex flex-wrap justify-center gap-6 mt-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            transition={{ delay: 0.3, duration: 0.9 }}
           >
-            <div className="bg-cyan-500/10 border border-cyan-400 rounded-full px-6 py-2 text-cyan-300">
-              <span className="text-cyan-400 font-bold">20+</span> Vulnerabilities Discovered
-            </div>
-            <div className="bg-emerald-500/10 border border-cyan-400 rounded-full px-6 py-2 text-cyan-300">
-              <span className="text-cyan-300 font-bold">50+</span> CTF Challenges Solved
-            </div>
-            <div className="bg-amber-500/10 border border-cyan-400 rounded-full px-6 py-2 text-cyan-300">
-              <span className="text-cyan-300 font-bold">30+</span> Penetration Tests
-            </div>
+            {stats.map((stat, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 + i * 0.2, duration: 0.6 }}
+                className={`bg-gradient-to-br ${stat.color} border border-cyan-400/40 backdrop-blur-md shadow-lg rounded-xl px-6 py-4 flex items-center gap-4 text-cyan-100 hover:scale-110 hover:shadow-md hover:shadow-blue-300 transition-all duration-300`}
+              >
+                {stat.icon}
+                <div>
+                  <div className="text-md text-cyan-400">{stat.label}</div>
+                </div>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
-      </div>
+ 
 
       {/* Category Filter */}
       <div className="mb-12">
