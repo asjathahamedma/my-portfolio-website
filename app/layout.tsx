@@ -70,7 +70,7 @@ export default function RootLayout({
           </main>
 
           <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-20">
-            <FloatingDock mobileClassName="translate-y-20" items={links} />
+            <FloatingDock items={links} />
           </div>
         </div>
       </body>

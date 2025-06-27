@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FaGithub, FaFileAlt } from "react-icons/fa";
@@ -113,15 +113,29 @@ const allProjects: Project[] = [
 export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [showContent, setShowContent] = useState(false);
+  const [startScrolling, setStartScrolling] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [scrollWidth, setScrollWidth] = useState(0);
+
 
   useEffect(() => {
     setShowContent(true);
+
+    const timer = setTimeout(() => {
+      setStartScrolling(true);
+      if (containerRef.current) {
+        setScrollWidth(containerRef.current.scrollWidth / 2); // half, because we duplicate
+      }
+    }, 1000); // wait for entry animation
+
+    return () => clearTimeout(timer);
   }, []);
+
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
       {/* Animated Typewriter */}
-          <motion.div
+      <motion.div
         initial={{ y: 100, opacity: 0 }}
         animate={showContent ? { y: 0, opacity: 1 } : {}}
         transition={{ duration: 1, ease: "easeOut" }}
@@ -142,10 +156,16 @@ export default function ProjectsPage() {
       >
         {/* Horizontal scrolling animation */}
         <motion.div
+          ref={containerRef}
           className="flex gap-10 px-10"
-          animate={{ x: ["7%", "-100%"] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          animate={startScrolling ? { x: [0, -scrollWidth] } : { x: 0 }}
+          transition={{
+            duration: 50, // adjust for your preferred speed
+            repeat: Infinity,
+            ease: "linear",
+          }}
         >
+
           {[...allProjects, ...allProjects].map((project, i) => (
             <motion.div
               key={`${project.title}-${i}`}
@@ -276,9 +296,6 @@ export default function ProjectsPage() {
                   )}
                 </div>
               </div>
-
-
-
 
               <button
                 onClick={() => setSelectedProject(null)}

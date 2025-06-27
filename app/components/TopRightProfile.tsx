@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function TopRightProfile() {
   return (
-    <div className="fixed top-6 right-10 z-50">
+    <div className="fixed top-4 right-4 z-50 max-w-[90vw]">
       <div className="flex items-center space-x-2 p-2 rounded-full ">
 
         {/* Spinning border wrapper */}
