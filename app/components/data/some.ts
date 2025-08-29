@@ -1,42 +1,42 @@
 export const writeupSentences = [
   [
-    { text: "📝 Zero-Day Chronicles: ", className: "dark:text-[#00D9FF]" },
-    { text: "Vulnerabilities Exposed" }
+    { text: "📝 Zero-Day: ", className: "text-[#004AAD] dark:text-[#00D9FF]" },
+    { text: "Vulns Exposed" }
   ],
   [
-    { text: "🏆 CTF Conqueror → ", },
-    { text: "Flags Captured, Secrets Revealed" ,className: "dark:text-[#00D9FF]"}
+    { text: "🏆 CTF: ", className: "text-[#E63946] dark:text-[#FF4D6D]" },
+    { text: "Flags Captured" }
   ],
   [
-    { text: "🔓 Lockpick Series: ", className: "dark:text-[#00D9FF]" },
-    { text: "Enterprise Networks Penetrated" }
+    { text: "🔓 Lockpick: ", className: "text-[#00875A] dark:text-[#00FFB2]" },
+    { text: "Networks Hacked" }
   ],
   [
-    { text: "🕵️‍♂️ Stealth Recon → ",  },
-    { text: "Attack Surface Mapped",className: "dark:text-[#00D9FF]" }
+    { text: "🕵 Recon: ", className: "text-[#9D4EDD] dark:text-[#C77DFF]" },
+    { text: "Surface Mapped" }
   ],
   [
-    { text: "💥 Exploit Engineering: ",className: "dark:text-[#00D9FF]" },
-    { text: "PoCs Forged, Defenses Breached" }
+    { text: "💥 Exploits: ", className: "text-[#E85D04] dark:text-[#FF9100]" },
+    { text: "PoCs Forged" }
   ],
   [
-    { text: "🔐 Crypto Crackdown → ",className: "dark:text-[#00D9FF]"  },
-    { text: "Encryption Schemes Broken" }
+    { text: "🔐 Crypto: ", className: "text-[#4361EE] dark:text-[#4CC9F0]" },
+    { text: "Ciphers Cracked" }
   ],
   [
-    { text: "🌐 Web War Stories: ",  },
-    { text: "OWASP Top 10 Exploited" ,className: "dark:text-[#00D9FF]"}
+    { text: "🌐 WebSec: ", className: "text-[#7209B7] dark:text-[#9D4EDD]" },
+    { text: "OWASP Owned" }
   ],
   [
-    { text: "🧩 Binary Puzzles → ", className: "dark:text-[#00D9FF]" },
-    { text: "Reversing Challenges Solved" }
+    { text: "🧩 Binary: ", className: "text-[#2A9D8F] dark:text-[#00C896]" },
+    { text: "Rev Done" }
   ],
   [
-    { text: "🚨 Incident Response: ",className: "dark:text-[#00D9FF]"  },
-    { text: "Threats Contained, Lessons Learned" }
+    { text: "🚨 IR: ", className: "text-[#D00000] dark:text-[#FF3C38]" },
+    { text: "Threats Contained" }
   ],
   [
-    { text: "🎯 Red Team Diaries → ",className: "dark:text-[#00D9FF]"   },
-    { text: "Enterprise Networks Breached" }
+    { text: "🎯 Red Team: ", className: "text-[#6A040F] dark:text-[#FF006E]" },
+    { text: "Breaches Logged" }
   ]
 ];

@@ -63,11 +63,11 @@ const FloatingDockMobile = ({
               >
                 <a
                   href={item.href}
-                  className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-900"
+                  className="relative flex h-10 w-10 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-300 border-2 border-fuchsia-400 dark:border-cyan-400"
                 >
                   <div className="h-4 w-4">{item.icon}</div>
                   {pathname === item.href && (
-                    <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 h-2 w-2 rounded-full bg-blue-500 animate-ping" />
+                    <span className="absolute left-1/2 -translate-x-1/2 h-6 w-6 rounded-full bg-fuchsia-400 dark:bg-cyan-500 animate-ping" />
                   )}
                 </a>
               </motion.div>
@@ -75,13 +75,16 @@ const FloatingDockMobile = ({
           </motion.div>
         )}
       </AnimatePresence>
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex h-6 w-6 sm:h-5 sm:w-5 items-center justify-center rounded-full bg-gray-50 dark:bg-neutral-800"
 
-      >
-        <IconLayoutNavbarCollapse className="h-3 w-3 text-neutral-500 dark:text-neutral-400" />
-      </button>
+      {/* Fixed: same size SSR & CSR (no sm: variant) */}
+      <div className="sm:h-9 sm:w-9">
+        <button
+          onClick={() => setOpen(!open)}
+          className="flex h-full w-full items-center justify-center rounded-full bg-fuchsia-500 dark:bg-cyan-300"
+        >
+          <IconLayoutNavbarCollapse className="h-10 w-10 p-2 text-neutral-100 dark:text-neutral-900" />
+        </button>
+      </div>
     </div>
   );
 };
@@ -99,7 +102,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden h-12 items-end gap-4 rounded-2xl bg-gray-50 px-3 pb-2 md:flex bg-gradient-to-b from-[#00d9ff36] to-[#0267fe3b]",
+        "mx-auto hidden h-12 items-end gap-4 rounded-2xl px-3 pb-2 md:flex bg-gradient-to-b from-fuchsia-900 to-fuchsia-300 dark:from-[#00d9ff36] dark:to-[#0267fe3b]",
         className
       )}
     >
@@ -176,7 +179,7 @@ function IconContainer({
         </motion.div>
 
         {pathname === href && (
-          <span className="absolute bottom-1.5 h-2 w-2 rounded-full bg-blue-500 animate-ping" />
+          <span className="absolute h-5 w-5 rounded-full bg-fuchsia-400 dark:bg-cyan-500 animate-ping" />
         )}
       </motion.div>
     </a>

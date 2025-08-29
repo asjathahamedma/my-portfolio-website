@@ -77,19 +77,20 @@ export const TypewriterEffectSmooth = ({
           {renderCurrentSentence()}
         </motion.div>
       </AnimatePresence>
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{
-          duration: 0.8,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-        className={cn(
-          "inline-block rounded-sm w-[4px] h-10 bg-[#00D9FF]",
-          cursorClassName
-        )}
-      />
+    <motion.span
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{
+    duration: 0.8,
+    repeat: Infinity,
+    repeatType: "reverse",
+  }}
+  className={cn(
+    "inline-block ml-1 rounded-sm w-[3px] h-6 sm:h-7 md:h-9 lg:h-11 xl:h-12 bg-fuchsia-600 dark:bg-[#00D9FF]",
+    cursorClassName
+  )}
+/>
+
     </div>
   );
 };

@@ -19,7 +19,7 @@ const BackgroundParticles = () => {
       {particles.map((particle, i) => (
         <motion.div
           key={i}
-          className="absolute text-[#00D9FF] text-sm md:text-base"
+          className="absolute text-fuchsia-950 dark:text-[#00D9FF] text-sm md:text-base"
           style={{
             left: particle.left,
             top: particle.top,

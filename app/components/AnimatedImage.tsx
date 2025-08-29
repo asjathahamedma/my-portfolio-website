@@ -37,7 +37,10 @@ export const AnimatedImage = () => {
           key={cert.name}
           src={cert.img}
           alt={cert.name}
-          className={`absolute w-16 h-16 ${cert.position} cursor-pointer z-20 cert-pulse border-2 p-2 border-[#00D9FF] rounded-full  `}
+          className={`absolute w-16 h-16 ${cert.position} cursor-pointer z-20 cert-pulse border-2 p-2 
+      border-fuchsia-600 dark:border-[#00D9FF] rounded-full 
+      hover:bg-fuchsia-500 hover:shadow-[0_0_20px_#f0f] 
+      dark:hover:bg-[#00D9FF] dark:hover:shadow-[0_0_20px_#00D9FF]`}
           initial={{ opacity: 0, scale: 0.5 }}
           animate={controls}
           transition={{
@@ -50,15 +53,12 @@ export const AnimatedImage = () => {
             scale: 1.2,
             rotate: [0, 5, -5, 0],
             transition: { duration: 0.5 },
-            background:"#00D9FF",
-            boxShadow: "0px 0px 20px 0 #00D9FF",
-
           }}
         />
       ))}
 
       <motion.div
-        className="absolute inset-5 bg-[#00D9FF]/10 rounded-xl blur-xl"
+        className="absolute inset-5 bg-[#dd0de42d] dark:bg-[#13c0df43] rounded-xl blur-xl"
         animate={{ opacity: isHovered ? 0.6 : 0 }}
         transition={{ duration: 0.3 }}
       />

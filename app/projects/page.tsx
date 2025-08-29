@@ -6,6 +6,7 @@ import { FaGithub, FaFileAlt } from "react-icons/fa";
 import { sentences } from "../components/data/projectSentences";
 import { TypewriterEffectSmooth } from "../components/typewriter-effect";
 import { TextGenerateEffect } from "../components/text-generate-effect";
+import { CometCard } from "../components/comet-card";
 
 type Project = {
   writeup: string | undefined;
@@ -22,208 +23,230 @@ type Project = {
 const allProjects: Project[] = [
   {
     title: "ViperScan",
-    description: "A Python-based web vulnerability scanner integrating Nmap, Burp Suite, and Nikto. It supports automated scanning, intelligent target parsing, and customizable modules for detecting OWASP Top 10 vulnerabilities.",
-    shortDescription: "Web scanner with Nmap, Burp Suite, and Nikto integration.",
+    description:
+      "A Python-based web vulnerability scanner integrating Nmap, Burp Suite, and Nikto. It supports automated scanning, intelligent target parsing, and customizable modules for detecting OWASP Top 10 vulnerabilities.",
+    shortDescription:
+      "Web scanner with Nmap, Burp Suite, and Nikto integration.",
     image: "/ViperScan.jpg",
     status: "In Progress",
     techStack: ["Python", "Nmap", "Burp Suite"],
     github: "/",
     category: "Penetration Testing",
-    writeup: "/"
+    writeup: "/",
   },
   {
     title: "XSS Hunter",
-    description: "Automated tool for detecting reflected and stored XSS vulnerabilities using payload injection and browser-based scripts. Ideal for testing input sanitization.",
+    description:
+      "Automated tool for detecting reflected and stored XSS vulnerabilities using payload injection and browser-based scripts. Ideal for testing input sanitization.",
     shortDescription: "Detects XSS vulnerabilities using JS payloads.",
     image: "/XssHunter.jpg",
     status: "Completed",
     techStack: ["JavaScript", "Burp Suite", "Python"],
     github: "/",
     category: "Penetration Testing",
-    writeup: "/"
+    writeup: "/",
   },
   {
     title: "MalwareLab-X",
-    description: "Reverse engineering malware using REMnux, x64dbg, and Wireshark. Includes behavioral analysis and static inspection in a safe lab setup.",
+    description:
+      "Reverse engineering malware using REMnux, x64dbg, and Wireshark. Includes behavioral analysis and static inspection in a safe lab setup.",
     shortDescription: "Reverse engineering malware using REMnux and x64dbg.",
     image: "/MalwareLab-X.jpg",
     status: "Research",
     techStack: ["REMnux", "x64dbg", "Wireshark"],
     github: "/",
     category: "Malware Analysis",
-    writeup: "/"
+    writeup: "/",
   },
   {
     title: "YARA Scanner",
-    description: "Detects malware in virtual sandbox environments using custom YARA rules. Supports real-time alerts and detailed match reports.",
+    description:
+      "Detects malware in virtual sandbox environments using custom YARA rules. Supports real-time alerts and detailed match reports.",
     shortDescription: "Malware detection using YARA rules.",
     image: "/YARAscanner.jpg",
     status: "Completed",
     techStack: ["Python", "YARA", "VirtualBox"],
     github: "/",
     category: "Malware Analysis",
-    writeup: "/"
+    writeup: "/",
   },
   {
     title: "AutoReconX",
-    description: "Automates reconnaissance tasks for CTFs including subdomain enumeration, directory brute-forcing, and port scanning.",
+    description:
+      "Automates reconnaissance tasks for CTFs including subdomain enumeration, directory brute-forcing, and port scanning.",
     shortDescription: "Automates CTF recon tasks like subdomain and dir scan.",
     image: "/AutoReconX.jpg",
     status: "Prototype",
     techStack: ["Python", "Sublist3r", "Dirsearch", "Nmap"],
     github: "/",
     category: "Scripting",
-    writeup: "/"
+    writeup: "/",
   },
   {
     title: "NetSentinel",
-    description: "Simulated lab environment for network defense including firewall setup, intrusion detection, and packet inspection using open-source tools.",
+    description:
+      "Simulated lab environment for network defense including firewall setup, intrusion detection, and packet inspection using open-source tools.",
     shortDescription: "Network defense lab with IDS, firewall, and sniffing.",
     image: "/NetSentinal.jpg",
     status: "Simulated",
     techStack: ["Wireshark", "pfSense", "Ettercap"],
     github: "/",
     category: "Network Security",
-    writeup: "/"
+    writeup: "/",
   },
   {
     title: "GlitchViper.dev",
-    description: "A modern, animated cybersecurity-themed portfolio using Next.js, Tailwind CSS, and Framer Motion. Features glitch effects, 3D assets, and smooth page transitions.",
+    description:
+      "A modern, animated cybersecurity-themed portfolio using Next.js, Tailwind CSS, and Framer Motion. Features glitch effects, 3D assets, and smooth page transitions.",
     shortDescription: "Cyber-themed animated portfolio with glitch effects.",
     image: "/myPortfolio.jpg",
     status: "Live",
     techStack: ["Next.js", "Tailwind", "Framer Motion"],
     github: "https://github.com/AsjathAhamedMohamedAazath/my-portfolio-website",
     category: "Frontend Development",
-    writeup: "/"
+    writeup: "/",
   },
   {
     title: "Admin Dashboard",
-    description: "A minimal admin dashboard interface built with Tailwind CSS and Chart.js. Displays analytics, real-time charts, and theme customization.",
+    description:
+      "A minimal admin dashboard interface built with Tailwind CSS and Chart.js. Displays analytics, real-time charts, and theme customization.",
     shortDescription: "Admin UI with Tailwind and Chart.js.",
     image: "/AdminDashboard.jpg",
     status: "Completed",
     techStack: ["React", "Tailwind", "Chart.js"],
     github: "/",
     category: "Frontend Development",
-    writeup: "/"
+    writeup: "/",
   },
 ];
 
 export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [showContent, setShowContent] = useState(false);
-  const [startScrolling, setStartScrolling] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollWidth, setScrollWidth] = useState(0);
-
-
-  useEffect(() => {
-    setShowContent(true);
-
-    const timer = setTimeout(() => {
-      setStartScrolling(true);
-      if (containerRef.current) {
-        setScrollWidth(containerRef.current.scrollWidth / 2); // half, because we duplicate
-      }
-    }, 1000); // wait for entry animation
-
-    return () => clearTimeout(timer);
-  }, []);
-
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen overflow-x-hidden p-6 md:p-12">
       {/* Animated Typewriter */}
       <motion.div
         initial={{ y: 100, opacity: 0 }}
-        animate={showContent ? { y: 0, opacity: 1 } : {}}
+        animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeOut" }}
+        className="flex justify-center items-center text-center"
       >
         <TypewriterEffectSmooth
           sentences={sentences}
-          className="text-xs sm:text-base md:text-xl lg:text-3xl xl:text-4xl p-5 font-normal"
-          cursorClassName="bg-[#00D9FF]"
+          className="
+    text-xl       /* mobile */
+    sm:text-2xl      /* small devices */
+    md:text-4xl     /* tablets */
+    lg:text-5xl     /* desktops */
+    xl:text-6xl     /* large screens */
+    p-5 
+  "
+          cursorClassName="
+    bg-fuchsia-600 dark:bg-[#00D9FF] 
+    h-4 sm:h-5 md:h-7 lg:h-8 xl:h-9
+  "
         />
       </motion.div>
 
-      {/* Container for the carousel with entry animation */}
+      {/* Section Description */}
       <motion.div
-        className="absolute top-1/2 -translate-y-1/2 left-0 w-full"
-        initial={{ y: 400, opacity: 0 }}
-        animate={showContent ? { y: 0, opacity: 1 } : {}}
-        transition={{ duration: 1, ease: "easeOut" }}
+        initial={{ y: 50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+        className="max-w-3xl mx-auto text-center mt-6 px-4"
       >
-        {/* Horizontal scrolling animation */}
-        <motion.div
-          ref={containerRef}
-          className="flex gap-10 px-10"
-          animate={startScrolling ? { x: [0, -scrollWidth] } : { x: 0 }}
-          transition={{
-            duration: 50, // adjust for your preferred speed
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-
-          {[...allProjects, ...allProjects].map((project, i) => (
-            <motion.div
-              key={`${project.title}-${i}`}
-              onClick={() => setSelectedProject(project)}
-              className="min-w-[50vw] h-[60vh] p-4 bg-[#393c3d80] rounded-xl flex flex-col justify-between items-center hover:shadow-[0_0_70px_#ffffffff] hover:scale-105 transition-all duration-500 cursor-pointer"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={1000}
-                height={500}
-                className="w-full h-[45%] object-cover rounded-md shadow-lg hover:scale-110 transition-all duration-300"
-              />
-              <div className="flex flex-col justify-center items-center flex-grow">
-                <motion.h2 className="text-3xl font-bold text-cyan-400 text-center mt-4">
-                  {project.title}
-                </motion.h2>
-                <p className="mt-2 text-gray-300 text-center text-sm max-w-2xl">
-                  {project.shortDescription}
-                </p>
-                <p className="mt-2 text-emerald-400 text-sm">
-                  <strong>Status:</strong> {project.status}
-                </p>
-                <p className="text-cyan-300 text-sm">
-                  <strong>Category:</strong> {project.category}
-                </p>
-                <div className="mt-3 flex flex-wrap justify-center gap-2">
-                  {project.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 text-xs border border-cyan-400 bg-cyan-500/10 text-cyan-300 rounded-full hover:bg-white hover:text-cyan-950 hover:border-white hover:scale-120 transition-all duration-500"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+          Explore a collection of my{" "}
+          <span className="text-fuchsia-500 dark:text-[#00D9FF] font-semibold">
+            cybersecurity
+          </span>{" "}
+          and{" "}
+          <span className="text-fuchsia-500 dark:text-[#00D9FF] font-semibold">
+            development
+          </span>{" "}
+          projects — ranging from penetration testing tools and malware analysis
+          labs to modern web apps and animated portfolios. Each project reflects
+          my passion for{" "}
+          <span className="text-emerald-400">problem-solving</span>,{" "}
+          <span className="text-fuchsia-400 dark:text-[#00D9FF]">
+            creativity
+          </span>
+          , and <span className="text-emerald-400">technical exploration</span>.
+        </p>
       </motion.div>
 
+      {/* Project Grid */}
+      <div className="mt-10 px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 mb-15">
+        {allProjects.map((project) => (
+          <CometCard key={project.title} className="flex flex-col w-full">
+            <button
+              type="button"
+              className="flex flex-col flex-1 rounded-2xl bg-gray-800 p-3 md:p-4 
+                   border border-fuchsia-600 dark:border-cyan-400 
+                   hover:shadow-2xl hover:shadow-fuchsia-300 dark:hover:shadow-cyan-400 
+                   transition-all duration-300"
+              onClick={() => setSelectedProject(project)}
+            >
+              {/* Image */}
+              <div className="relative aspect-[3/1] w-full overflow-hidden rounded-xl">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover rounded-xl"
+                />
+              </div>
+
+              {/* Text */}
+              <div className="mt-4 flex flex-col flex-1 text-left text-white">
+                <h2 className="text-lg font-semibold text-fuchsia-400 dark:text-[#00D9FF]">
+                  {project.title}
+                </h2>
+                <p className="mt-1 text-sm text-gray-300">
+                  {project.shortDescription}
+                </p>
+                <p className="mt-1 text-xs text-emerald-400">
+                  Status: {project.status}
+                </p>
+                <p className="text-xs text-fuchsia-300 dark:text-cyan-300">
+                  Category: {project.category}
+                </p>
+              </div>
+
+              {/* Tags */}
+              <div className="mt-3 flex flex-wrap gap-2">
+                {project.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-1 text-xs 
+                         bg-white dark:bg-[#00D9FF]/10 
+                         text-fuchsia-800 dark:text-[#00D9FF] rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </button>
+          </CometCard>
+        ))}
+      </div>
+
+      {/* Project Modal */}
       <AnimatePresence>
         {selectedProject && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-[#8ce5f468] backdrop-blur-sm z-50 flex items-center justify-center"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center"
             onClick={() => setSelectedProject(null)}
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.8, opacity: 0 }}
-              className="bg-[#011417] text-white p-8 rounded-lg max-w-3xl w-full shadow-lg relative"
+              className="bg-blue-100 dark:bg-[#011417] text-black dark:text-white p-8 rounded-lg max-w-3xl w-full shadow-lg relative"
               onClick={(e) => e.stopPropagation()}
             >
               <Image
@@ -236,62 +259,55 @@ export default function ProjectsPage() {
 
               <TextGenerateEffect
                 words={selectedProject.title}
-                className="text-3xl font-bold text-cyan-400 mb-2 text-left"
+                className="text-3xl font-bold text-fuchsia-600 dark:text-[#00D9FF] mb-2 text-left"
               />
               <TextGenerateEffect
                 words={selectedProject.description}
-                className="text-gray-300 mb-2 text-sm text-left"
+                className="text-black dark:text-gray-300 mb-2 text-sm text-left"
               />
+
               <TextGenerateEffect
                 words={`Status: ${selectedProject.status}`}
-                className="text-emerald-400 mb-2 text-sm text-left"
+                className="text-emerald-400 dark:text-emerald-400 mb-2 text-sm text-left"
               />
               <TextGenerateEffect
                 words={`Category: ${selectedProject.category}`}
-                className="text-cyan-300 mb-2 text-sm text-left"
+                className="text-fuchsia-400 dark:text-cyan-300 mb-2 text-sm text-left"
               />
-              <div className="mb-2 flex justify-between items-center flex-wrap gap-2">
-                {/* Tags on the left */}
+
+              <div className="mt-3 flex justify-between items-center flex-wrap gap-2">
                 <div className="flex flex-wrap gap-2">
                   {selectedProject.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="px-3 py-1 text-xs border border-cyan-400 bg-cyan-500/10 text-cyan-300 rounded-full hover:bg-white hover:text-cyan-950 hover:border-white hover:scale-120 transition-all duration-500"
+                      className="px-3 py-1 text-xs border border-fuchsia-600 dark:border-[#00D9FF] 
+                                 bg-fuchsia-500/10 dark:bg-[#00D9FF]/10 
+                                 text-fuchsia-600 dark:text-[#00D9FF] rounded-full"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
 
-                {/* Icons on the right */}
-                <div className="flex flex-col items-center gap-4 group">
-                  {/* Write-up link (only if exists) */}
+                <div className="flex flex-col items-center gap-4">
                   {selectedProject.writeup && (
                     <a
                       href={selectedProject.writeup}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-end text-green-300 hover:text-green-200 text-md overflow-hidden group/writeup"
+                      className="flex items-center gap-2 text-black dark:text-white hover:opacity-80 text-sm"
                     >
-                      <span className="opacity-0 transform translate-x-4 transition-all duration-300 group-hover/writeup:opacity-100 group-hover/writeup:translate-x-0 whitespace-nowrap">
-                        Read Write-up
-                      </span>
-                      <FaFileAlt className="text-xl ml-2" />
+                      <FaFileAlt className="text-lg" /> Read Write-up
                     </a>
                   )}
-
-                  {/* GitHub Link */}
                   {selectedProject.github && (
                     <a
                       href={selectedProject.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-end text-cyan-300 hover:text-cyan-200 text-md overflow-hidden group/github"
+                      className="flex items-center gap-2 text-black dark:text-white hover:opacity-80 text-sm"
                     >
-                      <span className="opacity-0 transform translate-x-4 transition-all duration-300 group-hover/github:opacity-100 group-hover/github:translate-x-0 whitespace-nowrap">
-                        View on GitHub
-                      </span>
-                      <FaGithub className="text-xl ml-2" />
+                      <FaGithub className="text-lg" /> View on GitHub
                     </a>
                   )}
                 </div>

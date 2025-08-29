@@ -60,22 +60,18 @@ export const ModalTrigger = ({
   );
 };
 
+// ModalBody
 export const ModalBody = ({
   children,
   className,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
 }) => {
   const { open } = useModal();
 
   useEffect(() => {
-    if (open) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-    
+    document.body.style.overflow = open ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -89,49 +85,22 @@ export const ModalBody = ({
     <AnimatePresence>
       {open && (
         <motion.div
-          initial={{
-            opacity: 0,
-          }}
-          animate={{
-            opacity: 1,
-            backdropFilter: "blur(10px)",
-          }}
-          exit={{
-            opacity: 0,
-            backdropFilter: "blur(0px)",
-          }}
-          className="fixed [perspective:800px] [transform-style:preserve-3d] inset-0 h-full w-full  flex items-center justify-center z-50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, backdropFilter: "blur(10px)" }}
+          exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+          className="fixed inset-0 flex items-center justify-center z-50"
         >
           <Overlay />
-
           <motion.div
             ref={modalRef}
             className={cn(
-              "min-h-[50%] max-h-[90%] md:max-w-[40%] bg-white dark:bg-neutral-950 border border-transparent dark:border-neutral-800 md:rounded-2xl relative z-50 flex flex-col flex-1 overflow-hidden",
+              "w-auto sm:w-[90%] md:w-[80%] lg:max-w-2xl relative z-50 bg-gradient-to-b from-fuchsia-200 to-blue-200  dark:from-[#b96ef7] dark:to-[#1d0136]  border border-[rgba(153,0,153,0.3)] dark:border-[rgba(0,217,255,0.3)]shadow-[0_10px_30px_rgba(153,0,153,0.2)] dark:shadow-[0_10px_30px_rgba(0,217,255,0.2)] rounded-2xl",
               className
             )}
-            initial={{
-              opacity: 0,
-              scale: 0.5,
-              rotateX: 40,
-              y: 40,
-            }}
-            animate={{
-              opacity: 1,
-              scale: 1,
-              rotateX: 0,
-              y: 0,
-            }}
-            exit={{
-              opacity: 0,
-              scale: 0.8,
-              rotateX: 10,
-            }}
-            transition={{
-              type: "spring",
-              stiffness: 260,
-              damping: 15,
-            }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ type: "spring", stiffness: 260, damping: 20 }}
           >
             <CloseIcon />
             {children}
@@ -142,16 +111,21 @@ export const ModalBody = ({
   );
 };
 
+// ModalContent
 export const ModalContent = ({
   children,
   className,
 }: {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
-  style?: React.CSSProperties;
 }) => {
   return (
-    <div className={cn("flex flex-col flex-1 p-8 md:p-10", className)}>
+    <div
+      className={cn(
+        "w-full flex justify-center items-center p-4 sm:p-6 md:p-8", // 🔧 less padding
+        className
+      )}
+    >
       {children}
     </div>
   );
@@ -190,7 +164,7 @@ const Overlay = ({ className }: { className?: string }) => {
         opacity: 0,
         backdropFilter: "blur(0px)",
       }}
-      className={`fixed inset-0 h-full w-full bg-[#022c48bd] bg-opacity-50 z-50 ${className}`}
+      className={`fixed inset-0 h-full w-full bg-[#857286c0] dark:bg-[#022c48bd] bg-opacity-50 z-50 ${className}`}
     ></motion.div>
   );
 };

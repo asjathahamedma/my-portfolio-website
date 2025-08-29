@@ -1,14 +1,14 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { motion } from "framer-motion";
 import { CardBody, CardContainer, CardItem } from "@/app/components/3d-Card";
-import { Post } from './writeupsData';
-import Image from 'next/image';
-import { TypewriterEffectSmooth } from '../components/typewriter-effect';
-import { writeupSentences } from '../components/data/some';
-import { Bug, ShieldCheck, Target } from 'lucide-react';
+import { Post } from "./writeupsData";
+import Image from "next/image";
+import { TypewriterEffectSmooth } from "../components/typewriter-effect";
+import { writeupSentences } from "../components/data/some";
+import { Bug, ShieldCheck, Target } from "lucide-react";
 
 const stats = [
   {
@@ -28,15 +28,15 @@ const stats = [
   },
 ];
 
-
 export default function WriteupsList({
   allPosts,
-  categories
+  categories,
 }: {
   allPosts: Post[];
   categories: string[];
 }) {
-  const defaultImage = "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+  const defaultImage =
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [filteredPosts, setFilteredPosts] = useState<Post[]>(allPosts);
@@ -45,7 +45,9 @@ export default function WriteupsList({
     if (!selectedCategory) {
       setFilteredPosts(allPosts);
     } else {
-      setFilteredPosts(allPosts.filter(post => post.category === selectedCategory));
+      setFilteredPosts(
+        allPosts.filter((post) => post.category === selectedCategory)
+      );
     }
   }, [selectedCategory, allPosts]);
 
@@ -55,9 +57,9 @@ export default function WriteupsList({
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   };
 
   const itemVariants = {
@@ -65,97 +67,144 @@ export default function WriteupsList({
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.5 }
-    }
+      transition: { duration: 0.5 },
+    },
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="max-w-7xl mx-auto px-4 py-8 pb-30 ">
       {/* Hero Section */}
-        <div className="relative z-20 py-24 px-8 text-center">
-          {/* Title */}
-          <motion.h1
-            className="text-4xl md:text-5xl font-extrabold text-white mb-6 drop-shadow-[0_2px_20px_rgba(0,217,255,0.25)]"
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <TypewriterEffectSmooth
-              sentences={writeupSentences}
-              cursorClassName="bg-[#00D9FF]"
-            />
-          </motion.h1>
+      <div className="relative z-20 py-24 px-8 text-center ">
+        {/* Title (Typewriter centered) */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex justify-center"
+        >
+          <TypewriterEffectSmooth
+            sentences={writeupSentences}
+            cursorClassName="bg-fuchsia-600 dark:bg-[#00D9FF]"
+            className="
+    text-xl        /* base mobile */
+    sm:text-2xl    /* small devices */
+    md:text-4xl    /* tablets */
+    lg:text-5xl    /* desktops */
+    xl:text-6xl    /* large screens */ 
+    drop-shadow-[0_2px_20px_rgba(0,217,255,0.25)]
+    text-center    /* keeps it balanced on all devices */
+  "
+          />
+        </motion.div>
 
-          {/* Description */}
-          <motion.p
-            className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto mb-10"
-            initial={{ opacity: 0, y: 100 }}
-            animate={{ opacity: 1, y:0 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-          >
-            Detailed reports of security assessments, CTF solutions, vulnerability discoveries, and my cybersecurity projects.
-          </motion.p>
-
-          {/* Stats */}
-          <motion.div
-            className="flex flex-wrap justify-center gap-6 mt-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.9 }}
-          >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3 + i * 0.2, duration: 0.6 }}
-                className={`bg-gradient-to-br ${stat.color} border border-cyan-400/40 backdrop-blur-md shadow-lg rounded-xl px-6 py-4 flex items-center gap-4 text-cyan-100 hover:scale-110 hover:shadow-md hover:shadow-blue-300 transition-all duration-300`}
-              >
-                {stat.icon}
-                <div>
-                  <div className="text-md text-cyan-400">{stat.label}</div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
- 
+        {/* Description (theme-aware, subtle highlight) */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+          className="text-base md:text-xl max-w-3xl mx-auto mt-6 leading-relaxed
+               text-gray-800 dark:text-white/80"
+        >
+          Field-tested notes from labs, boxes, and CTFs — focused on{" "}
+          <span className="font-semibold text-fuchsia-600 dark:text-[#00D9FF]">
+            practical exploitation
+          </span>
+          ,{" "}
+          <span className="font-semibold text-emerald-600 dark:text-emerald-400">
+            repeatable methodology
+          </span>
+          , and{" "}
+          <span className="font-semibold text-cyan-700 dark:text-cyan-300">
+            clean remediations
+          </span>
+          . Short, actionable, and straight to the point.
+        </motion.p>
+      </div>
 
       {/* Category Filter */}
-      <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 dark:text-white">Filter by Category</h2>
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.1 }}
+        className="mb-12"
+      >
+        <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white text-center">
+          Browse by Category
+        </h2>
 
-        <div className="flex flex-wrap gap-2 md:gap-4">
-          <button
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1, transition: { staggerChildren: 0.06 } },
+          }}
+          className="flex flex-wrap justify-center gap-2 md:gap-3"
+        >
+          {/* All */}
+          <motion.button
+            variants={{
+              hidden: { y: 10, opacity: 0 },
+              visible: { y: 0, opacity: 1 },
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
             onClick={() => setSelectedCategory(null)}
-            className={`px-4 py-2 rounded-full transition-all ${!selectedCategory ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20' : 'bg-gray-800  hover:bg-white hover:text-[#1a4343]'}`}
+            className={`px-4 py-2 rounded-full transition-all
+        ${
+          !selectedCategory
+            ? "bg-fuchsia-600 text-white shadow-lg shadow-cyan-500/30 dark:bg-[#00D9FF] dark:text-[#011417]"
+            : "bg-white text-[#01333a] border border-fuchsia-600 hover:bg-fuchsia-100  " +
+              "dark:bg-[#0b1f23] dark:text-white dark:border-cyan-400/30 dark:hover:bg-[#0f2a2f]"
+        }`}
           >
             All Categories
-          </button>
+          </motion.button>
 
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-4 py-2 rounded-full transition-all ${selectedCategory === category ? 'bg-cyan-500 text-white shadow-lg shadow-cyan-500/20' : 'bg-gray-800 hover:text-[#1a4343] hover:bg-white'}`}
+          {categories.map((cat) => (
+            <motion.button
+              key={cat}
+              variants={{
+                hidden: { y: 10, opacity: 0 },
+                visible: { y: 0, opacity: 1 },
+              }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-4 py-2 rounded-full transition-all
+          ${
+            selectedCategory === cat
+              ? "bg-fuchsia-600 text-white shadow-lg shadow-cyan-500/30 dark:bg-[#00D9FF] dark:text-[#011417]"
+              : "bg-white text-[#01333a] border border-fuchsia-600 hover:bg-fuchsia-100 " +
+                "dark:bg-[#0b1f23] dark:text-white dark:border-cyan-400/30 dark:hover:bg-[#0f2a2f]"
+          }`}
             >
-              {category}
-            </button>
+              {cat}
+            </motion.button>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Writeups Grid */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         {filteredPosts.map((post) => (
-          <motion.div key={`${post.category}-${post.slug}`} variants={itemVariants}>
+          <motion.div
+            key={`${post.category}-${post.slug}`}
+            variants={itemVariants}
+          >
             <CardContainer className="inter-var">
-              <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-cyan-500/100 dark:bg-[#95c4d442] dark:border-gray-800 border-gray-200 w-full h-[28rem] rounded-xl p-4 border transition-all duration-500">
+              <CardBody
+                className="
+    relative group/card w-full h-[28rem] rounded-xl p-4 border transition-all duration-500
+    bg-[#3634374e] border-fuchsia-600 hover:shadow-2xl hover:shadow-fuchsia-300
+    dark:bg-[#011a1ab7] dark:border-cyan-400 dark:hover:shadow-cyan-400
+  "
+              >
                 {/* Image */}
                 <CardItem
                   translateZ="100"
@@ -181,7 +230,7 @@ export default function WriteupsList({
                 {/* Category */}
                 <CardItem
                   translateZ="40"
-                  className="text-cyan-600 dark:text-cyan-400 font-medium text-sm mb-1"
+                  className="text-fuchsia-800 dark:text-cyan-400 font-medium text-sm mb-1"
                 >
                   {post.category}
                 </CardItem>
@@ -189,7 +238,7 @@ export default function WriteupsList({
                 {/* Title */}
                 <CardItem
                   translateZ="50"
-                  className="text-xl font-bold text-gray-800 dark:text-white mb-2 line-clamp-2"
+                  className="text-xl font-bold text-black dark:text-white mb-2 line-clamp-2"
                 >
                   {post.title}
                 </CardItem>
@@ -198,7 +247,7 @@ export default function WriteupsList({
                 {post.description && (
                   <CardItem
                     translateZ="60"
-                    className="text-gray-600 dark:text-gray-300 text-sm max-w-sm mt-2 line-clamp-2"
+                    className="text-gray-800 dark:text-gray-300 text-sm max-w-sm mt-2 line-clamp-2"
                   >
                     <p>{post.description}</p>
                   </CardItem>
@@ -211,7 +260,9 @@ export default function WriteupsList({
                       {post.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-xs px-2.5 py-1 rounded"
+                          className="text-xs px-3 py-1 rounded-full transition-all
+    bg-fuchsia-100 text-fuchsia-950 hover:shadow-md hover:shadow-cyan-400/40 hover:scale-105
+    dark:bg-[#00D9FF]/10 dark:text-[#00D9FF] dark:hover:shadow-[#00D9FF]/40"
                         >
                           {tag}
                         </span>
@@ -226,13 +277,12 @@ export default function WriteupsList({
                 )}
 
                 {/* CTA Button */}
-                <CardItem
-                  translateZ={20}
-                  className="mt-6"
-                >
+                <CardItem translateZ={20} className="mt-6">
                   <Link
-                    href={`/writeups/${encodeURIComponent(post.category)}/${encodeURIComponent(post.slug)}`}
-                    className="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-[#fff] to-[#02cef3] text-[#011e23] text-sm font-bold transition-all hover:from-[#02cef3] hover:to-white hover:shadow-md hover:shadow-cyan-500/80 hover:scale-110 duration-300"
+                    href={`/writeups/${encodeURIComponent(
+                      post.category
+                    )}/${encodeURIComponent(post.slug)}`}
+                    className="block w-full text-center px-4 py-3 rounded-xl bg-gradient-to-r from-fuchsia-800 to-fuchsia-400 dark:from-[#fff] dark:to-[#02cef3] text-white dark:text-[#011e23] text-sm font-bold transition-all hover:from-fuchsia-400 hover:to-fuchsia-800 dark:hover:from-[#02cef3] dark:hover:to-white hover:shadow-md hover:shadow-fuchsia-400 dark:hover:shadow-cyan-500/80 hover:scale-110 duration-300"
                   >
                     Read Writeup
                   </Link>

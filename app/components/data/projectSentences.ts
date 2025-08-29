@@ -1,42 +1,42 @@
 export const sentences = [
   [
-    { text: "🧠 AI Recon: ", className: "text-blue-500 glow-text dark:text-[#00D9FF]" },
-    { text: "Targets Profiled" },
+    { text: "🧠 AI Recon: ", className: "text-fuchsia-600 glow-text dark:text-[#00D9FF]" },
+    { text: "Profiles Mapped" },
   ],
   [
-    { text: "🚀 AutoReconX → ", className: "text-blue-500 dark:text-[#00D9FF]" },
-    { text: "Rapid Intelligence Gathered" },
+    { text: "🚀 AutoReconX → ", className: "text-fuchsia-600 dark:text-[#00D9FF]" },
+    { text: "Intel Gathered" },
   ],
   [
-    { text: "🕳️ XSS Hunter: ", className: "text-red-500" },
-    { text: "Payload Injected" },
+    { text: "🕳️ XSS Hunter: ", className: "text-fuchsia-600" },
+    { text: "Payloads Fired" },
   ],
   [
-    { text: "🧬 YARA Scanner → ", className: "text-blue-500 dark:text-[#00D9FF]" },
-    { text: "Malware DNA Matched" },
+    { text: "🧬 YARA Scan → ", className: "text-fuchsia-600 dark:text-[#00D9FF]" },
+    { text: "DNA Matched" },
   ],
   [
-    { text: "🛠️ NetSentinel: ", className: "text-blue-500 dark:text-[#00D9FF]" },
-    { text: "Packets Monitored" },
+    { text: "🛠️ NetSentinel: ", className: "text-fuchsia-600 dark:text-[#00D9FF]" },
+    { text: "Traffic Tracked" },
   ],
   [
-    { text: "🕷️ GlitchViper.dev ", className: "text-red-500" },
-    { text: "|| Red Team Showcase" },
+    { text: "🕷️ GlitchViper.dev ", className: "text-fuchsia-600" },
+    { text: "| Red Team Hub" },
   ],
   [
-    { text: "🔍 ViperScan Pro → ", className: "text-blue-500 dark:text-[#00D9FF]" },
-    { text: "Vulnerabilities Detected" },
+    { text: "🔍 ViperScan → ", className: "text-fuchsia-600 dark:text-[#00D9FF]" },
+    { text: "Vulns Found" },
   ],
   [
-    { text: "🧟 MalwareLab-X: ", className: "text-blue-500 dark:text-[#00D9FF]" },
-    { text: "Threat Behavior Uncovered" },
+    { text: "🧟 MalwareLab-X: ", className: "text-fuchsia-600 dark:text-[#00D9FF]" },
+    { text: "Threats Exposed" },
   ],
   [
-    { text: "🧠 Machine Learning + ", className: "text-blue-500 dark:text-[#00D9FF]" },
-    { text: "Threat Detection Evolved" },
+    { text: "🤖 ML + ", className: "text-fuchsia-600 dark:text-[#00D9FF]" },
+    { text: "Detection Boosted" },
   ],
   [
-    { text: "🎯 Target Engagement → ", className: "text-red-500" },
-    { text: "Defense Validated" },
+    { text: "🎯 Engagement → ", className: "text-fuchsia-600" },
+    { text: "Defense Tested" },
   ],
 ];

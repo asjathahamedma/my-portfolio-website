@@ -203,7 +203,7 @@ const CollisionMechanism = ({
           repeatDelay: beamOptions.repeatDelay || 0,
         }}
         className={cn(
-          "absolute left-0 top-20 m-auto h-14 w-px rounded-full bg-gradient-to-t from-[#03c4f5] via-[#eeeeef] to-transparent",
+          "absolute left-0 top-20 m-auto h-4 w-px rounded-full bg-gradient-to-t from-fuchsia-950 via-green-300 to-transparent dark:from-fuchsia-500 dark:via-yellow-50 dark:to-transparent",
           beamOptions.className
         )}
       />
