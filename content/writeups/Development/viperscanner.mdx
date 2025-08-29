@@ -1,0 +1,128 @@
+---
+title: "ViperScan – Python Web Vulnerability Scanner"
+image: "/viperscan.jpg"
+date: "2024-08-30"
+category: "development"
+tags: ["python", "nmap", "nikto", "automation", "bug bounty"]
+description: "A Python-based web vulnerability scanner integrating Nmap and Nikto with HTML reporting. Future enhancements include automation workflows and AI-driven analysis."
+status: "In Progress"
+github: "https://github.com/asjathahamedma/viperscanner"
+techStack: ["Python", "Nmap", "Nikto"]
+---
+
+# ViperScan — Python Web Vulnerability Scanner
+
+ViperScan is a Python-based web vulnerability scanner designed to streamline reconnaissance and reporting workflows. It integrates popular tools like Nmap, Burp Suite, and Nikto to deliver automated scanning with detailed HTML reports.
+
+## Project Architecture & Flow
+
+```
+ViperScan/
+├── viper_scan.py # Main script to kick off a scan
+├── modules/
+│ ├── nmap_integration.py
+│ ├── burp_exporter.py
+│ └── nikto_wrapper.py
+├── reports/
+│ └── scan_report.html # Generated scan results
+├── requirements.txt # Python dependencies
+└── README.md # Project overview & instructions
+```
+
+## Core Functionality
+
+### Main Flow (viper_scan.py)
+
+```python
+from modules.nmap_integration import scan_web
+from modules.burp_exporter import export_burp_issues
+from modules.nikto_wrapper import run_nikto
+
+def main(target_url: str):
+    print(f"[+] Starting scan for {target_url}")
+    nmap_results = scan_web(target_url)
+    print(f"[+] Nmap Results: {nmap_results}")
+
+    nikto_results = run_nikto(target_url)
+    print(f"[+] Nikto Results: {nikto_results}")
+
+    export_burp_issues(target_url, nikto_results, nmap_results)
+    print("[+] HTML report generated at reports/scan_report.html")
+```
+
+**Explanation:**
+
+- `scan_web` runs an Nmap scan for open endpoints and services.
+- `run_nikto` runs basic vulnerability checks using Nikto.
+- `export_burp_issues` consolidates findings (from both tools) into a readable HTML report.
+
+### Nmap Integration (modules/nmap_integration.py)
+
+```python
+import subprocess
+
+def scan_web(target: str) -> dict:
+    result = subprocess.check_output([
+        'nmap', '-sV', '-oX', '-', target
+    ])  # Parse the XML output...
+    services = parse_nmap_xml(result)
+    return services
+```
+
+**Explanation:** Executes Nmap to detect open services (-sV) and returns the result. Parsing XML output enables detailed service detection and later correlation.
+
+### HTML Report Generation (modules/burp_exporter.py)
+
+```python
+from jinja2 import Template
+
+HTML_TEMPLATE = """
+
+<html>
+  <head>
+    <title>ViperScan Report for {{ target }}</title>
+  </head>
+  <body>
+    <h1>Scan Report</h1>
+    <h2>Nmap Findings</h2>
+    <pre>{{ nmap }}</pre>
+    <h2>Nikto Findings</h2>
+    <pre>{{ nikto }}</pre>
+  </body>
+</html>
+"""
+
+def export_burp_issues(target: str, nikto_result: str, nmap_result: str):
+    rendered = Template(HTML_TEMPLATE).render(
+        target=target, nikto=nikto_result, nmap=nmap_result
+    )
+    with open('reports/scan_report.html', 'w') as f:
+        f.write(rendered)
+```
+
+**Explanation:** Uses Jinja2 to format data into a human-friendly HTML file, improving readability and shareability.
+
+## 🔮 Future Enhancements
+
+- **Automated Scheduling**  
+  Integrate background jobs (e.g., `cron`, `celery`) for regular scans.  
+
+- **AI-Powered Insights**  
+  Use AI to analyze outputs and highlight critical vulnerabilities.  
+
+- **Plugin System**  
+  Add modular support for custom scanners (e.g., DirBuster, custom PoCs).  
+
+- **Dashboard UI**  
+  Build a web interface to visualize results and filter findings.  
+
+- **Containerization**  
+  Leverage Docker for easy deployment and isolation.  
+
+- **Severity Scoring**  
+  Use scoring frameworks (e.g., CVSS) to prioritize vulnerability results.  
+
+
+## Summary Write-up
+
+ViperScan is an in-progress Python tool aimed at automating web vulnerability scanning with clarity and ease. At present, it seamlessly combines Nmap and Nikto outputs into an HTML report, offering immediate visibility into detected issues. As it matures, it aims to introduce automation features, AI-driven analysis, and an extensible plugin architecture to meet real-world pentesting and bug bounty workflows.

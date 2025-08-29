@@ -64,20 +64,7 @@ const links = [
     ),
     href: "/about",
   },
-  {
-    title: "My LinkedIn",
-    icon: (
-      <IconBrandLinkedin className="h-full w-full text-neutral-500 dark:text-black" />
-    ),
-    href: "https://www.linkedin.com/in/asjathahamedmohamedaazath",
-  },
-  {
-    title: "My GitHub",
-    icon: (
-      <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-black" />
-    ),
-    href: "https://github.com/AsjathAhamedMohamedAazath?tab=repositories",
-  },
+
 ];
 
 export default function RootLayout({

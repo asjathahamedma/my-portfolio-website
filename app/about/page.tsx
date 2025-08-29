@@ -23,7 +23,7 @@ export default function AboutPage() {
       content: (
         <div className="flex flex-col items-center justify-center h-full text-center px-4">
           <Image
-            src="/asjath.jpg"
+            src="/asjath.png"
             width={140}
             height={140}
             alt="Asjath Ahamed"

@@ -14,7 +14,7 @@ export default function TopRightProfile() {
           {/* Static image inside */}
           <div className="relative w-12 h-12 rounded-full overflow-hidden bg-black">
             <Image
-              src="/profile.png"
+              src="/asjath.png"
               alt="Profile"
               width={48}
               height={48}

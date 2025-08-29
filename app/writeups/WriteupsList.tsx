@@ -153,7 +153,7 @@ export default function WriteupsList({
             className={`px-4 py-2 rounded-full transition-all
         ${
           !selectedCategory
-            ? "bg-fuchsia-600 text-white shadow-lg shadow-cyan-500/30 dark:bg-[#00D9FF] dark:text-[#011417]"
+            ? "bg-fuchsia-600 text-white shadow-lg shadow-fuchsia-400/70 dark:shadow-cyan-500/70 dark:bg-[#00D9FF] dark:text-[#011417]"
             : "bg-white text-[#01333a] border border-fuchsia-600 hover:bg-fuchsia-100  " +
               "dark:bg-[#0b1f23] dark:text-white dark:border-cyan-400/30 dark:hover:bg-[#0f2a2f]"
         }`}
@@ -174,7 +174,7 @@ export default function WriteupsList({
               className={`px-4 py-2 rounded-full transition-all
           ${
             selectedCategory === cat
-              ? "bg-fuchsia-600 text-white shadow-lg shadow-cyan-500/30 dark:bg-[#00D9FF] dark:text-[#011417]"
+              ? "bg-fuchsia-600 text-white shadow-lg shadow-fuchsia-400/70 dark:shadow-cyan-500/70 dark:bg-[#00D9FF] dark:text-[#011417]"
               : "bg-white text-[#01333a] border border-fuchsia-600 hover:bg-fuchsia-100 " +
                 "dark:bg-[#0b1f23] dark:text-white dark:border-cyan-400/30 dark:hover:bg-[#0f2a2f]"
           }`}
@@ -200,8 +200,8 @@ export default function WriteupsList({
             <CardContainer className="inter-var">
               <CardBody
                 className="
-    relative group/card w-full h-[28rem] rounded-xl p-4 border transition-all duration-500
-    bg-[#3634374e] border-fuchsia-600 hover:shadow-2xl hover:shadow-fuchsia-300
+    relative group/card w-full h-[30rem] rounded-xl p-4 border transition-all duration-500
+    bg-[#3634374e] border-fuchsia-600 hover:shadow-lg hover:shadow-fuchsia-400
     dark:bg-[#011a1ab7] dark:border-cyan-400 dark:hover:shadow-cyan-400
   "
               >

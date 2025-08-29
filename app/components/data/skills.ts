@@ -1,7 +1,8 @@
 export const skills = [
   {
     title: "Penetration Testing",
-    quote: "Experienced in simulating attacks to find vulnerabilities in networks, applications, and systems using industry-standard tools.",
+    quote:
+      "Experienced in simulating attacks to find vulnerabilities in networks, applications, and systems using industry-standard tools.",
     iconUrl: "/penetration.png",
     logos: [
       { name: "Metasploit", url: "/metasploit.png" },
@@ -10,42 +11,54 @@ export const skills = [
     ],
   },
   {
-    title: "Malware Analysis",
-    quote: "Skilled in reverse engineering and dissecting malicious binaries using Ghidra and IDA Pro.",
-    iconUrl: "/malware-analysis.png",
+    title: "Network Engineering",
+    quote:
+      "Experienced in designing, configuring, and securing networks with expertise in Active Directory, switches, firewalls, VPNs, and routing.",
+    iconUrl: "/network-engineering.png",
     logos: [
-      { name: "Ghidra", url: "/ghidra.png" },
-      { name: "IDA Pro", url: "/IDA-pro.png" },
+      { name: "AD", url: "/active-directory.png" },
+      { name: "Switching", url: "/cisco-switch.png" },
+      { name: "Firewall", url: "/firewall.png" },
+      { name: "VPN", url: "/vpn.png" },
+      { name: "Routing", url: "/routing.png" },
     ],
   },
+
   {
     title: "Network Security",
-    quote: "Proficient in traffic inspection, TCP/IP analysis and network protocol troubleshooting.",
+    quote:
+      "Proficient in traffic inspection, TCP/IP analysis and network protocol troubleshooting.",
     iconUrl: "/network-security.png",
     logos: [{ name: "Wireshark", url: "/wireshark.png" }],
   },
   {
-    title: "Scripting & Automation",
-    quote: "Automated tasks with Python, Bash, and PowerShell for scanning, parsing, and exploitation.",
+    title: "Programming & Scripting",
+    quote:
+      "Proficient in developing and automating solutions using Python, C++, Bash, and PowerShell for diverse system and security tasks.",
     iconUrl: "/scripting.png",
     logos: [
       { name: "Python", url: "/python.png" },
+      { name: "C++", url: "/c++.png" },
       { name: "Bash", url: "/bash.png" },
       { name: "PowerShell", url: "/powershell.png" },
     ],
   },
-  {
-    title: "Cyber Labs & Platforms",
-    quote: "Active learner on Hack The Box and TryHackMe with practical CTF experience.",
-    iconUrl: "/cyberlab.png",
-    logos: [
-      { name: "Hack The Box", url: "/hack-the-box.png" },
-      { name: "TryHackMe", url: "/Tryhackme.png" },
-    ],
-  },
+
+{
+  title: "Cyber Labs & Platforms",
+  quote:
+    "Engaged in continuous learning and hands-on practice through Hack The Box, while actively exploring vulnerabilities and participating in bug bounty programs via HackerOne.",
+  iconUrl: "/cyberlab.png",
+  logos: [
+    { name: "Hack The Box", url: "/hack-the-box.png" },
+    { name: "HackerOne", url: "/hackerone.png" },
+  ],
+},
+
   {
     title: "Frontend Development",
-    quote: "Built sleek, responsive UIs using React, Next.js, and Tailwind CSS.",
+    quote:
+      "Built sleek, responsive UIs using React, Next.js, and Tailwind CSS.",
     iconUrl: "/web-dev.png",
     logos: [
       { name: "React", url: "/react.png" },

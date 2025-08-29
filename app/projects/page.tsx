@@ -21,103 +21,34 @@ type Project = {
 };
 
 const allProjects: Project[] = [
-  {
-    title: "ViperScan",
-    description:
-      "A Python-based web vulnerability scanner integrating Nmap, Burp Suite, and Nikto. It supports automated scanning, intelligent target parsing, and customizable modules for detecting OWASP Top 10 vulnerabilities.",
-    shortDescription:
-      "Web scanner with Nmap, Burp Suite, and Nikto integration.",
-    image: "/ViperScan.jpg",
-    status: "In Progress",
-    techStack: ["Python", "Nmap", "Burp Suite"],
-    github: "/",
-    category: "Penetration Testing",
-    writeup: "/",
-  },
-  {
-    title: "XSS Hunter",
-    description:
-      "Automated tool for detecting reflected and stored XSS vulnerabilities using payload injection and browser-based scripts. Ideal for testing input sanitization.",
-    shortDescription: "Detects XSS vulnerabilities using JS payloads.",
-    image: "/XssHunter.jpg",
-    status: "Completed",
-    techStack: ["JavaScript", "Burp Suite", "Python"],
-    github: "/",
-    category: "Penetration Testing",
-    writeup: "/",
-  },
-  {
-    title: "MalwareLab-X",
-    description:
-      "Reverse engineering malware using REMnux, x64dbg, and Wireshark. Includes behavioral analysis and static inspection in a safe lab setup.",
-    shortDescription: "Reverse engineering malware using REMnux and x64dbg.",
-    image: "/MalwareLab-X.jpg",
-    status: "Research",
-    techStack: ["REMnux", "x64dbg", "Wireshark"],
-    github: "/",
-    category: "Malware Analysis",
-    writeup: "/",
-  },
-  {
-    title: "YARA Scanner",
-    description:
-      "Detects malware in virtual sandbox environments using custom YARA rules. Supports real-time alerts and detailed match reports.",
-    shortDescription: "Malware detection using YARA rules.",
-    image: "/YARAscanner.jpg",
-    status: "Completed",
-    techStack: ["Python", "YARA", "VirtualBox"],
-    github: "/",
-    category: "Malware Analysis",
-    writeup: "/",
-  },
-  {
-    title: "AutoReconX",
-    description:
-      "Automates reconnaissance tasks for CTFs including subdomain enumeration, directory brute-forcing, and port scanning.",
-    shortDescription: "Automates CTF recon tasks like subdomain and dir scan.",
-    image: "/AutoReconX.jpg",
-    status: "Prototype",
-    techStack: ["Python", "Sublist3r", "Dirsearch", "Nmap"],
-    github: "/",
-    category: "Scripting",
-    writeup: "/",
-  },
-  {
-    title: "NetSentinel",
-    description:
-      "Simulated lab environment for network defense including firewall setup, intrusion detection, and packet inspection using open-source tools.",
-    shortDescription: "Network defense lab with IDS, firewall, and sniffing.",
-    image: "/NetSentinal.jpg",
-    status: "Simulated",
-    techStack: ["Wireshark", "pfSense", "Ettercap"],
-    github: "/",
-    category: "Network Security",
-    writeup: "/",
-  },
-  {
-    title: "GlitchViper.dev",
-    description:
-      "A modern, animated cybersecurity-themed portfolio using Next.js, Tailwind CSS, and Framer Motion. Features glitch effects, 3D assets, and smooth page transitions.",
-    shortDescription: "Cyber-themed animated portfolio with glitch effects.",
-    image: "/myPortfolio.jpg",
-    status: "Live",
-    techStack: ["Next.js", "Tailwind", "Framer Motion"],
-    github: "https://github.com/AsjathAhamedMohamedAazath/my-portfolio-website",
-    category: "Frontend Development",
-    writeup: "/",
-  },
-  {
-    title: "Admin Dashboard",
-    description:
-      "A minimal admin dashboard interface built with Tailwind CSS and Chart.js. Displays analytics, real-time charts, and theme customization.",
-    shortDescription: "Admin UI with Tailwind and Chart.js.",
-    image: "/AdminDashboard.jpg",
-    status: "Completed",
-    techStack: ["React", "Tailwind", "Chart.js"],
-    github: "/",
-    category: "Frontend Development",
-    writeup: "/",
-  },
+{
+  title: "ViperScan",
+  description:
+    "A Python-based web vulnerability scanner designed for efficient target assessment. Currently integrates Nmap for web scanning and generates detailed HTML reports. Future enhancements include automated scanning workflows and AI-driven vulnerability detection.",
+  shortDescription:
+    "Python web scanner with Nmap integration and HTML reporting.",
+  image: "/ViperScan.jpg",
+  status: "In Progress",
+  techStack: ["Python", "Nmap"],
+  github: "https://github.com/asjathahamedma/viperscanner.git",
+  category: "Penetration Testing",
+  writeup: "/writeups/Development/viperscanner",
+},
+
+{
+  title: "GlitchViper.dev",
+  description:
+    "A modern cybersecurity-themed portfolio developed with Next.js, TypeScript, Tailwind CSS, and Aceternity UI. Designed with SEO-friendly architecture, smooth animations, glitch effects, and full light/dark theme support.",
+  shortDescription: "Cybersecurity portfolio with modern design, SEO optimization, and animations.",
+  image: "/myPortfolio.jpg",
+  status: "Live",
+  techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Aceternity UI", "Framer Motion"],
+  github: "https://github.com/asjathahamedma/my-portfolio-website.git",
+  category: "Frontend Development",
+  writeup: "/writeups/Development/my-portfolio",
+},
+
+
 ];
 
 export default function ProjectsPage() {
@@ -184,7 +115,7 @@ export default function ProjectsPage() {
               type="button"
               className="flex flex-col flex-1 rounded-2xl bg-gray-800 p-3 md:p-4 
                    border border-fuchsia-600 dark:border-cyan-400 
-                   hover:shadow-2xl hover:shadow-fuchsia-300 dark:hover:shadow-cyan-400 
+                   hover:shadow-2xl hover:shadow-fuchsia-400 dark:hover:shadow-cyan-400 
                    transition-all duration-300"
               onClick={() => setSelectedProject(project)}
             >
