@@ -10,23 +10,7 @@ import { TypewriterEffectSmooth } from "../components/typewriter-effect";
 import { writeupSentences } from "../components/data/some";
 import { Bug, ShieldCheck, Target } from "lucide-react";
 
-const stats = [
-  {
-    icon: <Bug className="text-cyan-400 w-6 h-6" />,
-    label: "Labs & Boxes Completed",
-    color: "from-cyan-500/30 to-cyan-400/10",
-  },
-  {
-    icon: <Target className="text-emerald-400 w-6 h-6" />,
-    label: "CTF Challenges Solved",
-    color: "from-emerald-500/30 to-emerald-400/10",
-  },
-  {
-    icon: <ShieldCheck className="text-amber-400 w-6 h-6" />,
-    label: "Hours Practicing Offensive Security",
-    color: "from-amber-500/30 to-amber-400/10",
-  },
-];
+
 
 export default function WriteupsList({
   allPosts,
