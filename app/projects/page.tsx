@@ -27,7 +27,7 @@ const allProjects: Project[] = [
     "A Python-based web vulnerability scanner designed for efficient target assessment. Currently integrates Nmap for web scanning and generates detailed HTML reports. Future enhancements include automated scanning workflows and AI-driven vulnerability detection.",
   shortDescription:
     "Python web scanner with Nmap integration and HTML reporting.",
-  image: "/ViperScan.jpg",
+  image: "/ViperScanner.jpg",
   status: "In Progress",
   techStack: ["Python", "Nmap"],
   github: "https://github.com/asjathahamedma/viperscanner.git",
