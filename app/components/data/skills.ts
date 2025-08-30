@@ -38,7 +38,7 @@ export const skills = [
     iconUrl: "/scripting.png",
     logos: [
       { name: "Python", url: "/python.png" },
-      { name: "C++", url: "/c++.png" },
+      { name: "C++", url: "/C++.png" },
       { name: "Bash", url: "/bash.png" },
       { name: "PowerShell", url: "/powershell.png" },
     ],

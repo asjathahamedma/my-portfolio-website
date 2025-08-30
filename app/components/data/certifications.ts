@@ -6,7 +6,7 @@ export const certifications = [
   },
   {
     name: "C++",
-    img: "/c++.png",
+    img: "/C++.png",
     position: "top-16 right-20",
   },
   {

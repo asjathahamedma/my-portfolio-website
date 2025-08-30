@@ -166,7 +166,7 @@ export default function AboutPage() {
         >
           {[
             { name: "Python", url: "/python.png" },
-            { name: "C++", url: "/c++.png" },
+            { name: "C++", url: "/C++.png" },
             { name: "Burp Suite", url: "/burp-suite.png" },
             { name: "Nmap", url: "/nmap.png" },
             { name: "Metasploit", url: "/metasploit.png" },
