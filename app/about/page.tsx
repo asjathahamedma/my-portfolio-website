@@ -181,7 +181,7 @@ export default function AboutPage() {
             }}
           >
             {[
-              { href: "https://github.com/AsjathAhamedMohamedAazath", icon: <FaGithub /> },
+              { href: "https://github.com/asjathahamedma", icon: <FaGithub /> },
               { href: "https://www.linkedin.com/in/asjathahamedma", icon: <FaLinkedin /> },
               {
                 href: "#",
