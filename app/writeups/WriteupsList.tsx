@@ -8,7 +8,6 @@ import { Post } from "./writeupsData";
 import Image from "next/image";
 import { TypewriterEffectSmooth } from "../components/typewriter-effect";
 import { writeupSentences } from "../components/data/some";
-import { Bug, ShieldCheck, Target } from "lucide-react";
 
 
 
