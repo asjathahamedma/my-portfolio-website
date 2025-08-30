@@ -14,6 +14,44 @@ const iconVariants = {
 
 export default function AboutPage() {
   const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (res.ok) {
+        // success: reset + close
+        setFormData({ name: "", email: "", message: "" });
+        setShowForm(false);
+      } else {
+        alert("❌ Failed to send message. Please try again.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("⚠️ Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const aboutSections = [
     {
@@ -48,10 +86,20 @@ export default function AboutPage() {
             </h4>
             <p className="text-sm italic">Sept 2022 – Dec 2024</p>
             <ul className="list-disc list-inside text-sm mt-2 space-y-1">
-              <li>Configured and secured networks with routers, firewalls, and advanced encryption (WPA3, IPsec, TLS).</li>
-              <li>Performed penetration testing with OWASP Top 10 and SIEM tools.</li>
-              <li>Managed Windows/Linux systems and virtualization (VMware, Hyper-V).</li>
-              <li>Administered Active Directory and DHCP for user management.</li>
+              <li>
+                Configured and secured networks with routers, firewalls, and
+                advanced encryption (WPA3, IPsec, TLS).
+              </li>
+              <li>
+                Performed penetration testing with OWASP Top 10 and SIEM tools.
+              </li>
+              <li>
+                Managed Windows/Linux systems and virtualization (VMware,
+                Hyper-V).
+              </li>
+              <li>
+                Administered Active Directory and DHCP for user management.
+              </li>
             </ul>
           </div>
           <div>
@@ -60,9 +108,17 @@ export default function AboutPage() {
             </h4>
             <p className="text-sm italic">July 2025 – Present</p>
             <ul className="list-disc list-inside text-sm mt-2 space-y-1">
-              <li>Completed modules on Nmap, Web Application Security, and Linux fundamentals.</li>
-              <li>Exploited vulnerabilities using Burp Suite and Metasploit.</li>
-              <li>Developed incident response strategies and collaborated on real-world attack simulations.</li>
+              <li>
+                Completed modules on Nmap, Web Application Security, and Linux
+                fundamentals.
+              </li>
+              <li>
+                Exploited vulnerabilities using Burp Suite and Metasploit.
+              </li>
+              <li>
+                Developed incident response strategies and collaborated on
+                real-world attack simulations.
+              </li>
             </ul>
           </div>
         </div>
@@ -70,7 +126,8 @@ export default function AboutPage() {
     },
     {
       title: "Education",
-      description: "My academic journey that strengthens my foundation in cybersecurity and data science.",
+      description:
+        "My academic journey that strengthens my foundation in cybersecurity and data science.",
       content: (
         <div className="text-gray-800 dark:text-white px-4 space-y-3">
           <div>
@@ -90,7 +147,8 @@ export default function AboutPage() {
     },
     {
       title: "Tech Stack",
-      description: "Technologies and tools I frequently use in cybersecurity and frontend development.",
+      description:
+        "Technologies and tools I frequently use in cybersecurity and frontend development.",
       content: (
         <motion.div
           className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm p-4"
@@ -126,7 +184,13 @@ export default function AboutPage() {
               variants={iconVariants}
               transition={{ duration: 0.5 }}
             >
-              <Image src={tech.url} alt={tech.name} width={48} height={48} className="rounded-lg shadow-md" />
+              <Image
+                src={tech.url}
+                alt={tech.name}
+                width={48}
+                height={48}
+                className="rounded-lg shadow-md"
+              />
               <span className="text-center">{tech.name}</span>
             </motion.div>
           ))}
@@ -135,13 +199,16 @@ export default function AboutPage() {
     },
     {
       title: "Certifications & Courses",
-      description: "Credentials and specialized training that reinforce my skills.",
+      description:
+        "Credentials and specialized training that reinforce my skills.",
       content: (
         <div className="text-gray-800 dark:text-white px-4">
           <ul className="list-disc list-inside text-sm space-y-1">
             <li>
-              <span className="font-semibold text-white dark:text-black">Certified Bug Bounty Hunter</span> – Hack The
-              Box Academy (Aug 2025 – Present)
+              <span className="font-semibold text-white dark:text-black">
+                Certified Bug Bounty Hunter
+              </span>{" "}
+              – Hack The Box Academy (Aug 2025 – Present)
             </li>
           </ul>
         </div>
@@ -154,15 +221,22 @@ export default function AboutPage() {
         <div className="text-gray-800 dark:text-white px-4 space-y-2">
           <ul className="list-disc list-inside text-sm">
             <li>Favorite CTF Platform: Hack The Box</li>
-            <li>I love glitch effects, hacker themes, and building interactive animations.</li>
-            <li>I break things to understand them — and then rebuild them stronger 🔧</li>
+            <li>
+              I love glitch effects, hacker themes, and building interactive
+              animations.
+            </li>
+            <li>
+              I break things to understand them — and then rebuild them stronger
+              🔧
+            </li>
           </ul>
         </div>
       ),
     },
     {
       title: "Let’s Connect",
-      description: "I’m open to collaborations, freelance projects, and knowledge-sharing.",
+      description:
+        "I’m open to collaborations, freelance projects, and knowledge-sharing.",
       content: (
         <div className="flex flex-col items-center justify-center h-full text-center gap-4 text-gray-800 ">
           <TextGenerateEffect words="Reach out via:" className="text-lg" />
@@ -182,7 +256,10 @@ export default function AboutPage() {
           >
             {[
               { href: "https://github.com/asjathahamedma", icon: <FaGithub /> },
-              { href: "https://www.linkedin.com/in/asjathahamedma", icon: <FaLinkedin /> },
+              {
+                href: "https://www.linkedin.com/in/asjathahamedma",
+                icon: <FaLinkedin />,
+              },
               {
                 href: "#",
                 icon: <FaEnvelope />,
@@ -247,27 +324,43 @@ export default function AboutPage() {
               <h2 className="text-2xl font-bold text-fuchsia-600 dark:text-[#00D9FF] mb-4">
                 Contact Me
               </h2>
-              <form className="flex flex-col gap-4">
+              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                 <input
                   type="text"
+                  name="name"
                   placeholder="Your Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500 dark:focus:ring-[#00D9FF]"
                 />
+
                 <input
                   type="email"
+                  name="email"
                   placeholder="Your Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500 dark:focus:ring-[#00D9FF]"
                 />
+
                 <textarea
+                  name="message"
                   placeholder="Your Message"
                   rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-800 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-fuchsia-500 dark:focus:ring-[#00D9FF]"
                 />
+
                 <button
                   type="submit"
-                  className="bg-fuchsia-600 dark:bg-[#00D9FF] text-white font-semibold py-2 rounded-lg hover:opacity-80 transition-all"
+                  disabled={loading}
+                  className="bg-fuchsia-600 dark:bg-[#00D9FF] text-white font-semibold py-2 rounded-lg hover:opacity-80 transition-all disabled:opacity-50"
                 >
-                  Send Message
+                  {loading ? "Sending..." : "Send Message"}
                 </button>
               </form>
             </motion.div>
