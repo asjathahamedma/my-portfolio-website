@@ -25,7 +25,7 @@ export const AnimatedImage = () => {
       onMouseLeave={handleHoverEnd}
     >
       <motion.img
-        src="/hacker2.png"
+        src="/hacker2.webp"
         alt="Cyber Surgeon"
         className="w-auto max-w-md rounded-xl h-90 relative z-10 ml-20"
         whileHover={{ scale: 1.2 }}
@@ -37,8 +37,8 @@ export const AnimatedImage = () => {
           key={cert.name}
           src={cert.img}
           alt={cert.name}
-          className={`absolute w-16 h-16 ${cert.position} cursor-pointer z-20 cert-pulse border-2 p-2 
-      border-fuchsia-600 dark:border-[#00D9FF] rounded-full 
+          className={`absolute w-12 h-12 ${cert.position} cursor-pointer z-20 cert-pulse border-2 p-2 
+      border-fuchsia-800 dark:border-[#00D9FF] rounded-full 
       hover:bg-fuchsia-500 hover:shadow-[0_0_20px_#f0f] 
       dark:hover:bg-[#00D9FF] dark:hover:shadow-[0_0_20px_#00D9FF]`}
           initial={{ opacity: 0, scale: 0.5 }}

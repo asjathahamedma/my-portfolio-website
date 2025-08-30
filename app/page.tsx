@@ -29,7 +29,7 @@ const Home = () => {
             >
               <div className="relative group">
                 <Image
-                  src="/skill-img2.png"
+                  src="/skill-img2.webp"
                   alt="Hacker"
                   width={400}
                   height={400}
@@ -84,18 +84,18 @@ const Home = () => {
             {/* Left Content (Intro) */}
             <div className="relative mt-8 text-center sm:absolute sm:left-0 sm:top-3/5 sm:-translate-y-1/2 sm:text-left sm:pl-10 sm:w-1/3">
               <h1 className="flex flex-wrap gap-x-2 text-3xl sm:text-5xl justify-center sm:justify-start">
-                <LettersPullUp text="Welcome" className=" text-fuchsia-600 drop-shadow-[0_0_15px_rgba(153,0,153,0.7)]  dark:text-[#00D9FF]" />
+                <LettersPullUp text="Welcome" className=" text-fuchsia-600 drop-shadow-md drop-shadow-fuchsia-400 dark:drop-shadow-cyan-400 dark:text-[#00D9FF]" />
                 <LettersPullUp text="to" className="text-black dark:text-white" />
                 <LettersPullUp text="the" className="text-black dark:text-white" />
                 <LettersPullUp text="Code" className="text-black dark:text-white" />
-                <LettersPullUp text="Anomaly" className=" text-fuchsia-600 dark:text-[#00D9FF]" />
+                <LettersPullUp text="Anomaly" className=" text-fuchsia-600 dark:text-[#00D9FF] drop-shadow-md drop-shadow-fuchsia-400 dark:drop-shadow-cyan-400 " />
               </h1>
               <div className="max-w-md mx-auto sm:mx-0 flex flex-wrap gap-x-2 justify-center sm:justify-start text-sm sm:text-base text-black dark:text-white mt-2">
                 {[
                   "I don’t", "just", "breach", "defenses—", "I rewrite", "the", "rules.",
                   "Firewalls", "melt.", "Secrets", "spill.", "I code", "in", "chaos",
                 ].map((word, i) => (
-                  <GradualSpacing key={i} text={word} />
+                  <GradualSpacing key={i} text={word} className="hover:scale-105 hover:text-fuchsia-500 dark:hover:text-cyan-400 transition-all duration-200"/>
                 ))}
               </div>
             </div>
@@ -104,14 +104,14 @@ const Home = () => {
             <div className="relative mt-8 text-center sm:absolute sm:right-0 sm:top-2/5 sm:-translate-y-1/2 sm:text-right sm:pr-10 sm:w-1/3">
               <div className="mb-2 flex flex-wrap gap-x-2 justify-center sm:justify-end text-sm sm:text-base text-black dark:text-white">
                 {["They", "fortified", "the", "walls.", "They", "encrypted", "everything."].map((word, i) => (
-                  <GradualSpacing key={i} text={word} />
+                  <GradualSpacing key={i} text={word} className="hover:scale-105 hover:text-fuchsia-500 dark:hover:text-cyan-400 transition-all duration-200" />
                 ))}
               </div>
               <div className="flex flex-wrap gap-x-2 text-3xl sm:text-5xl justify-center sm:justify-end">
                 <LettersPullUp text="But" className="text-black dark:text-white" />
-                <LettersPullUp text="GlitchViper" className="text-fuchsia-600 dark:text-[#00D9FF]" />
+                <LettersPullUp text="GlitchViper" className="text-fuchsia-600 dark:text-[#00D9FF] drop-shadow-md drop-shadow-fuchsia-400 dark:drop-shadow-cyan-400 " />
                 <LettersPullUp text="rewrote" className="text-black dark:text-white" />
-                <LettersPullUp text="reality." className="text-fuchsia-600 dark:text-[#00D9FF]" />
+                <LettersPullUp text="reality." className="text-fuchsia-600 dark:text-[#00D9FF] drop-shadow-md drop-shadow-fuchsia-400 dark:drop-shadow-cyan-400 " />
               </div>
             </div>
           </div>

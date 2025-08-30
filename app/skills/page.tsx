@@ -114,7 +114,7 @@ const SkillCard = ({ skill }: { skill: Skill }) => {
     <Modal>
       <ModalTrigger className="block w-full">
         <div
-          className="group relative h-16 sm:h-20 md:h-24 rounded-xl 
+          className="group relative h-12 sm:h-16 md:h-18 rounded-xl 
                      hover:shadow-[0_0_15px_rgba(153,0,153,0.5)] 
                      dark:hover:shadow-[0_0_15px_rgba(0,217,255,0.5)] 
                      cursor-pointer overflow-hidden
