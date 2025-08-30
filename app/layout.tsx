@@ -5,12 +5,10 @@ import TopRightProfile from "./components/TopRightProfile";
 import { FloatingDock } from "./components/floating-dock";
 import Image from "next/image";
 import {
-  IconBrandGithub,
   IconHome,
   IconBrain,
   IconRocket,
   IconBook,
-  IconBrandLinkedin,
   IconUser,
 } from "@tabler/icons-react";
 import BackgroundParticlesWrapper from "./components/BackgroundParticlesWrapper";

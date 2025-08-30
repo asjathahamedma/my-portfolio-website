@@ -15,7 +15,7 @@ const BackgroundParticles = () => {
   );
 
   return (
-    <div className="fixed inset-0 opacity-50 pointer-events-none overflow-hidden">
+    <div className="fixed inset-0 opacity-90 pointer-events-none overflow-hidden">
       {particles.map((particle, i) => (
         <motion.div
           key={i}
