@@ -40,7 +40,7 @@ const allProjects: Project[] = [
       "A Windows desktop application that matches TopJobs.lk listings against imported resume profiles and helps send tailored applications through Gmail. Version 2 combines a Tauri and React interface with the existing Python automation engine, local history, and live workflow reporting.",
     shortDescription:
       "Desktop job-search workflow with resume matching and application tracking.",
-    image: "/web-dev.png",
+    image: "/scripting.png",
     status: "Version 2",
     techStack: ["Tauri", "React", "Tailwind CSS", "Python", "SQLite"],
     github: "https://github.com/asjathahamedma/Tobjobs-Auto-Mailer",
@@ -53,7 +53,7 @@ const allProjects: Project[] = [
       "An ASP.NET MVC web application for managing events and bookings. It includes user registration and login, event creation and management, a booking workflow, and an admin dashboard, backed by SQL Server and Entity Framework.",
     shortDescription:
       "ASP.NET MVC event platform with booking and administration features.",
-    image: "/cyberlab.png",
+    image: "/web-dev.png",
     status: "Completed",
     techStack: ["ASP.NET MVC", "C#", "SQL Server", "Entity Framework", "Bootstrap"],
     github: "https://github.com/asjathahamedma/SmartEventMVC",

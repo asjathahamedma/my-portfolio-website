@@ -19,10 +19,10 @@ export type Post = PostMeta & {
 
 export async function getWriteupsData() {
   const basePath = path.join(process.cwd(), 'content/writeups');
-  const categories = fs.readdirSync(basePath);
+  const contentDirectories = fs.readdirSync(basePath);
   
-  const allPosts: Post[] = categories.flatMap((category) => {
-    const categoryPath = path.join(basePath, category);
+  const allPosts: Post[] = contentDirectories.flatMap((directory) => {
+    const categoryPath = path.join(basePath, directory);
     const files = fs.readdirSync(categoryPath);
 
     return files.map((filename) => {
@@ -33,13 +33,15 @@ export async function getWriteupsData() {
       return {
         ...(data as PostMeta),
         slug: filename.replace(/\.mdx$/, ''),
-        category,
+        category: (data as PostMeta).category || directory,
       };
     });
   });
 
   // Sort posts by date (newest first)
   allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const categories = [...new Set(allPosts.map((post) => post.category))].sort();
 
   return { allPosts, categories };
 }
