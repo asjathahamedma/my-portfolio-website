@@ -1,0 +1,32 @@
+---
+title: "PySpark WAF Machine Learning Project"
+image: "/firewall.png"
+date: "2026-10-21"
+category: "Development"
+tags: ["Python", "PySpark", "Machine Learning", "Web Security", "ASP.NET Core"]
+description: "A hybrid Web Application Firewall prototype combining rule-based request checks with a PySpark attack-classification pipeline."
+---
+
+# PySpark WAF Machine Learning Project
+
+This project explores a hybrid approach to HTTP request inspection. Fast, rule-based checks handle recognizable patterns, while a PySpark machine-learning pipeline classifies requests that need a broader assessment. The project also connects the inspection service to an ASP.NET Core MVC ticket-booking demo.
+
+## Detection and data workflow
+
+The detection scope includes SQL injection, cross-site scripting, command injection, path traversal, server-side template injection, and suspicious encoded payloads. Multiple source datasets are combined into a master dataset, then used to train and evaluate the Spark ML pipeline.
+
+The repository separates raw and processed data, model artifacts, scripts, demo files, and reports. Its Python scripts cover dataset building, training, evaluation, prediction, and the WAF API.
+
+## Request inspection
+
+The Python API provides a real-time inspection path for the demo site. Requests that match the quick rules can be handled early; other suspicious requests can be passed to the trained classifier. The MVC booking application makes it possible to demonstrate the checks in a working web flow.
+
+## Technology
+
+The project uses Python and PySpark for data processing and classification, ASP.NET Core MVC for the demo application, and PowerShell for supporting workflows.
+
+## Limitations
+
+This is a practical security prototype, not a guarantee that every malicious request will be detected. Model performance depends on the quality and coverage of its training data, and any deployment should be tested and monitored in its intended environment.
+
+See the [project repository](https://github.com/asjathahamedma/WAF-Mechine-Learning-Model) for detailed setup instructions and demo materials.

@@ -1,0 +1,28 @@
+---
+title: "TopJobs Auto Mailer"
+image: "/web-dev.png"
+date: "2026-10-21"
+category: "Development"
+tags: ["Tauri", "React", "Python", "Desktop App", "Automation"]
+description: "A Windows desktop job-application assistant that matches TopJobs.lk listings to resume profiles and tracks the application workflow."
+---
+
+# TopJobs Auto Mailer
+
+TopJobs Auto Mailer turns a collection of job-search scripts into a desktop workflow. Version 2 pairs a Tauri and React application with the existing Python automation engine, giving users a place to manage resume profiles, monitor matching jobs, and review local history.
+
+## From resume to application
+
+Users add their Gmail sender details and import one or more PDF resumes. The app analyzes each resume to create an editable profile with role keywords, description keywords, and a summary. The automation scans TopJobs.lk, checks listings against those profiles, selects a suitable resume, and can prepare an application when a job email is available.
+
+The workflow can be started or stopped in the app. Its dashboard presents progress, stages, logs, and daily totals; the jobs view includes match scores, application status, and skip reasons. History is stored locally using SQLite, CSV files, and logs.
+
+## Desktop architecture
+
+The interface is built with React, Tailwind CSS, Vite, and Framer Motion. Tauri provides the Windows desktop shell, while a bridge connects the app to Python services for scraping, matching, mail delivery, profile import, and related tasks.
+
+## Account and automation considerations
+
+The current email flow uses a Gmail address and an app password. Google OAuth is described as a possible future release, not a current feature. The app only automates email-based applications when a job email is available, and users should review their resume profiles and settings before starting automation. Scraper behavior may also need maintenance if the source site changes.
+
+See the [project repository](https://github.com/asjathahamedma/Tobjobs-Auto-Mailer) for the workflow demo, releases, and developer setup.

@@ -1,0 +1,28 @@
+---
+title: "GOLD Price Prediction and Algorithmic Trading Bot"
+image: "/brain.png"
+date: "2026-10-21"
+category: "Development"
+tags: ["Python", "Reinforcement Learning", "PPO", "Gymnasium", "MetaTrader 5"]
+description: "An experimental PPO reinforcement-learning workflow for XAUUSD, covering data preparation, evaluation, backtesting, and optional MT5 execution."
+---
+
+# GOLD Price Prediction and Algorithmic Trading Bot
+
+This project investigates whether a reinforcement-learning agent can learn a trading policy from historical GOLD (XAUUSD) data and technical features. It uses Proximal Policy Optimization (PPO) from Stable-Baselines3 and a custom Gymnasium environment with hold, buy, and sell actions.
+
+## End-to-end workflow
+
+The data script can retrieve historical 15-minute bars from MetaTrader 5. A feature-engineering step prepares the data and adds indicators such as RSI, stochastic values, rolling support and resistance distances, volume signals, candlestick-pattern flags, and price changes. The resulting dataset is used to train the agent and evaluate it on a held-out portion of the historical data.
+
+The repository also contains a traditional backtester for comparison and an evaluation script that plots the agent's net-worth curve. A runner script organizes the data, feature, training, and evaluation stages.
+
+## Optional live execution
+
+The live-trading script connects to an installed MetaTrader 5 terminal, processes recent market data, and uses the saved model to choose an action. This is a high-risk experimental capability: historical evaluation does not establish future performance, and live trading can lose money. It should not be treated as financial advice or run on a funded account without independent validation and appropriate safeguards.
+
+## Technology
+
+The project uses Python, Stable-Baselines3, Gymnasium, MetaTrader5, Pandas, NumPy, scikit-learn, and Matplotlib.
+
+See the [project repository](https://github.com/asjathahamedma/GOLD-price-prediction-model) for scripts and setup instructions.

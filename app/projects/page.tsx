@@ -21,34 +21,58 @@ type Project = {
 };
 
 const allProjects: Project[] = [
-{
-  title: "ViperScan",
-  description:
-    "A Python-based web vulnerability scanner designed for efficient target assessment. Currently integrates Nmap for web scanning and generates detailed HTML reports. Future enhancements include automated scanning workflows and AI-driven vulnerability detection.",
-  shortDescription:
-    "Python web scanner with Nmap integration and HTML reporting.",
-  image: "/ViperScanner.jpg",
-  status: "In Progress",
-  techStack: ["Python", "Nmap"],
-  github: "https://github.com/asjathahamedma/viperscanner.git",
-  category: "Penetration Testing",
-  writeup: "/writeups/Development/viperscanner",
-},
-
-{
-  title: "GlitchViper.dev",
-  description:
-    "A modern cybersecurity-themed portfolio developed with Next.js, TypeScript, Tailwind CSS, and Aceternity UI. Designed with SEO-friendly architecture, smooth animations, glitch effects, and full light/dark theme support.",
-  shortDescription: "Cybersecurity portfolio with modern design, SEO optimization, and animations.",
-  image: "/myPortfolio.jpg",
-  status: "Live",
-  techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Aceternity UI", "Framer Motion"],
-  github: "https://github.com/asjathahamedma/my-portfolio-website.git",
-  category: "Frontend Development",
-  writeup: "/writeups/Development/my-portfolio",
-},
-
-
+  {
+    title: "PySpark WAF Machine Learning Project",
+    description:
+      "A hybrid Web Application Firewall prototype combining fast rule-based checks with a PySpark machine-learning pipeline to classify suspicious HTTP requests. It includes dataset-building and model-evaluation workflows, a Python inspection API, and an ASP.NET Core MVC event-booking demo integration.",
+    shortDescription:
+      "Hybrid request inspection with PySpark classification and rule-based checks.",
+    image: "/firewall.png",
+    status: "Prototype",
+    techStack: ["Python", "PySpark", "ASP.NET Core MVC", "PowerShell"],
+    github: "https://github.com/asjathahamedma/WAF-Mechine-Learning-Model",
+    category: "Machine Learning & Security",
+    writeup: "/writeups/Development/pyspark-waf-machine-learning",
+  },
+  {
+    title: "TopJobs Auto Mailer",
+    description:
+      "A Windows desktop application that matches TopJobs.lk listings against imported resume profiles and helps send tailored applications through Gmail. Version 2 combines a Tauri and React interface with the existing Python automation engine, local history, and live workflow reporting.",
+    shortDescription:
+      "Desktop job-search workflow with resume matching and application tracking.",
+    image: "/web-dev.png",
+    status: "Version 2",
+    techStack: ["Tauri", "React", "Tailwind CSS", "Python", "SQLite"],
+    github: "https://github.com/asjathahamedma/Tobjobs-Auto-Mailer",
+    category: "Desktop Development",
+    writeup: "/writeups/Development/topjobs-auto-mailer",
+  },
+  {
+    title: "Event Management System",
+    description:
+      "An ASP.NET MVC web application for managing events and bookings. It includes user registration and login, event creation and management, a booking workflow, and an admin dashboard, backed by SQL Server and Entity Framework.",
+    shortDescription:
+      "ASP.NET MVC event platform with booking and administration features.",
+    image: "/cyberlab.png",
+    status: "Completed",
+    techStack: ["ASP.NET MVC", "C#", "SQL Server", "Entity Framework", "Bootstrap"],
+    github: "https://github.com/asjathahamedma/SmartEventMVC",
+    category: "Web Development",
+    writeup: "/writeups/Development/event-management-system",
+  },
+  {
+    title: "GOLD Price Prediction and Algorithmic Trading Bot",
+    description:
+      "An experimental reinforcement-learning workflow for GOLD (XAUUSD), using a PPO agent in a custom Gymnasium trading environment. The project covers MetaTrader 5 data access, technical feature engineering, model training, historical evaluation, backtesting, and an optional live-trading script.",
+    shortDescription:
+      "PPO-based XAUUSD trading experiment with feature engineering and evaluation.",
+    image: "/brain.png",
+    status: "Research Prototype",
+    techStack: ["Python", "Stable-Baselines3", "Gymnasium", "MetaTrader 5", "Pandas"],
+    github: "https://github.com/asjathahamedma/GOLD-price-prediction-model",
+    category: "Machine Learning & Finance",
+    writeup: "/writeups/Development/gold-price-prediction-trading-bot",
+  },
 ];
 
 export default function ProjectsPage() {
