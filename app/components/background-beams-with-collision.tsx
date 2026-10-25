@@ -33,7 +33,15 @@ export const BackgroundBeamsWithCollision = ({
       translateX: 100,
       duration: 7,
       repeatDelay: 7,
-      className: "h-6",
+      className: "h-10",
+    },
+    {
+      initialX: 250,
+      translateX: 250,
+      duration: 8,
+      repeatDelay: 5,
+      delay: 1,
+      className: "h-12",
     },
     {
       initialX: 400,
@@ -47,7 +55,15 @@ export const BackgroundBeamsWithCollision = ({
       translateX: 800,
       duration: 11,
       repeatDelay: 2,
-      className: "h-20",
+      className: "h-14",
+    },
+    {
+      initialX: 900,
+      translateX: 900,
+      duration: 6,
+      repeatDelay: 8,
+      delay: 3,
+      className: "h-10",
     },
     {
       initialX: 1000,
@@ -62,7 +78,15 @@ export const BackgroundBeamsWithCollision = ({
       duration: 6,
       repeatDelay: 4,
       delay: 2,
-      className: "h-6",
+      className: "h-10",
+    },
+    {
+      initialX: 1400,
+      translateX: 1400,
+      duration: 9,
+      repeatDelay: 6,
+      delay: 2,
+      className: "h-12",
     },
   ];
 
@@ -204,7 +228,7 @@ const CollisionMechanism = ({
           repeatDelay: beamOptions.repeatDelay || 0,
         }}
         className={cn(
-          "absolute left-0 top-20 m-auto h-4 w-px rounded-full bg-gradient-to-t from-fuchsia-950 via-green-300 to-transparent dark:from-fuchsia-500 dark:via-yellow-50 dark:to-transparent",
+          "absolute left-0 top-20 m-auto h-10 w-0.5 rounded-full bg-gradient-to-t from-fuchsia-950 via-green-300 to-transparent shadow-[0_0_6px_rgba(217,70,239,0.35)] dark:from-fuchsia-500 dark:via-yellow-50 dark:to-transparent dark:shadow-[0_0_8px_rgba(0,217,255,0.45)]",
           beamOptions.className
         )}
       />
