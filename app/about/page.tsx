@@ -59,17 +59,13 @@ export default function AboutPage() {
       description:
         "I’m Asjath Ahamed Mohamed Aazath, a Cybersecurity and Network Engineer from Sri Lanka with hands-on experience in penetration testing, network defense, and malware analysis. My passion lies in building secure systems, breaking them apart ethically, and engineering better defenses.",
       content: (
-        <div className="flex flex-col items-center justify-center h-full text-center px-4">
+        <div className="flex flex-col items-center justify-center h-full text-center px-4 lg:items-end lg:text-right">
           <Image
-            src="/asjath.png"
-            width={140}
-            height={140}
+            src="/asjath-cutout.png"
+            width={480}
+            height={480}
             alt="Asjath Ahamed"
-            className="rounded-lg border-4 border-black hover:scale-125 transition-all duration-300 shadow-2xl mb-5"
-          />
-          <TextGenerateEffect
-            words="Dynamic Cybersecurity & Network Engineer with two years of experience configuring and securing infrastructures, conducting vulnerability assessments, and developing innovative incident response strategies."
-            className="max-w-md font-light text-gray-800 dark:text-gray-300"
+            className="h-64 w-64 object-contain transition-transform duration-300 hover:scale-105 sm:h-80 sm:w-80 lg:h-[28rem] lg:w-[28rem]"
           />
         </div>
       ),
@@ -79,13 +75,13 @@ export default function AboutPage() {
       description:
         "Here’s an overview of my practical industry and training experience in cybersecurity and networking.",
       content: (
-        <div className="text-gray-800 dark:text-white px-4 space-y-4 text-left">
+        <div className="text-gray-800 dark:text-gray-100 px-4 space-y-5 text-left text-base md:text-lg">
           <div>
-            <h4 className="font-semibold text-white dark:text-[#00D9FF]">
+            <h4 className="font-semibold text-lg md:text-xl text-fuchsia-700 dark:text-[#00D9FF]">
               Cyber Security & Network Engineer – ICBT Campus
             </h4>
             <p className="text-sm italic">Sept 2022 – Dec 2024</p>
-            <ul className="list-disc list-inside text-sm mt-2 space-y-1">
+            <ul className="list-disc list-inside mt-2 space-y-2">
               <li>
                 Configured and secured networks with routers, firewalls, and
                 advanced encryption (WPA3, IPsec, TLS).
@@ -103,11 +99,11 @@ export default function AboutPage() {
             </ul>
           </div>
           <div>
-            <h4 className="font-semibold text-white dark:text-[#00D9FF]">
+            <h4 className="font-semibold text-lg md:text-xl text-fuchsia-700 dark:text-[#00D9FF]">
               Hack The Box Academy Labs – Hands-On Training
             </h4>
             <p className="text-sm italic">July 2025 – Present</p>
-            <ul className="list-disc list-inside text-sm mt-2 space-y-1">
+            <ul className="list-disc list-inside mt-2 space-y-2">
               <li>
                 Completed modules on Nmap, Web Application Security, and Linux
                 fundamentals.
@@ -129,15 +125,15 @@ export default function AboutPage() {
       description:
         "My academic journey that strengthens my foundation in cybersecurity and data science.",
       content: (
-        <div className="text-gray-800 dark:text-white px-4 space-y-3">
+        <div className="text-gray-800 dark:text-gray-100 px-4 space-y-5 text-lg md:text-xl">
           <div>
-            <h4 className="font-semibold text-white dark:text-black">
+            <h4 className="font-semibold text-xl text-fuchsia-700 dark:text-[#00D9FF]">
               Higher Diploma in Networking & Cybersecurity
             </h4>
             <p className="text-sm italic">Sept 2022 – Dec 2024</p>
           </div>
           <div>
-            <h4 className="font-semibold text-white dark:text-black">
+            <h4 className="font-semibold text-xl text-fuchsia-700 dark:text-[#00D9FF]">
               BSc (Hons) Data Science
             </h4>
             <p className="text-sm italic">Aug 2025 – Present</p>
@@ -151,7 +147,7 @@ export default function AboutPage() {
         "Technologies and tools I frequently use in cybersecurity and frontend development.",
       content: (
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 gap-6 text-sm p-4"
+          className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-base md:text-lg p-6"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -187,8 +183,8 @@ export default function AboutPage() {
               <Image
                 src={tech.url}
                 alt={tech.name}
-                width={48}
-                height={48}
+                width={64}
+                height={64}
                 className="rounded-lg shadow-md"
               />
               <span className="text-center">{tech.name}</span>
@@ -202,10 +198,10 @@ export default function AboutPage() {
       description:
         "Credentials and specialized training that reinforce my skills.",
       content: (
-        <div className="text-gray-800 dark:text-white px-4">
-          <ul className="list-disc list-inside text-sm space-y-1">
+        <div className="text-gray-800 dark:text-gray-100 px-4 text-lg md:text-xl">
+          <ul className="list-disc list-inside space-y-2">
             <li>
-              <span className="font-semibold text-white dark:text-black">
+              <span className="font-semibold text-fuchsia-700 dark:text-[#00D9FF]">
                 Certified Bug Bounty Hunter
               </span>{" "}
               – Hack The Box Academy (Aug 2025 – Present)
@@ -218,8 +214,8 @@ export default function AboutPage() {
       title: "Fun Facts",
       description: "Some personal touches beyond the code and exploits.",
       content: (
-        <div className="text-gray-800 dark:text-white px-4 space-y-2">
-          <ul className="list-disc list-inside text-sm">
+        <div className="text-gray-800 dark:text-gray-100 px-4 space-y-3 text-lg md:text-xl">
+          <ul className="list-disc list-inside space-y-2">
             <li>Favorite CTF Platform: Hack The Box</li>
             <li>
               I love glitch effects, hacker themes, and building interactive
@@ -238,10 +234,13 @@ export default function AboutPage() {
       description:
         "I’m open to collaborations, freelance projects, and knowledge-sharing.",
       content: (
-        <div className="flex flex-col items-center justify-center h-full text-center gap-4 text-gray-800 ">
-          <TextGenerateEffect words="Reach out via:" className="text-lg" />
+        <div className="flex flex-col items-center justify-center h-full text-center gap-6 text-gray-800 dark:text-gray-100">
+          <TextGenerateEffect
+            words="Reach out via:"
+            className="text-xl md:text-2xl font-medium text-gray-800 dark:text-gray-100"
+          />
           <motion.div
-            className="flex gap-6 text-5xl"
+            className="flex gap-8 text-6xl md:text-7xl text-fuchsia-700 dark:text-cyan-300"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
@@ -271,7 +270,7 @@ export default function AboutPage() {
                   key={idx}
                   onClick={item.action}
                   variants={iconVariants}
-                  className="hover:scale-125 hover:text-white transition-all duration-300"
+                  className="text-fuchsia-700 hover:text-fuchsia-900 dark:text-cyan-300 dark:hover:text-white hover:scale-125 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 dark:focus-visible:ring-cyan-300 rounded"
                 >
                   {item.icon}
                 </motion.button>
@@ -282,7 +281,7 @@ export default function AboutPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   variants={iconVariants}
-                  className="hover:scale-125 hover:text-white transition-all duration-300"
+                  className="text-fuchsia-700 hover:text-fuchsia-900 dark:text-cyan-300 dark:hover:text-white hover:scale-125 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-500 dark:focus-visible:ring-cyan-300 rounded"
                 >
                   {item.icon}
                 </motion.a>

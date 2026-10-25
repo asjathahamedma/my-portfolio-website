@@ -17,6 +17,8 @@ export type Post = PostMeta & {
   category: string;
 };
 
+const categories = ["Web Development", "AI/ML", "Cyber Security"];
+
 export async function getWriteupsData() {
   const basePath = path.join(process.cwd(), 'content/writeups');
   const contentDirectories = fs.readdirSync(basePath);
@@ -40,8 +42,6 @@ export async function getWriteupsData() {
 
   // Sort posts by date (newest first)
   allPosts.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-
-  const categories = [...new Set(allPosts.map((post) => post.category))].sort();
 
   return { allPosts, categories };
 }

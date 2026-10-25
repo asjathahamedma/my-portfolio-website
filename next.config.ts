@@ -12,6 +12,8 @@ const withMDX = createMDX({
 })
 
 const nextConfig: NextConfig = {
+  distDir: process.env.NODE_ENV === 'development' ? '.next-dev' : '.next',
+
   // Include .md and .mdx in routing
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 

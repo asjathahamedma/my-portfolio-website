@@ -27,12 +27,12 @@ const allProjects: Project[] = [
       "A hybrid Web Application Firewall prototype combining fast rule-based checks with a PySpark machine-learning pipeline to classify suspicious HTTP requests. It includes dataset-building and model-evaluation workflows, a Python inspection API, and an ASP.NET Core MVC event-booking demo integration.",
     shortDescription:
       "Hybrid request inspection with PySpark classification and rule-based checks.",
-    image: "/firewall.png",
+    image: "/WAF%20project.jpg",
     status: "Prototype",
     techStack: ["Python", "PySpark", "ASP.NET Core MVC", "PowerShell"],
     github: "https://github.com/asjathahamedma/WAF-Mechine-Learning-Model",
-    category: "Machine Learning & Security",
-    writeup: "/writeups/Development/pyspark-waf-machine-learning",
+    category: "Cyber Security",
+    writeup: "/writeups/Cyber%20Security/pyspark-waf-machine-learning",
   },
   {
     title: "TopJobs Auto Mailer",
@@ -40,12 +40,12 @@ const allProjects: Project[] = [
       "A Windows desktop application that matches TopJobs.lk listings against imported resume profiles and helps send tailored applications through Gmail. Version 2 combines a Tauri and React interface with the existing Python automation engine, local history, and live workflow reporting.",
     shortDescription:
       "Desktop job-search workflow with resume matching and application tracking.",
-    image: "/scripting.png",
+    image: "/Auto%20jobs.jpg",
     status: "Version 2",
     techStack: ["Tauri", "React", "Tailwind CSS", "Python", "SQLite"],
     github: "https://github.com/asjathahamedma/Tobjobs-Auto-Mailer",
-    category: "Desktop Development",
-    writeup: "/writeups/Development/topjobs-auto-mailer",
+    category: "Web Development",
+    writeup: "/writeups/Web%20Development/topjobs-auto-mailer",
   },
   {
     title: "Event Management System",
@@ -53,12 +53,12 @@ const allProjects: Project[] = [
       "An ASP.NET MVC web application for managing events and bookings. It includes user registration and login, event creation and management, a booking workflow, and an admin dashboard, backed by SQL Server and Entity Framework.",
     shortDescription:
       "ASP.NET MVC event platform with booking and administration features.",
-    image: "/web-dev.png",
+    image: "/event%20management%20.jpg",
     status: "Completed",
     techStack: ["ASP.NET MVC", "C#", "SQL Server", "Entity Framework", "Bootstrap"],
     github: "https://github.com/asjathahamedma/SmartEventMVC",
     category: "Web Development",
-    writeup: "/writeups/Development/event-management-system",
+    writeup: "/writeups/Web%20Development/event-management-system",
   },
   {
     title: "GOLD Price Prediction and Algorithmic Trading Bot",
@@ -66,12 +66,12 @@ const allProjects: Project[] = [
       "An experimental reinforcement-learning workflow for GOLD (XAUUSD), using a PPO agent in a custom Gymnasium trading environment. The project covers MetaTrader 5 data access, technical feature engineering, model training, historical evaluation, backtesting, and an optional live-trading script.",
     shortDescription:
       "PPO-based XAUUSD trading experiment with feature engineering and evaluation.",
-    image: "/brain.png",
+    image: "/Gold%20price%20prediction.jpg",
     status: "Research Prototype",
     techStack: ["Python", "Stable-Baselines3", "Gymnasium", "MetaTrader 5", "Pandas"],
     github: "https://github.com/asjathahamedma/GOLD-price-prediction-model",
-    category: "Machine Learning & Finance",
-    writeup: "/writeups/Development/gold-price-prediction-trading-bot",
+    category: "AI/ML",
+    writeup: "/writeups/AI%2FML/gold-price-prediction-trading-bot",
   },
 ];
 

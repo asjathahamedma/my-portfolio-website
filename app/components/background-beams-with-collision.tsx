@@ -135,13 +135,14 @@ const CollisionMechanism = ({
         beamRef.current &&
         containerRef.current &&
         parentRef.current &&
-        !cycleCollisionDetected
+        !cycleCollisionDetected &&
+        !collision.detected
       ) {
         const beamRect = beamRef.current.getBoundingClientRect();
         const containerRect = containerRef.current.getBoundingClientRect();
         const parentRect = parentRef.current.getBoundingClientRect();
 
-        if (beamRect.bottom >= containerRect.top && !collision.detected) {
+        if (beamRect.bottom >= containerRect.top) {
           const relativeX =
             beamRect.left - parentRect.left + beamRect.width / 2;
           const relativeY = beamRect.bottom - parentRect.top;
@@ -155,25 +156,25 @@ const CollisionMechanism = ({
           });
           setCycleCollisionDetected(true);
         }
-
       }
     };
 
     const animationInterval = setInterval(checkCollision, 50);
 
     return () => clearInterval(animationInterval);
-  }, [cycleCollisionDetected, containerRef, parentRef]);
+  }, [collision.detected, cycleCollisionDetected, containerRef, parentRef]);
 
   useEffect(() => {
     if (collision.detected && collision.coordinates) {
-      setTimeout(() => {
+      const timeoutId = setTimeout(() => {
         setCollision({ detected: false, coordinates: null });
         setCycleCollisionDetected(false);
         setBeamKey((prevKey) => prevKey + 1);
       }, 2000);
 
+      return () => clearTimeout(timeoutId);
     }
-  }, [collision]);
+  }, [collision.detected, collision.coordinates]);
 
   return (
     <>

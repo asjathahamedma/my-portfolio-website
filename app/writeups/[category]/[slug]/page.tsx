@@ -29,6 +29,15 @@ const Note = ({ children }: { children: ReactNode }) => (
 
 const components = { Note };
 
+type WriteupFrontmatter = {
+  category?: string;
+  date?: string;
+  description?: string;
+  image?: string;
+  tags?: string[];
+  title?: string;
+};
+
 export default async function WriteupPage(props: {
   params: Promise<{ category: string; slug: string }>;
 }) {
@@ -38,13 +47,31 @@ export default async function WriteupPage(props: {
   const decodedSlug = decodeURIComponent(slug);
 
   const basePath = path.join(process.cwd(), "content/writeups");
-  const filePath = path.join(basePath, decodedCategory, `${decodedSlug}.mdx`);
+  const contentDirectories = await fs.readdir(basePath, { withFileTypes: true });
+  let writeup:
+    | { content: string; data: WriteupFrontmatter }
+    | undefined;
 
-  try {
-    const source = await fs.readFile(filePath, "utf8");
-    const { content, data } = matter(source);
+  for (const directory of contentDirectories) {
+    if (!directory.isDirectory()) continue;
 
-    return (
+    const categoryPath = path.join(basePath, directory.name);
+    const filename = `${decodedSlug}.mdx`;
+    const filenames = await fs.readdir(categoryPath);
+    if (!filenames.includes(filename)) continue;
+
+    const source = await fs.readFile(path.join(categoryPath, filename), "utf8");
+    const parsed = matter(source);
+    if (parsed.data.category === decodedCategory) {
+      writeup = parsed;
+      break;
+    }
+  }
+
+  if (!writeup) notFound();
+
+  const { content, data } = writeup;
+  return (
       <div className="prose dark:prose-invert mx-auto max-w-4xl p-6">
         <BackButton  />
 
@@ -107,28 +134,26 @@ export default async function WriteupPage(props: {
           </div>
         </article>
       </div>
-    );
-  } catch (error) {
-    console.error("Error loading MDX:", error);
-    return notFound();
-  }
+  );
 }
 
-// ✅ still valid since page is server component
 export async function generateStaticParams() {
   const basePath = path.join(process.cwd(), "content/writeups");
-  const categories = await fs.readdir(basePath);
+  const contentDirectories = await fs.readdir(basePath, { withFileTypes: true });
 
   const params: { category: string; slug: string }[] = [];
 
-  for (const category of categories) {
-    const categoryPath = path.join(basePath, category);
+  for (const directory of contentDirectories) {
+    if (!directory.isDirectory()) continue;
+    const categoryPath = path.join(basePath, directory.name);
     const files = await fs.readdir(categoryPath);
 
     for (const file of files) {
       if (file.endsWith(".mdx")) {
+        const source = await fs.readFile(path.join(categoryPath, file), "utf8");
+        const { data } = matter(source);
         params.push({
-          category,
+          category: data.category || directory.name,
           slug: file.replace(/\.mdx$/, ""),
         });
       }
